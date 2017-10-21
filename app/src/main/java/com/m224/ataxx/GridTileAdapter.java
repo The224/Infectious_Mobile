@@ -9,16 +9,18 @@ import android.widget.BaseAdapter;
  * Created by 224 on 2017-10-20.
  */
 
-public class GridImageAdapter extends BaseAdapter {
+public class GridTileAdapter extends BaseAdapter {
     private Context context;
+    private Tile[] tiles;
 
-    public GridImageAdapter(Context c) {
-        context = c;
+    public GridTileAdapter(Context context, Tile[] tiles) {
+        this.context = context;
+        this.tiles = tiles;
     }
 
     @Override
     public int getCount() {
-        return 81;
+        return tiles.length;
     }
 
     @Override
@@ -35,12 +37,11 @@ public class GridImageAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
         Tile imageView;
         if (view == null) { // Eco-Responsable
-            imageView = new Tile(context);
+            imageView = new Tile(context, IGlobalVariable.STATE.PLAYER2);
         } else {
             imageView = (Tile) view;
         }
 
-        imageView.setImageResource(R.drawable.tile_block);
         return imageView;
     }
 }
