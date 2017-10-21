@@ -35,14 +35,7 @@ public class GridTileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        Tile imageView;
-        if (view == null) { // Eco-Responsable
-            imageView = new Tile(context, IGlobalVariable.STATE.PLAYER2);
-        } else {
-            imageView = (Tile) view;
-        }
-
-        return imageView;
+        return tiles[position];
     }
 }
 
