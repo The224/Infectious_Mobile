@@ -11,16 +11,16 @@ import android.widget.BaseAdapter;
 
 public class GridTileAdapter extends BaseAdapter {
     private Context context;
-    private Tile[] tiles;
+    private Grid grid;
 
-    public GridTileAdapter(Context context, Tile[] tiles) {
+    public GridTileAdapter(Context context, Grid grid) {
         this.context = context;
-        this.tiles = tiles;
+        this.grid = grid;
     }
 
     @Override
     public int getCount() {
-        return tiles.length;
+        return IGlobalVariable.MAX_TILE;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class GridTileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        return tiles[position];
+        return grid.getTileAt(position);
     }
 }
 

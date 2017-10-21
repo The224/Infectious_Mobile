@@ -9,19 +9,22 @@ import android.widget.Toast;
 
 public class GridActivity extends AppCompatActivity {
 
-    private Tile[] tiles;
+    private static Grid grid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
 
-        tiles = Grid.getConfig1(this);
+        grid = new Grid(this);
+        grid.setConfig1();
 
+        handleGrid();
+    }
 
-
+    private void handleGrid() {
         GridView gridview = (GridView) findViewById(R.id.grid_view);
-        gridview.setAdapter(new GridTileAdapter(this, tiles));
+        gridview.setAdapter(new GridTileAdapter(this, grid));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
@@ -29,8 +32,7 @@ public class GridActivity extends AppCompatActivity {
 
                 ((Tile)v).setState(IGlobalVariable.STATE.BLOCK);
 
-                Toast.makeText(GridActivity.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(GridActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
     }

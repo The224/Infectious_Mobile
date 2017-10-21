@@ -16,6 +16,10 @@ public class Tile extends ImageView {
         changeImageResource();
     }
 
+    public IGlobalVariable.STATE getState() {
+        return state;
+    }
+
     public Tile(Context context, IGlobalVariable.STATE state) {
         super(context);
         this.state = state;
