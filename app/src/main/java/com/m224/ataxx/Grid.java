@@ -10,6 +10,7 @@ public class Grid {
 
     private Tile[] tiles;
     private Context context;
+    private int selectTile = -1;
 
     public Grid(Context context) {
         this.tiles = new Tile[IGlobalVariable.MAX_TILE];
@@ -34,6 +35,16 @@ public class Grid {
         tiles[8].setState(IGlobalVariable.STATE.PLAYER1);
         tiles[72].setState(IGlobalVariable.STATE.PLAYER1);
         tiles[80].setState(IGlobalVariable.STATE.PLAYER2);
+    }
+
+    public void changeSelectedTile(int newSelected) {
+        if (selectTile >= 0) {
+            tiles[selectTile].setSelected(false);
+        }
+
+        tiles[newSelected].setSelected(true);
+
+        selectTile = newSelected;
     }
 
 

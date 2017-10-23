@@ -30,7 +30,9 @@ public class GridActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
-                ((Tile)v).setState(IGlobalVariable.STATE.BLOCK);
+                //((Tile)v).setState(IGlobalVariable.STATE.BLOCK);
+
+                grid.changeSelectedTile(position);
 
                 Toast.makeText(GridActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
