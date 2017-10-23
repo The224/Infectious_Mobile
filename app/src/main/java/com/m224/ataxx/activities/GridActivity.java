@@ -7,34 +7,34 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.m224.ataxx.domaine.Grid;
-import com.m224.ataxx.adapters.GridTileAdapter;
+import com.m224.ataxx.controllers.GameController;
+import com.m224.ataxx.adapters.TileAdapter;
 import com.m224.ataxx.R;
 
 public class GridActivity extends AppCompatActivity {
 
-    private static Grid grid;
+    private static GameController gameControllerc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
 
-        grid = new Grid(this);
-        grid.setConfig1();
+        gameControllerc = new GameController(this);
+        gameControllerc.setConfig1();
 
         handleGrid();
     }
 
     private void handleGrid() {
         GridView gridview = (GridView) findViewById(R.id.grid_view);
-        gridview.setAdapter(new GridTileAdapter(this, grid));
+        gridview.setAdapter(new TileAdapter(this, gameControllerc));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 //((Tile)v).setState(IGlobalVariable.STATE.BLOCK);
-                grid.changeSelectedTile(position);
+                gameControllerc.changeSelectedTile(position);
                 Toast.makeText(GridActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });

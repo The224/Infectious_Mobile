@@ -5,20 +5,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.m224.ataxx.domaine.Grid;
+import com.m224.ataxx.controllers.GameController;
 import com.m224.ataxx.interfaces.IGlobalVariable;
 
 /**
  * Created by 224 on 2017-10-20.
  */
 
-public class GridTileAdapter extends BaseAdapter {
+public class TileAdapter extends BaseAdapter {
     private Context context;
-    private Grid grid;
+    private GameController gameController;
 
-    public GridTileAdapter(Context context, Grid grid) {
+    public TileAdapter(Context context, GameController gameController) {
         this.context = context;
-        this.grid = grid;
+        this.gameController = gameController;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class GridTileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        return grid.getTileAt(position);
+        return gameController.getTileAt(position);
     }
 }
 

@@ -1,20 +1,21 @@
-package com.m224.ataxx.domaine;
+package com.m224.ataxx.controllers;
 
 import android.content.Context;
 
+import com.m224.ataxx.domaine.Tile;
 import com.m224.ataxx.interfaces.IGlobalVariable;
 
 /**
- * Created by 224 on 2017-10-20.
+ * Created by 224 on 2017-10-23.
  */
 
-public class Grid {
+public class GameController {
 
     private Tile[] tiles;
     private Context context;
     private int selectTile = -1;
 
-    public Grid(Context context) {
+    public GameController(Context context) {
         this.tiles = new Tile[IGlobalVariable.MAX_TILE];
         this.context = context;
 
@@ -40,9 +41,8 @@ public class Grid {
     }
 
     public void changeSelectedTile(int newSelected) {
-        if (selectTile >= 0) {
+        if (selectTile >= 0)
             tiles[selectTile].setSelected(false);
-        }
 
         tiles[newSelected].setSelected(true);
 
@@ -52,4 +52,11 @@ public class Grid {
 
 
 
+
+
+
+
 }
+
+
+
