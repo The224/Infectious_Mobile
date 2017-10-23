@@ -1,9 +1,12 @@
-package com.m224.ataxx;
+package com.m224.ataxx.domaine;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.widget.ImageView;
+
+import com.m224.ataxx.R;
+import com.m224.ataxx.interfaces.IGlobalVariable;
 
 /**
  * Created by 224 on 2017-10-20.

@@ -1,4 +1,4 @@
-package com.m224.ataxx;
+package com.m224.ataxx.interfaces;
 
 /**
  * Created by 224 on 2017-10-20.

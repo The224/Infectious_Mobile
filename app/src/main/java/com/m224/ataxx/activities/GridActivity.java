@@ -1,4 +1,4 @@
-package com.m224.ataxx;
+package com.m224.ataxx.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.m224.ataxx.domaine.Grid;
+import com.m224.ataxx.adapters.GridTileAdapter;
+import com.m224.ataxx.R;
 
 public class GridActivity extends AppCompatActivity {
 
@@ -29,11 +33,8 @@ public class GridActivity extends AppCompatActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-
                 //((Tile)v).setState(IGlobalVariable.STATE.BLOCK);
-
                 grid.changeSelectedTile(position);
-
                 Toast.makeText(GridActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });

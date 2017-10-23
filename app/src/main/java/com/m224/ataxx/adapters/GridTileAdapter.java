@@ -1,9 +1,12 @@
-package com.m224.ataxx;
+package com.m224.ataxx.adapters;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.m224.ataxx.domaine.Grid;
+import com.m224.ataxx.interfaces.IGlobalVariable;
 
 /**
  * Created by 224 on 2017-10-20.

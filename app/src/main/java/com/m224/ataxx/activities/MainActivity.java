@@ -1,9 +1,11 @@
-package com.m224.ataxx;
+package com.m224.ataxx.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.m224.ataxx.R;
 
 // TODO : change App icon
 
