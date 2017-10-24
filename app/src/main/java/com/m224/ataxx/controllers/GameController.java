@@ -15,6 +15,9 @@ public class GameController {
     private Context context;
     private int selectTile = IGlobalVariable.DEFAULT_SELECTED_TILE;
 
+    private int scorePlayer1;
+    private int scorePlayer2;
+
     public GameController(Context context) {
         this.tiles = new Tile[IGlobalVariable.MAX_TILE];
         this.context = context;
@@ -35,12 +38,32 @@ public class GameController {
             tiles[i].setState(IGlobalVariable.STATE.EMPTY);
     }
 
+    public int getScorePlayer1() {
+        return scorePlayer1;
+    }
+
+    public int getScorePlayer2() {
+        return scorePlayer2;
+    }
+
+    private void countScore() {
+        scorePlayer1=0;
+        scorePlayer2=0;
+        for (Tile tile : tiles) {
+            if (tile.getState() == IGlobalVariable.STATE.PLAYER1)
+                scorePlayer1++;
+            if (tile.getState() == IGlobalVariable.STATE.PLAYER2)
+                scorePlayer2++;
+        }
+    }
+
     public void setConfig1() {
         resetTile();
         tiles[0].setState(IGlobalVariable.STATE.PLAYER2);
         tiles[8].setState(IGlobalVariable.STATE.PLAYER1);
         tiles[72].setState(IGlobalVariable.STATE.PLAYER1);
         tiles[80].setState(IGlobalVariable.STATE.PLAYER2);
+        countScore();
     }
 
     public void changeSelectedTile(int newSelected) {
@@ -67,8 +90,9 @@ public class GameController {
 
         if (moveTile.getState() == IGlobalVariable.STATE.EMPTY) {
             moveTile.setState(tiles[selectTile].getState());
-            tiles[selectTile].setState(IGlobalVariable.STATE.EMPTY);
+            //tiles[selectTile].setState(IGlobalVariable.STATE.EMPTY);
             unSelectTile();
+            countScore();
         } else
             changeSelectedTile(tileId);
     }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.m224.ataxx.controllers.GameController;
@@ -31,20 +32,18 @@ public class GameActivity extends AppCompatActivity {
         gridview.setAdapter(new TileAdapter(this, gameControllerc));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                //((Tile)v).setState(IGlobalVariable.STATE.BLOCK);
-                //gameControllerc.changeSelectedTile(position);
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
                 gameControllerc.makeMove(position);
 
-                Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                TextView tv_player_1 = (TextView) findViewById(R.id.tv_player_1);
+                TextView tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
+
+                tv_player_1.setText(""+gameControllerc.getScorePlayer1());
+                tv_player_2.setText(""+gameControllerc.getScorePlayer2());
+
+                //Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
-
-
-
-
 }
