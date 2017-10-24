@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.m224.ataxx.controllers.GameController;
-import com.m224.ataxx.interfaces.IGlobalVariable;
+import com.m224.ataxx.utils.IGlobalVariable;
 
 /**
  * Created by 224 on 2017-10-20.

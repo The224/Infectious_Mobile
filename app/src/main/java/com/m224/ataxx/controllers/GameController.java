@@ -3,7 +3,7 @@ package com.m224.ataxx.controllers;
 import android.content.Context;
 
 import com.m224.ataxx.domaine.Tile;
-import com.m224.ataxx.interfaces.IGlobalVariable;
+import com.m224.ataxx.utils.IGlobalVariable;
 
 /**
  * Created by 224 on 2017-10-23.
@@ -13,7 +13,7 @@ public class GameController {
 
     private Tile[] tiles;
     private Context context;
-    private int selectTile = -1;
+    private int selectTile = IGlobalVariable.DEFAULT_SELECTED_TILE;
 
     public GameController(Context context) {
         this.tiles = new Tile[IGlobalVariable.MAX_TILE];
@@ -21,6 +21,9 @@ public class GameController {
 
         for (int i = 0; i < tiles.length; i++)
             tiles[i] = new Tile(context, IGlobalVariable.STATE.EMPTY);
+
+        tiles[selectTile].setSelected(true);
+
     }
 
     public Tile getTileAt(int i) {
@@ -41,12 +44,33 @@ public class GameController {
     }
 
     public void changeSelectedTile(int newSelected) {
-        if (selectTile >= 0)
-            tiles[selectTile].setSelected(false);
+        if (tiles[newSelected].getState() == IGlobalVariable.STATE.PLAYER1 ||
+                tiles[newSelected].getState() == IGlobalVariable.STATE.PLAYER2) {
+            if (selectTile >= 0)
+                tiles[selectTile].setSelected(false);
+            tiles[newSelected].setSelected(true);
+            selectTile = newSelected;
+        }
+    }
 
-        tiles[newSelected].setSelected(true);
+    public void unSelectTile(){
+        tiles[selectTile].setSelected(false);
+    }
 
-        selectTile = newSelected;
+    public void makeMove(int tileId) {
+        Tile moveTile = tiles[tileId];
+        // Prevent selectTile to be null
+        if (selectTile < 0) {
+            changeSelectedTile(tileId);
+            return;
+        }
+
+        if (moveTile.getState() == IGlobalVariable.STATE.EMPTY) {
+            moveTile.setState(tiles[selectTile].getState());
+            tiles[selectTile].setState(IGlobalVariable.STATE.EMPTY);
+            unSelectTile();
+        } else
+            changeSelectedTile(tileId);
     }
 
 
@@ -54,9 +78,28 @@ public class GameController {
 
 
 
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

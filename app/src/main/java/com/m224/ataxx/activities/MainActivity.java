@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void startActivityGrid(View view) {
-        Intent intent = new Intent(this, GridActivity.class);
+        Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
 

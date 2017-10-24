@@ -6,7 +6,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.widget.ImageView;
 
 import com.m224.ataxx.R;
-import com.m224.ataxx.interfaces.IGlobalVariable;
+import com.m224.ataxx.utils.IGlobalVariable;
 
 /**
  * Created by 224 on 2017-10-20.

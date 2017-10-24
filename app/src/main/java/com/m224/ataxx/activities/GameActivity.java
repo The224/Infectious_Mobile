@@ -11,7 +11,7 @@ import com.m224.ataxx.controllers.GameController;
 import com.m224.ataxx.adapters.TileAdapter;
 import com.m224.ataxx.R;
 
-public class GridActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     private static GameController gameControllerc;
 
@@ -34,8 +34,10 @@ public class GridActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
                 //((Tile)v).setState(IGlobalVariable.STATE.BLOCK);
-                gameControllerc.changeSelectedTile(position);
-                Toast.makeText(GridActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                //gameControllerc.changeSelectedTile(position);
+                gameControllerc.makeMove(position);
+
+                Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
     }
