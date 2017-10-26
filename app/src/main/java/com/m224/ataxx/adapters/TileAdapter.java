@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.m224.ataxx.controllers.GameController;
+import com.m224.ataxx.services.GameService;
 import com.m224.ataxx.utils.IGlobalVariable;
 
 /**
@@ -14,11 +14,11 @@ import com.m224.ataxx.utils.IGlobalVariable;
 
 public class TileAdapter extends BaseAdapter {
     private Context context;
-    private GameController gameController;
+    private GameService gameService;
 
-    public TileAdapter(Context context, GameController gameController) {
+    public TileAdapter(Context context, GameService gameService) {
         this.context = context;
-        this.gameController = gameController;
+        this.gameService = gameService;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class TileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        return gameController.getTileAt(position);
+        return gameService.getTileAt(position);
     }
 }
 

@@ -1,4 +1,4 @@
-package com.m224.ataxx.controllers;
+package com.m224.ataxx.services;
 
 import android.content.Context;
 
@@ -9,7 +9,7 @@ import com.m224.ataxx.utils.IGlobalVariable;
  * Created by 224 on 2017-10-23.
  */
 
-public class GameController {
+public class GameService {
 
     private Tile[] tiles;
     private Context context;
@@ -18,7 +18,7 @@ public class GameController {
     private int scorePlayer1;
     private int scorePlayer2;
 
-    public GameController(Context context) {
+    public GameService(Context context) {
         this.tiles = new Tile[IGlobalVariable.MAX_TILE];
         this.context = context;
 
