@@ -51,7 +51,7 @@ public class Util {
             around.add( tileId+(rowLength-1) );
         if (downRight)
             around.add( tileId+(rowLength+1) );
-        
+
         return around;
     }
 

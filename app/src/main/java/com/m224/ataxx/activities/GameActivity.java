@@ -15,42 +15,49 @@ import com.m224.ataxx.utils.Util;
 
 public class GameActivity extends AppCompatActivity {
 
-    private static GameController gameControllerc;
+    private GameController gameController;
+    private TextView tv_player_1 = (TextView) findViewById(R.id.tv_player_1);
+    private TextView tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
 
-        gameControllerc = new GameController(this);
-        gameControllerc.setConfig1();
+        gameController = new GameController(this);
+        gameController.setConfig1();
 
         handleGrid();
+        refreshScore();
     }
 
     private void handleGrid() {
         GridView gridview = (GridView) findViewById(R.id.grid_view);
-        gridview.setAdapter(new TileAdapter(this, gameControllerc));
-
-        TextView tv_player_1 = (TextView) findViewById(R.id.tv_player_1);
-        TextView tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
-
-        tv_player_1.setText(""+gameControllerc.getScorePlayer1());
-        tv_player_2.setText(""+gameControllerc.getScorePlayer2());
+        gridview.setAdapter(new TileAdapter(this, gameController));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-                gameControllerc.makeMove(position);
+                gameController.makeMove(position);
 
-                TextView tv_player_1 = (TextView) findViewById(R.id.tv_player_1);
-                TextView tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
-
-                tv_player_1.setText(""+gameControllerc.getScorePlayer1());
-                tv_player_2.setText(""+gameControllerc.getScorePlayer2());
+                refreshScore();
 
                 Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
+    private void refreshScore() {
+        tv_player_1.setText(""+gameController.getScorePlayer1());
+        tv_player_2.setText(""+gameController.getScorePlayer2());
+    }
+
+
+
+
+
+
+
+
 }
