@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.m224.ataxx.domaine.Tile;
 import com.m224.ataxx.utils.IGlobalVariable;
+import com.m224.ataxx.utils.Util;
+
+import java.util.List;
 
 /**
  * Created by 224 on 2017-10-23.
@@ -47,8 +50,7 @@ public class GameService {
     }
 
     private void countScore() {
-        scorePlayer1=0;
-        scorePlayer2=0;
+        scorePlayer1=0; scorePlayer2=0;
         for (Tile tile : tiles) {
             if (tile.getState() == IGlobalVariable.STATE.PLAYER1)
                 scorePlayer1++;
@@ -92,10 +94,34 @@ public class GameService {
             moveTile.setState(tiles[selectTile].getState());
             //tiles[selectTile].setState(IGlobalVariable.STATE.EMPTY);
             unSelectTile();
+            infectAround(tileId);
             countScore();
         } else
             changeSelectedTile(tileId);
+
+        selectTile = -1;
+
     }
+
+    public void infectAround(int tileId) {
+        List<Integer> aroundId = Util.getTileAround(tileId);
+        for (int id : aroundId) {
+            Tile tile = tiles[id];
+            if ( tile.getState() == IGlobalVariable.STATE.PLAYER1 ||
+                    tile.getState() == IGlobalVariable.STATE.PLAYER2 ) {
+                tile.setState(tiles[selectTile].getState());
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
 
 
 

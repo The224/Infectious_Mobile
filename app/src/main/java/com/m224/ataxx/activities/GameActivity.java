@@ -15,13 +15,16 @@ import com.m224.ataxx.R;
 public class GameActivity extends AppCompatActivity {
 
     private GameService gameService;
-    private TextView tv_player_1 = (TextView) findViewById(R.id.tv_player_1);
-    private TextView tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
+    private TextView tv_player_1;
+    private TextView tv_player_2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
+
+        tv_player_1 = (TextView) findViewById(R.id.tv_player_1);
+        tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
 
         gameService = new GameService(this);
         gameService.setConfig1();
