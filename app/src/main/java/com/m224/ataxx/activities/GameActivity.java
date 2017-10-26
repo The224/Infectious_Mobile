@@ -27,7 +27,7 @@ public class GameActivity extends AppCompatActivity {
         tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
 
         gameService = new GameService(this);
-        gameService.setConfig1();
+        gameService.setConfigOne();
 
         handleGrid();
         refreshScore();
@@ -40,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-                gameService.makeMove(position);
+                gameService.makeMoveOld(position);
 
                 refreshScore();
 
