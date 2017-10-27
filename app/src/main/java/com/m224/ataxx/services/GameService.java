@@ -15,7 +15,7 @@ import java.util.List;
 public class GameService {
 
     private Tile[] tiles;
-    private int selectTile = IGlobalVariable.DEFAULT_SELECTED_TILE;
+    private Tile selectTile = null;
 
     private int scorePlayer1;
     private int scorePlayer2;
@@ -25,8 +25,6 @@ public class GameService {
 
         for (int i = 0; i < tiles.length; i++)
             tiles[i] = new Tile(context, IGlobalVariable.STATE.EMPTY);
-
-        tiles[selectTile].setSelected(true);
 
     }
 
@@ -64,101 +62,46 @@ public class GameService {
         countScore();
     }
 
-    private boolean isStatePlayer(int id) {
-        if (tiles[id].getState() == IGlobalVariable.STATE.PLAYER1 ||
-                tiles[id].getState() == IGlobalVariable.STATE.PLAYER2) {
-            return true;
-        }
-        return false;
-    }
 
-    private void changeSelectedTile(int newSelected) {
-        if (isStatePlayer(newSelected)) {
-            removeSelection();
-            tiles[newSelected].setSelected(true);
-            selectTile = newSelected;
-        }
-    }
-
-    public void removeSelection(){
-        if (selectTile >= 0) {
-            tiles[selectTile].setSelected(false);
-        }
-    }
-
-    public void makeMoveOld(int tileId) {
-        Tile moveTile = tiles[tileId];
-        // Prevent selectTile to be null
-        if (selectTile < 0) {
-            changeSelectedTile(tileId);
-            return;
-        }
-
-        if (moveTile.getState() == IGlobalVariable.STATE.EMPTY) {
-            moveTile.setState(tiles[selectTile].getState());
-            //tiles[selectTile].setState(IGlobalVariable.STATE.EMPTY);
-            removeSelection();
-            infectAround(tileId);
-            countScore();
-        } else
-            changeSelectedTile(tileId);
-
-        selectTile = -1;
-
-    }
-
-    private void infectAround(int tileId) {
-        List<Integer> aroundId = Util.getTileAround(tileId);
-        for (int id : aroundId) {
-            Tile tile = tiles[id];
-            if ( isStatePlayer(tileId) ) {
-                tile.setState(tiles[selectTile].getState());
-            }
-        }
-    }
 
     /*********************************/
 
-    public boolean isFutureMoveValid(int id) {
-        // Confirme que le mouvement se fais dans les deux premiere case
-        return false;
-    }
 
-    public boolean isSelectionOk(int id) {
-        // Doit confirmer que le choix est bon quand je click sur n'importe quel case
-        return false;
-    }
-
-    public void makeMove(int id) {
-        // fait le mouvement vers l'autre case
-    }
 
     public void move(int toId){
 
-        isFutureMoveValid(toId);
+        if (selectTile == null) {  // Cree la selection
+            if(tiles[toId].isStatePlayer()) {
+                selectTile = tiles[toId];
+                selectTile.setSelected(true);
+            }
+        } else if (tiles[toId].isStatePlayer()) { // Change la selection
+            selectTile.setSelected(false);
+            selectTile = tiles[toId];
+            selectTile.setSelected(true);
+        } else if (tiles[toId].getState() == IGlobalVariable.STATE.EMPTY) { // Fait le mouvement
+            selectTile.setSelected(false);
+            tiles[toId].setState(selectTile.getState());
 
-        isSelectionOk(toId);
+            // Besoin de confirmer que le move est possible !
 
-        makeMove(toId);
 
-        infectAround(toId);
 
-        removeSelection();
+
+
+
+            // Infect around
+            List<Integer> integerList = Util.getTileAround(toId);
+            for (int id : integerList ) {
+                if (tiles[id].isStatePlayer())
+                    tiles[id].setState(tiles[toId].getState());
+            }
+
+
+            selectTile = null;
+        }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

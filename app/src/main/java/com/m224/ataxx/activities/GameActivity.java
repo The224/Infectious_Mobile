@@ -40,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-                gameService.makeMoveOld(position);
+                gameService.move(position);
 
                 refreshScore();
 

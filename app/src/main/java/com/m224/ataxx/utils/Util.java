@@ -55,6 +55,13 @@ public class Util {
         return around;
     }
 
+    public static boolean confirmValideMove(int tileId) {
+
+        return false;
+    }
+
+
+
 
 
 

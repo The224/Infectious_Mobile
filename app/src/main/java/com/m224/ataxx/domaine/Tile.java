@@ -56,6 +56,14 @@ public class Tile extends ImageView {
         this.setImageDrawable(layerDrawable);
     }
 
+    public boolean isStatePlayer() {
+        if (this.state == IGlobalVariable.STATE.PLAYER1 ||
+                this.state == IGlobalVariable.STATE.PLAYER2) {
+            return true;
+        }
+        return false;
+    }
+
 
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
