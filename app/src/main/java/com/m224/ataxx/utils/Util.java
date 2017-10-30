@@ -1,5 +1,7 @@
 package com.m224.ataxx.utils;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,11 +57,35 @@ public class Util {
         return around;
     }
 
-    public static boolean confirmValideMove(int tileId) {
+    /**
+     * lazyness ?
+     * @param start tile id of the origin point
+     * @param end tile id of the end move
+     * @return 0 if move is not valid
+     *         1 if duplicated
+     *         2 if jump
+     */
+    public static int confirmValidMove(int start, int end) {
+        List<Integer> duplicates = getTileAround(start);
 
-        return false;
+        for (int duplicate : duplicates) {
+            Log.d("UTIL", "         "+start+":"+duplicate+" : "+end);
+            if (duplicate == end) {
+                return 1;
+            }
+        }
+
+        for (int duplicate : duplicates) {
+            List<Integer> jumps = getTileAround(duplicate);
+            for (int jump : jumps) {
+                if (jump == end) {
+                    return 2;
+                }
+            }
+        }
+
+        return 0;
     }
-
 
 
 

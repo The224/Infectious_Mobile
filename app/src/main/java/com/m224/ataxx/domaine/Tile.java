@@ -16,19 +16,31 @@ public class Tile extends ImageView {
 
     private IGlobalVariable.STATE state;
     private boolean selected;
+    private int id;
 
     public void setState(IGlobalVariable.STATE state) {
         this.state = state;
         changeImageResource();
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public IGlobalVariable.STATE getState() {
         return state;
     }
 
-    public Tile(Context context, IGlobalVariable.STATE state) {
+    public Tile(Context context, IGlobalVariable.STATE state, int id) {
         super(context);
         this.state = state;
+        this.id = id;
         changeImageResource();
     }
 

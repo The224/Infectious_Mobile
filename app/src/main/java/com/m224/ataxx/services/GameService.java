@@ -24,7 +24,7 @@ public class GameService {
         this.tiles = new Tile[IGlobalVariable.MAX_TILE];
 
         for (int i = 0; i < tiles.length; i++)
-            tiles[i] = new Tile(context, IGlobalVariable.STATE.EMPTY);
+            tiles[i] = new Tile(context, IGlobalVariable.STATE.EMPTY, i);
 
     }
 
@@ -67,6 +67,16 @@ public class GameService {
     /*********************************/
 
 
+    /**
+     * Infect the 8 tiles around param int*/
+    public void infectAround(int aroundId) {
+        List<Integer> integerList = Util.getTileAround(aroundId);
+        for (int id : integerList ) {
+            if (tiles[id].isStatePlayer())
+                tiles[id].setState(tiles[aroundId].getState());
+        }
+    }
+
 
     public void move(int toId){
 
@@ -80,25 +90,19 @@ public class GameService {
             selectTile = tiles[toId];
             selectTile.setSelected(true);
         } else if (tiles[toId].getState() == IGlobalVariable.STATE.EMPTY) { // Fait le mouvement
-            selectTile.setSelected(false);
-            tiles[toId].setState(selectTile.getState());
 
-            // Besoin de confirmer que le move est possible !
+            int moveType = Util.confirmValidMove(selectTile.getId(),toId);
 
+            if (moveType > 0) {
+                selectTile.setSelected(false);
+                tiles[toId].setState(selectTile.getState());
+                infectAround(toId);
 
-
-
-
-
-            // Infect around
-            List<Integer> integerList = Util.getTileAround(toId);
-            for (int id : integerList ) {
-                if (tiles[id].isStatePlayer())
-                    tiles[id].setState(tiles[toId].getState());
+                if (moveType == 2) {
+                    selectTile.setState(IGlobalVariable.STATE.EMPTY);
+                }
+                selectTile = null;
             }
-
-
-            selectTile = null;
         }
 
     }
