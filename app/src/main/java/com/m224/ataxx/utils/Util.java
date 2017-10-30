@@ -69,7 +69,6 @@ public class Util {
         List<Integer> duplicates = getTileAround(start);
 
         for (int duplicate : duplicates) {
-            Log.d("UTIL", "         "+start+":"+duplicate+" : "+end);
             if (duplicate == end) {
                 return 1;
             }
@@ -86,20 +85,6 @@ public class Util {
 
         return 0;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

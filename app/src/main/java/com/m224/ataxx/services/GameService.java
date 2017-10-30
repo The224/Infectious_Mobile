@@ -85,6 +85,21 @@ public class GameService {
         }
     }
 
+    public void makeMovement(int toId) {
+        int moveType = Util.confirmValidMove(selectTile.getId(),toId);
+
+        if (moveType > 0) {
+            selectTile.setSelected(false);
+            tiles[toId].setState(selectTile.getState());
+            infectAround(toId);
+
+            if (moveType == 2) {
+                selectTile.setState(IGlobalVariable.STATE.EMPTY);
+            }
+            selectTile = null;
+            countScore();
+        }
+    }
 
     public void move(int toId){
         if (selectTile == null) {  // Cree la selection
@@ -96,20 +111,11 @@ public class GameService {
             selectTile.setSelected(false);
             selectTile = tiles[toId];
             selectTile.setSelected(true);
-        } else if (tiles[toId].getState() == IGlobalVariable.STATE.EMPTY) { // Fait le mouvement
+        } else if (tiles[toId].getState() == IGlobalVariable.STATE.EMPTY) {
 
-            int moveType = Util.confirmValidMove(selectTile.getId(),toId);
-
-            if (moveType > 0) {
-                selectTile.setSelected(false);
-                tiles[toId].setState(selectTile.getState());
-                infectAround(toId);
-
-                if (moveType == 2) {
-                    selectTile.setState(IGlobalVariable.STATE.EMPTY);
-                }
-                selectTile = null;
-                countScore();
+            if (turnPlayerOne && selectTile.getState() == IGlobalVariable.STATE.PLAYER1 ||
+                    !turnPlayerOne && selectTile.getState() == IGlobalVariable.STATE.PLAYER2) {
+                makeMovement(toId);
                 turnPlayerOne = !turnPlayerOne;
             }
         }
