@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Ataxx</string>
+
+    <string name="turn_player_one">Player 1 Turn</string>
+    <string name="turn_player_two">Player 2 Turn</string>
+
 </resources>

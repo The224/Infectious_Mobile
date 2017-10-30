@@ -15,8 +15,7 @@ import com.m224.ataxx.R;
 public class GameActivity extends AppCompatActivity {
 
     private GameService gameService;
-    private TextView tv_player_1;
-    private TextView tv_player_2;
+    private TextView tv_player_1, tv_player_2, tv_turn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
 
         tv_player_1 = (TextView) findViewById(R.id.tv_player_1);
         tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
+        tv_turn = (TextView) findViewById(R.id.tv_turn);
 
         gameService = new GameService(this);
         gameService.setConfigOne();
@@ -43,6 +43,7 @@ public class GameActivity extends AppCompatActivity {
                 gameService.move(position);
 
                 refreshScore();
+                refreshTurn();
 
                 Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
@@ -55,9 +56,15 @@ public class GameActivity extends AppCompatActivity {
         tv_player_2.setText(""+ gameService.getScorePlayer2());
     }
 
-
-
-
+    private void refreshTurn() {
+        if (gameService.isTurnPlayerOne()) {
+            tv_turn.setText(getResources().getString(R.string.turn_player_one));
+            tv_turn.setTextColor(getResources().getColor(R.color.player1));
+        } else {
+            tv_turn.setText(getResources().getString(R.string.turn_player_two));
+            tv_turn.setTextColor(getResources().getColor(R.color.player2));
+        }
+    }
 
 
 

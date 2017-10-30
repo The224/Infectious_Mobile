@@ -17,6 +17,7 @@ public class GameService {
     private Tile[] tiles;
     private Tile selectTile = null;
 
+    private boolean turnPlayerOne;
 
     private int scorePlayer1;
     private int scorePlayer2;
@@ -27,7 +28,13 @@ public class GameService {
         for (int i = 0; i < tiles.length; i++)
             tiles[i] = new Tile(context, IGlobalVariable.STATE.EMPTY, i);
 
+        turnPlayerOne = false;
     }
+
+    public boolean isTurnPlayerOne() {
+        return turnPlayerOne;
+    }
+
 
     public Tile getTileAt(int i) {
         return tiles[i];
@@ -103,6 +110,7 @@ public class GameService {
                 }
                 selectTile = null;
                 countScore();
+                turnPlayerOne = !turnPlayerOne;
             }
         }
     }
