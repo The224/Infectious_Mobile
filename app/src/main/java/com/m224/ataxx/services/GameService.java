@@ -17,6 +17,7 @@ public class GameService {
     private Tile[] tiles;
     private Tile selectTile = null;
 
+
     private int scorePlayer1;
     private int scorePlayer2;
 
@@ -79,7 +80,6 @@ public class GameService {
 
 
     public void move(int toId){
-
         if (selectTile == null) {  // Cree la selection
             if(tiles[toId].isStatePlayer()) {
                 selectTile = tiles[toId];
@@ -102,11 +102,10 @@ public class GameService {
                     selectTile.setState(IGlobalVariable.STATE.EMPTY);
                 }
                 selectTile = null;
+                countScore();
             }
         }
-
     }
-
 }
 
 
