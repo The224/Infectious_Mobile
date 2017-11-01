@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.m224.ataxx.services.GameService;
 import com.m224.ataxx.adapters.TileAdapter;
 import com.m224.ataxx.R;
+import com.m224.ataxx.utils.Util;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -21,6 +22,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
+        Util.customActionbar(this, R.layout.actionbar_grid);
+        setTitle("");
 
         tv_player_1 = (TextView) findViewById(R.id.tv_player_1);
         tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
@@ -31,6 +34,11 @@ public class GameActivity extends AppCompatActivity {
 
         handleGrid();
         refreshScore();
+    }
+
+    public void onBackClick(View v) {
+        finish();
+        this.overridePendingTransition(R.anim.left_start, R.anim.left_end);
     }
 
     private void handleGrid() {
@@ -49,7 +57,6 @@ public class GameActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void refreshScore() {
         tv_player_1.setText(""+ gameService.getScorePlayer1());

@@ -1,6 +1,10 @@
 package com.m224.ataxx.utils;
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +14,16 @@ import java.util.List;
  */
 
 public class Util {
+
+    public static void customActionbar(AppCompatActivity appCompatActivity, int resources) {
+        android.support.v7.app.ActionBar actionBar = appCompatActivity.getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) appCompatActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(resources, null);
+
+        actionBar.setCustomView(v);
+    }
 
 
     public static List<Integer> getTileAround(int tileId) {

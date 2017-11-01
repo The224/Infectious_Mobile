@@ -9,9 +9,8 @@
     <color name="player2">#F64E8B</color>
     <color name="player2Dark">#790630</color>
 
-
-
-
-
-
+    <!--
+    <color name="colorPrimary">#393E46</color>
+    <color name="colorPrimaryDark">#222831</color>
+    -->
 </resources>
