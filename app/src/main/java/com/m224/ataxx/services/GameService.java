@@ -1,5 +1,7 @@
 package com.m224.ataxx.services;
 
+import android.util.Log;
+
 import com.m224.ataxx.domaine.Tile;
 import com.m224.ataxx.utils.IGlobalVariable;
 import com.m224.ataxx.utils.Util;
@@ -44,10 +46,6 @@ public class GameService {
         return scorePlayer2;
     }
 
-    public List<Tile> getTiles() {
-        return tiles;
-    }
-
     private void resetGrid() {
         for (Tile tile : tiles)
             tile.setState(IGlobalVariable.STATE.EMPTY);
@@ -72,14 +70,11 @@ public class GameService {
         countScore();
     }
 
-
-
     /*********************************/
-
 
     /**
      * Infect the 8 tiles around param int*/
-    public void infectAround(int aroundId) {
+    private void infectAround(int aroundId) {
         List<Integer> integerList = Util.getTileAround(aroundId);
         for (int id : integerList ) {
             if (tiles.get(id).isStatePlayer())
@@ -87,7 +82,7 @@ public class GameService {
         }
     }
 
-    public void makeMovement(int toId) {
+    private void makeMovement(int toId) {
         int moveType = Util.confirmValidMove(selectTile.getId(),toId);
 
         if (moveType > 0) {
@@ -100,12 +95,15 @@ public class GameService {
             }
             selectTile = null;
             countScore();
+            turnPlayerOne = !turnPlayerOne;
         }
     }
 
     public void move(int toId){
         if (selectTile == null) {  // Cree la selection
-            if(tiles.get(toId).isStatePlayer()) {
+
+            if (tiles.get(toId).getState() == IGlobalVariable.STATE.PLAYER1 && turnPlayerOne ||
+                    tiles.get(toId).getState() == IGlobalVariable.STATE.PLAYER2 && !turnPlayerOne) {
                 selectTile = tiles.get(toId);
                 selectTile.setSelected(true);
             }
@@ -118,7 +116,6 @@ public class GameService {
             if (turnPlayerOne && selectTile.getState() == IGlobalVariable.STATE.PLAYER1 ||
                     !turnPlayerOne && selectTile.getState() == IGlobalVariable.STATE.PLAYER2) {
                 makeMovement(toId);
-                turnPlayerOne = !turnPlayerOne;
             }
         }
     }

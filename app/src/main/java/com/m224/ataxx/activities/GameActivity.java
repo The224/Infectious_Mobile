@@ -23,9 +23,9 @@ import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
-    private GameService gameService;
+    private GameService gameService = new GameService();
     private TextView tv_player_1, tv_player_2, tv_turn;
-    private List<TileImageView> gridImages;
+    private List<TileImageView> gridImages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +34,15 @@ public class GameActivity extends AppCompatActivity {
         Util.customActionbar(this, R.layout.actionbar_grid);
         setTitle("");
 
-        gridImages = new ArrayList<>();
+        tv_player_1 = findViewById(R.id.tv_player_1);
+        tv_player_2 = findViewById(R.id.tv_player_2);
+        tv_turn = findViewById(R.id.tv_turn);
 
-        for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
-            gridImages.add(new TileImageView(this, IGlobalVariable.STATE.EMPTY, i));
-        }
-
-
-        tv_player_1 = (TextView) findViewById(R.id.tv_player_1);
-        tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
-        tv_turn = (TextView) findViewById(R.id.tv_turn);
-
-        gameService = new GameService();
         gameService.setConfigOne();
 
 
         for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
-            gridImages.get(i).setState(gameService.getTileAt(i).getState());
+            gridImages.add(new TileImageView(this, gameService.getTileAt(i).getState(), i));
         }
 
         handleGrid();
@@ -96,9 +88,6 @@ public class GameActivity extends AppCompatActivity {
                 for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
                     gridImages.get(i).setState(gameService.getTileAt(i).getState());
                     gridImages.get(i).setSelected(gameService.getTileAt(i).isSelected());
-
-
-
                 }
 
                 Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
