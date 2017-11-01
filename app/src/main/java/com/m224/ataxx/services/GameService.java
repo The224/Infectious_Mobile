@@ -28,7 +28,7 @@ public class GameService {
         for (int i = 0; i < tiles.length; i++)
             tiles[i] = new Tile(context, IGlobalVariable.STATE.EMPTY, i);
 
-        turnPlayerOne = false;
+        turnPlayerOne = true;
     }
 
     public boolean isTurnPlayerOne() {

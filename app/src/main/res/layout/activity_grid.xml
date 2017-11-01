@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Turn"
+        android:text="@string/turn_player_one"
         android:textColor="@color/player1"
         android:textSize="30sp" />
 
