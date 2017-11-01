@@ -5,8 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.m224.ataxx.domaine.TileImageView;
 import com.m224.ataxx.services.GameService;
 import com.m224.ataxx.utils.IGlobalVariable;
+
+import java.util.List;
 
 /**
  * Created by 224 on 2017-10-20.
@@ -14,11 +17,11 @@ import com.m224.ataxx.utils.IGlobalVariable;
 
 public class TileAdapter extends BaseAdapter {
     private Context context;
-    private GameService gameService;
+    private List<TileImageView> gridImage;
 
-    public TileAdapter(Context context, GameService gameService) {
+    public TileAdapter(Context context, List<TileImageView> gridImage) {
         this.context = context;
-        this.gameService = gameService;
+        this.gridImage = gridImage;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class TileAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        return gameService.getTileAt(position);
+        return gridImage.get(position);
     }
 }
 

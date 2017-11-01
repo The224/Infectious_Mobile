@@ -1,11 +1,10 @@
 package com.m224.ataxx.services;
 
-import android.content.Context;
-
 import com.m224.ataxx.domaine.Tile;
 import com.m224.ataxx.utils.IGlobalVariable;
 import com.m224.ataxx.utils.Util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class GameService {
 
-    private Tile[] tiles;
+    private List<Tile> tiles;
     private Tile selectTile = null;
 
     private boolean turnPlayerOne;
@@ -22,11 +21,11 @@ public class GameService {
     private int scorePlayer1;
     private int scorePlayer2;
 
-    public GameService(Context context) {
-        this.tiles = new Tile[IGlobalVariable.MAX_TILE];
+    public GameService() {
+        this.tiles = new ArrayList<>();
 
-        for (int i = 0; i < tiles.length; i++)
-            tiles[i] = new Tile(context, IGlobalVariable.STATE.EMPTY, i);
+        for (int i = 0; i < IGlobalVariable.MAX_TILE; i++)
+            tiles.add(new Tile(IGlobalVariable.STATE.EMPTY,i));
 
         turnPlayerOne = true;
     }
@@ -35,15 +34,18 @@ public class GameService {
         return turnPlayerOne;
     }
 
-
-    public Tile getTileAt(int i) {
-        return tiles[i];
+    public Tile getTileAt(int id) {
+        return tiles.get(id);
     }
     public int getScorePlayer1() {
         return scorePlayer1;
     }
     public int getScorePlayer2() {
         return scorePlayer2;
+    }
+
+    public List<Tile> getTiles() {
+        return tiles;
     }
 
     private void resetGrid() {
@@ -63,10 +65,10 @@ public class GameService {
 
     public void setConfigOne() {
         resetGrid();
-        tiles[0].setState(IGlobalVariable.STATE.PLAYER2);
-        tiles[8].setState(IGlobalVariable.STATE.PLAYER1);
-        tiles[72].setState(IGlobalVariable.STATE.PLAYER1);
-        tiles[80].setState(IGlobalVariable.STATE.PLAYER2);
+        tiles.get(0).setState(IGlobalVariable.STATE.PLAYER2);
+        tiles.get(8).setState(IGlobalVariable.STATE.PLAYER1);
+        tiles.get(72).setState(IGlobalVariable.STATE.PLAYER1);
+        tiles.get(80).setState(IGlobalVariable.STATE.PLAYER2);
         countScore();
     }
 
@@ -80,8 +82,8 @@ public class GameService {
     public void infectAround(int aroundId) {
         List<Integer> integerList = Util.getTileAround(aroundId);
         for (int id : integerList ) {
-            if (tiles[id].isStatePlayer())
-                tiles[id].setState(tiles[aroundId].getState());
+            if (tiles.get(id).isStatePlayer())
+                tiles.get(id).setState(tiles.get(aroundId).getState());
         }
     }
 
@@ -90,7 +92,7 @@ public class GameService {
 
         if (moveType > 0) {
             selectTile.setSelected(false);
-            tiles[toId].setState(selectTile.getState());
+            tiles.get(toId).setState(selectTile.getState());
             infectAround(toId);
 
             if (moveType == 2) {
@@ -103,15 +105,15 @@ public class GameService {
 
     public void move(int toId){
         if (selectTile == null) {  // Cree la selection
-            if(tiles[toId].isStatePlayer()) {
-                selectTile = tiles[toId];
+            if(tiles.get(toId).isStatePlayer()) {
+                selectTile = tiles.get(toId);
                 selectTile.setSelected(true);
             }
-        } else if (tiles[toId].isStatePlayer()) { // Change la selection
+        } else if (tiles.get(toId).isStatePlayer()) { // Change la selection
             selectTile.setSelected(false);
-            selectTile = tiles[toId];
+            selectTile = tiles.get(toId);
             selectTile.setSelected(true);
-        } else if (tiles[toId].getState() == IGlobalVariable.STATE.EMPTY) {
+        } else if (tiles.get(toId).getState() == IGlobalVariable.STATE.EMPTY) {
 
             if (turnPlayerOne && selectTile.getState() == IGlobalVariable.STATE.PLAYER1 ||
                     !turnPlayerOne && selectTile.getState() == IGlobalVariable.STATE.PLAYER2) {

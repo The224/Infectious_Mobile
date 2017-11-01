@@ -11,15 +11,21 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.m224.ataxx.domaine.TileImageView;
 import com.m224.ataxx.services.GameService;
 import com.m224.ataxx.adapters.TileAdapter;
 import com.m224.ataxx.R;
+import com.m224.ataxx.utils.IGlobalVariable;
 import com.m224.ataxx.utils.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
     private GameService gameService;
     private TextView tv_player_1, tv_player_2, tv_turn;
+    private List<TileImageView> gridImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +34,24 @@ public class GameActivity extends AppCompatActivity {
         Util.customActionbar(this, R.layout.actionbar_grid);
         setTitle("");
 
+        gridImages = new ArrayList<>();
+
+        for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
+            gridImages.add(new TileImageView(this, IGlobalVariable.STATE.EMPTY, i));
+        }
+
+
         tv_player_1 = (TextView) findViewById(R.id.tv_player_1);
         tv_player_2 = (TextView) findViewById(R.id.tv_player_2);
         tv_turn = (TextView) findViewById(R.id.tv_turn);
 
-        gameService = new GameService(this);
+        gameService = new GameService();
         gameService.setConfigOne();
+
+
+        for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
+            gridImages.get(i).setState(gameService.getTileAt(i).getState());
+        }
 
         handleGrid();
         refreshScore();
@@ -65,7 +83,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void handleGrid() {
         GridView gridview = (GridView) findViewById(R.id.grid_view);
-        gridview.setAdapter(new TileAdapter(this, gameService));
+        gridview.setAdapter(new TileAdapter(this, gridImages));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -74,6 +92,14 @@ public class GameActivity extends AppCompatActivity {
 
                 refreshScore();
                 refreshTurn();
+
+                for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
+                    gridImages.get(i).setState(gameService.getTileAt(i).getState());
+                    gridImages.get(i).setSelected(gameService.getTileAt(i).isSelected());
+
+
+
+                }
 
                 Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
