@@ -40,13 +40,11 @@ public class GameActivity extends AppCompatActivity {
 
         gameService.setConfigOne();
 
-
         for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
             gridImages.add(new TileImageView(this, gameService.getTileAt(i).getState(), i));
         }
 
         handleGrid();
-        refreshScore();
     }
 
     @Override
@@ -58,10 +56,10 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
         switch (item.getItemId()) {
             case R.id.navigation_dashboard:
                 gameService.setConfigOne();
+                refreshInterface();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -74,32 +72,35 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void handleGrid() {
-        GridView gridview = (GridView) findViewById(R.id.grid_view);
+        GridView gridview = findViewById(R.id.grid_view);
         gridview.setAdapter(new TileAdapter(this, gridImages));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
                 gameService.move(position);
-
-                refreshScore();
-                refreshTurn();
-
-                for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
-                    gridImages.get(i).setState(gameService.getTileAt(i).getState());
-                    gridImages.get(i).setSelected(gameService.getTileAt(i).isSelected());
-                }
-
+                refreshInterface();
                 Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
+        refreshInterface();
     }
 
+    /* *Refresher* */
+    private void refreshInterface() {
+        refreshGrid();
+        refreshScore();
+        refreshTurn();
+    }
+    private void refreshGrid() {
+        for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
+            gridImages.get(i).setState(gameService.getTileAt(i).getState());
+            gridImages.get(i).setSelected(gameService.getTileAt(i).isSelected());
+        }
+    }
     private void refreshScore() {
         tv_player_1.setText(""+ gameService.getScorePlayer1());
         tv_player_2.setText(""+ gameService.getScorePlayer2());
     }
-
     private void refreshTurn() {
         if (gameService.isTurnPlayerOne()) {
             tv_turn.setText(getResources().getString(R.string.turn_player_one));
@@ -109,6 +110,7 @@ public class GameActivity extends AppCompatActivity {
             tv_turn.setTextColor(getResources().getColor(R.color.player2));
         }
     }
+    /* *********** */
 
 
 
