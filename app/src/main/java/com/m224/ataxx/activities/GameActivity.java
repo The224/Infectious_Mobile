@@ -46,6 +46,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         handleGrid();
+        refreshInterface();
     }
 
     @Override
@@ -81,11 +82,8 @@ public class GameActivity extends AppCompatActivity {
                 gameService.move(position);
                 refreshInterface();
                 Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
-
-                Util.JSONStringToGrid(Util.gridToJSONString(gameService.getTiles()));
             }
         });
-        refreshInterface();
     }
 
     /* *Refresher* */
