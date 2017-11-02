@@ -43,6 +43,9 @@ public class GameService {
     public int getScorePlayer2() {
         return scorePlayer2;
     }
+    public List<Tile> getTiles() {
+        return tiles;
+    }
 
     public void move(int toId){
         if (selectTile == null) {  // Cree la selection

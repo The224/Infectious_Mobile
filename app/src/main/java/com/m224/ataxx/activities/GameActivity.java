@@ -2,6 +2,7 @@ package com.m224.ataxx.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -80,6 +81,8 @@ public class GameActivity extends AppCompatActivity {
                 gameService.move(position);
                 refreshInterface();
                 Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+
+                Util.JSONStringToGrid(Util.gridToJSONString(gameService.getTiles()));
             }
         });
         refreshInterface();

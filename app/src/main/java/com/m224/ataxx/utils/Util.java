@@ -6,6 +6,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.m224.ataxx.domaine.Tile;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +30,14 @@ public class Util {
         actionBar.setCustomView(v);
     }
 
+    public static String gridToJSONString(List<Tile> tiles) {
+        return new Gson().toJson(tiles);
+    }
+
+    public static List<Tile> JSONStringToGrid(String string) {
+        Type listType = new TypeToken<ArrayList<Tile>>(){}.getType();
+        return new Gson().fromJson(string,listType);
+    }
 
     public static List<Integer> getTileAround(int tileId) {
         int rowLength = (int)Math.sqrt(IGlobalVariable.MAX_TILE);
