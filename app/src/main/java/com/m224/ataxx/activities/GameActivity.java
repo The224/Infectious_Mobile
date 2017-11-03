@@ -39,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
         tv_player_2 = findViewById(R.id.tv_player_2);
         tv_turn = findViewById(R.id.tv_turn);
 
-        gameService.setConfigOne();
+        gameService.setConfig(1);
 
         for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
             gridImages.add(new TileImageView(this, gameService.getTileAt(i).getState(), i));
@@ -60,7 +60,7 @@ public class GameActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_dashboard:
-                gameService.setConfigOne();
+                gameService.setConfig(1);
                 refreshInterface();
                 return true;
             default:
