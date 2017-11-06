@@ -39,36 +39,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        title = new ArrayList<>();
-        image = new ArrayList<>();
-
-        title.add("Test 111");
-        image.add(R.drawable.background);
-
-
-        adapter = new ConfigListAdapter(this, title, image);
-
-
-        recyclerView = findViewById(R.id.recycler_view);
-
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        // recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-
-
-
-
-
-
-
-        prepareAlbums();
-
-
-
-
-
+        initRecyclerView();
     }
 
     public void startActivityGrid(View view) {
@@ -103,22 +74,58 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    private void prepareAlbums() {
-        int[] image = new int[]{
-                R.drawable.background,
-                R.drawable.background,
-                R.drawable.background,
-                R.drawable.background};
+    private void initRecyclerView() {
+        title = new ArrayList<>();
+        image = new ArrayList<>();
 
-        String[] title = new String[]{
-                "test 1",
-                "test 2",
-                "test 3",
-                "test 4"};
+        adapter = new ConfigListAdapter(this, title, image);
+
+        recyclerView = findViewById(R.id.recycler_view);
+
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+        prepareAlbums();
+    }
+
+    private void prepareAlbums() {
+        title.add("Test 111");
+        image.add(R.drawable.background);
+        title.add("Test 222");
+        image.add(R.drawable.background);
+        title.add("Test 333");
+        image.add(R.drawable.ic_arrow_left);
+        title.add("Test 444");
+        image.add(R.drawable.background);
+        title.add("Test 555");
+        image.add(R.drawable.background);
+        title.add("Test 666");
+        image.add(R.drawable.background);
+        title.add("Test 777");
+        image.add(R.drawable.ic_arrow_right);
+        title.add("Test 888");
+        image.add(R.drawable.background);
+        title.add("Test 999");
+        image.add(R.drawable.background);
+        title.add("Test 123");
+        image.add(R.drawable.background);
+        title.add("Test 456");
+        image.add(R.drawable.background);
+        title.add("Test 789");
+        image.add(R.drawable.background);
 
         adapter.notifyDataSetChanged();
     }
 
+
+    public void startGameWithConfig(int configId) {
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("configId", configId);
+        startActivity(intent);
+        overridePendingTransition(R.anim.right_start, R.anim.right_end);
+    }
 
 
 

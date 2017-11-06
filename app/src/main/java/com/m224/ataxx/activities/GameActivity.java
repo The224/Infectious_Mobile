@@ -40,7 +40,14 @@ public class GameActivity extends AppCompatActivity {
         tv_player_2 = findViewById(R.id.tv_player_2);
         tv_turn = findViewById(R.id.tv_turn);
 
-        gameService.setConfig(1);
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) {
+            gameService.setConfig(0);
+        } else {
+            gameService.setConfig(extras.getInt("configId"));
+        }
+
+
 
         for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
             gridImages.add(new TileImageView(this, gameService.getStateAt(i), i));
