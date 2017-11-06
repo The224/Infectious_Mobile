@@ -29,8 +29,26 @@ public class GameService {
                 board.setConfigOne();
                 break;
         }
+    }
 
+    public int getScorePlayer1() {
+        return board.getScorePlayer1();
+    }
 
+    public int getScorePlayer2() {
+        return board.getScorePlayer2();
+    }
+
+    public IGlobalVariable.STATE getStateAt(int id) {
+        return board.getStateAt(id);
+    }
+
+    public boolean isSelectAt(int id) {
+        return board.getTileAt(id).isSelected();
+    }
+
+    public boolean isTurnPlayerOne() {
+        return board.isTurnPlayerOne();
     }
 
     public void move(int toId){

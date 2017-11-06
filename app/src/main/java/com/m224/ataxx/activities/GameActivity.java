@@ -42,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
         gameService.setConfig(1);
 
         for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
-            gridImages.add(new TileImageView(this, gameService.getTileAt(i).getState(), i));
+            gridImages.add(new TileImageView(this, gameService.getStateAt(i), i));
         }
 
         handleGrid();
@@ -94,8 +94,8 @@ public class GameActivity extends AppCompatActivity {
     }
     private void refreshGrid() {
         for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
-            gridImages.get(i).setState(gameService.getTileAt(i).getState());
-            gridImages.get(i).setSelected(gameService.getTileAt(i).isSelected());
+            gridImages.get(i).setState(gameService.getStateAt(i));
+            gridImages.get(i).setSelected(gameService.isSelectAt(i));
         }
     }
     private void refreshScore() {
