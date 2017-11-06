@@ -6,16 +6,28 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.m224.ataxx.R;
+import com.m224.ataxx.adapters.ConfigListAdapter;
 import com.m224.ataxx.utils.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private ConfigListAdapter adapter;
+    private RecyclerView recyclerView;
+
+    private List<String> title;
+    private List<Integer> image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +35,42 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Util.customActionbar(this, R.layout.actionbar_main);
 
-        mTextMessage = (TextView) findViewById(R.id.tv_msg);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        mTextMessage = findViewById(R.id.tv_msg);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        title = new ArrayList<>();
+        image = new ArrayList<>();
+
+        title.add("Test 111");
+        image.add(R.drawable.background);
+
+
+        adapter = new ConfigListAdapter(this, title, image);
+
+
+        recyclerView = findViewById(R.id.recycler_view);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        // recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+
+
+
+
+
+
+        prepareAlbums();
+
+
+
+
+
     }
-    /*
 
-    view pager, un contre un, un contre ordinateur, multijoueur
-    avec list d'item image de preview
-
-    */
     public void startActivityGrid(View view) {
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
@@ -63,6 +101,32 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+
+
+    private void prepareAlbums() {
+        int[] image = new int[]{
+                R.drawable.background,
+                R.drawable.background,
+                R.drawable.background,
+                R.drawable.background};
+
+        String[] title = new String[]{
+                "test 1",
+                "test 2",
+                "test 3",
+                "test 4"};
+
+        adapter.notifyDataSetChanged();
+    }
+
+
+
+
+
+
+
+
+
 
 
 
