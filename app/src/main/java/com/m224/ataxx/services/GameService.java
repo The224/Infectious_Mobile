@@ -1,11 +1,9 @@
 package com.m224.ataxx.services;
 
 import com.m224.ataxx.domaine.Board;
-import com.m224.ataxx.domaine.Tile;
-import com.m224.ataxx.utils.IGlobalVariable;
+import com.m224.ataxx.utils.State;
 import com.m224.ataxx.utils.Util;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,7 +37,7 @@ public class GameService {
         return board.getScorePlayer2();
     }
 
-    public IGlobalVariable.STATE getStateAt(int id) {
+    public State getStateAt(int id) {
         return board.getStateAt(id);
     }
 
@@ -54,8 +52,8 @@ public class GameService {
     public void move(int toId){
         if (board.getSelectTile() == null) {  // Cree la selection
 
-            if (board.getStateAt(toId) == IGlobalVariable.STATE.PLAYER1 && board.isTurnPlayerOne() ||
-                    board.getStateAt(toId) == IGlobalVariable.STATE.PLAYER2 && !board.isTurnPlayerOne()) {
+            if (board.getStateAt(toId) == State.PLAYER1 && board.isTurnPlayerOne() ||
+                    board.getStateAt(toId) == State.PLAYER2 && !board.isTurnPlayerOne()) {
                 board.setSelectTile(toId);
                 board.getSelectTile().setSelected(true);
             }
@@ -64,10 +62,10 @@ public class GameService {
             board.setSelectTile(toId);
             board.getSelectTile().setSelected(true);
 
-        } else if (board.getStateAt(toId) == IGlobalVariable.STATE.EMPTY) {
+        } else if (board.getStateAt(toId) == State.EMPTY) {
 
-            if (board.isTurnPlayerOne() && board.getSelectTile().getState() == IGlobalVariable.STATE.PLAYER1 ||
-                    !board.isTurnPlayerOne() && board.getSelectTile().getState() == IGlobalVariable.STATE.PLAYER2) {
+            if (board.isTurnPlayerOne() && board.getSelectTile().getState() == State.PLAYER1 ||
+                    !board.isTurnPlayerOne() && board.getSelectTile().getState() == State.PLAYER2) {
                 makeMovement(toId);
             }
         }
@@ -92,7 +90,7 @@ public class GameService {
             infectAround(toId);
 
             if (moveType == 2) {
-                board.getSelectTile().setState(IGlobalVariable.STATE.EMPTY);
+                board.getSelectTile().setState(State.EMPTY);
             }
             board.setSelectTile(-1);
             board.swithTurn();

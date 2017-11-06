@@ -8,5 +8,5 @@ public enum State {
     EMPTY,
     BLOCK,
     PLAYER1,
-    PLAYER2;
+    PLAYER2,
 }

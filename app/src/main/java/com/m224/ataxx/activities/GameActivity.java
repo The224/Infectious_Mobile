@@ -2,7 +2,6 @@ package com.m224.ataxx.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,7 +15,7 @@ import com.m224.ataxx.domaine.TileImageView;
 import com.m224.ataxx.services.GameService;
 import com.m224.ataxx.adapters.TileAdapter;
 import com.m224.ataxx.R;
-import com.m224.ataxx.utils.IGlobalVariable;
+import com.m224.ataxx.utils.ConfigVariable;
 import com.m224.ataxx.utils.Util;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
 
         gameService.setConfig(1);
 
-        for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
+        for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
             gridImages.add(new TileImageView(this, gameService.getStateAt(i), i));
         }
 
@@ -93,7 +92,7 @@ public class GameActivity extends AppCompatActivity {
         refreshTurn();
     }
     private void refreshGrid() {
-        for (int i = 0; i < IGlobalVariable.MAX_TILE; i++) {
+        for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
             gridImages.get(i).setState(gameService.getStateAt(i));
             gridImages.get(i).setSelected(gameService.isSelectAt(i));
         }

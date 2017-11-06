@@ -2,7 +2,6 @@ package com.m224.ataxx.utils;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -40,7 +39,7 @@ public class Util {
     }
 
     public static List<Integer> getTileAround(int tileId) {
-        int rowLength = (int)Math.sqrt(IGlobalVariable.MAX_TILE);
+        int rowLength = (int)Math.sqrt(ConfigVariable.MAX_TILE);
         List<Integer> around = new ArrayList<>();
         boolean upLeft = true, upRight = true, downLeft = true, downRight = true;
 
@@ -51,7 +50,7 @@ public class Util {
             upRight = false;
         }
 
-        if (tileId < (IGlobalVariable.MAX_TILE - rowLength) ) { // Ne se situe pas au sol
+        if (tileId < (ConfigVariable.MAX_TILE - rowLength) ) { // Ne se situe pas au sol
             around.add(tileId+rowLength);
         } else {
             downLeft = false;

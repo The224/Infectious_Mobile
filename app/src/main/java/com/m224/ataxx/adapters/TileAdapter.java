@@ -6,8 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.m224.ataxx.domaine.TileImageView;
-import com.m224.ataxx.services.GameService;
-import com.m224.ataxx.utils.IGlobalVariable;
+import com.m224.ataxx.utils.ConfigVariable;
 
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class TileAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return IGlobalVariable.MAX_TILE;
+        return ConfigVariable.MAX_TILE;
     }
 
     @Override

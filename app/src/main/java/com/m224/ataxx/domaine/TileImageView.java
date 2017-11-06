@@ -6,7 +6,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.widget.ImageView;
 
 import com.m224.ataxx.R;
-import com.m224.ataxx.utils.IGlobalVariable;
+import com.m224.ataxx.utils.State;
 
 /**
  * Created by 224 on 2017-11-01.
@@ -14,18 +14,18 @@ import com.m224.ataxx.utils.IGlobalVariable;
 
 public class TileImageView extends ImageView {
 
-    private IGlobalVariable.STATE state;
+    private State state;
     private boolean selected;
     private int id;
 
-    public TileImageView(Context context, IGlobalVariable.STATE state, int id) {
+    public TileImageView(Context context, State state, int id) {
         super(context);
         this.state = state;
         this.id = id;
         changeImageResource();
     }
 
-    public void setState(IGlobalVariable.STATE state) {
+    public void setState(State state) {
         this.state = state;
         changeImageResource();
     }
@@ -38,11 +38,11 @@ public class TileImageView extends ImageView {
     private void changeImageResource() {
         Drawable[] drawables = new Drawable[2];
 
-        if (state == IGlobalVariable.STATE.EMPTY) {
+        if (state == State.EMPTY) {
             drawables[0] = getResources().getDrawable(R.drawable.tile_empty);
-        } else if (state == IGlobalVariable.STATE.PLAYER1) {
+        } else if (state == State.PLAYER1) {
             drawables[0] = getResources().getDrawable(R.drawable.tile_player1);
-        } else if (state == IGlobalVariable.STATE.PLAYER2) {
+        } else if (state == State.PLAYER2) {
             drawables[0] = getResources().getDrawable(R.drawable.tile_player2);
         } else {
             drawables[0] = getResources().getDrawable(R.drawable.tile_block);

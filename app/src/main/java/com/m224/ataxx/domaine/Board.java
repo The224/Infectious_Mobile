@@ -1,7 +1,7 @@
 package com.m224.ataxx.domaine;
 
-import com.m224.ataxx.utils.IGlobalVariable;
-import com.m224.ataxx.utils.Util;
+import com.m224.ataxx.utils.ConfigVariable;
+import com.m224.ataxx.utils.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +26,8 @@ public class Board {
         turnPlayerOne = true;
         scorePlayer1 = 0;
         scorePlayer2 = 0;
-        for (int i = 0; i < IGlobalVariable.MAX_TILE; i++)
-            tiles.add(new Tile(IGlobalVariable.STATE.EMPTY,i));
+        for (int i = 0; i < ConfigVariable.MAX_TILE; i++)
+            tiles.add(new Tile(State.EMPTY,i));
     }
 
     /* *Public Method* */
@@ -35,7 +35,7 @@ public class Board {
         return tiles.get(i);
     }
 
-    public IGlobalVariable.STATE getStateAt(int i) {
+    public State getStateAt(int i) {
         return tiles.get(i).getState();
     }
 
@@ -48,19 +48,19 @@ public class Board {
     /* *Board Configuration* */
     public void setConfigOne() {
         resetBoard();
-        tiles.get(0).setState(IGlobalVariable.STATE.PLAYER2);
-        tiles.get(8).setState(IGlobalVariable.STATE.PLAYER1);
-        tiles.get(72).setState(IGlobalVariable.STATE.PLAYER1);
-        tiles.get(80).setState(IGlobalVariable.STATE.PLAYER2);
+        tiles.get(0).setState(State.PLAYER2);
+        tiles.get(8).setState(State.PLAYER1);
+        tiles.get(72).setState(State.PLAYER1);
+        tiles.get(80).setState(State.PLAYER2);
         updateScore();
     }
 
     public void setConfigTwo() {
         resetBoard();
-        tiles.get(0).setState(IGlobalVariable.STATE.PLAYER1);
-        tiles.get(8).setState(IGlobalVariable.STATE.PLAYER2);
-        tiles.get(72).setState(IGlobalVariable.STATE.PLAYER2);
-        tiles.get(80).setState(IGlobalVariable.STATE.PLAYER1);
+        tiles.get(0).setState(State.PLAYER1);
+        tiles.get(8).setState(State.PLAYER2);
+        tiles.get(72).setState(State.PLAYER2);
+        tiles.get(80).setState(State.PLAYER1);
         updateScore();
     }
     /* ********************* */
@@ -69,16 +69,16 @@ public class Board {
     private void updateScore() {
         scorePlayer1=0; scorePlayer2=0;
         for (Tile tile : tiles) {
-            if (tile.getState() == IGlobalVariable.STATE.PLAYER1)
+            if (tile.getState() == State.PLAYER1)
                 scorePlayer1++;
-            if (tile.getState() == IGlobalVariable.STATE.PLAYER2)
+            if (tile.getState() == State.PLAYER2)
                 scorePlayer2++;
         }
     }
 
     private void resetBoard() {
         for (Tile tile : tiles)
-            tile.setState(IGlobalVariable.STATE.EMPTY);
+            tile.setState(State.EMPTY);
     }
     /* **************** */
 

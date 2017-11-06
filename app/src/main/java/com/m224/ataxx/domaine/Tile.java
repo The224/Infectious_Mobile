@@ -1,12 +1,6 @@
 package com.m224.ataxx.domaine;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.widget.ImageView;
-
-import com.m224.ataxx.R;
-import com.m224.ataxx.utils.IGlobalVariable;
+import com.m224.ataxx.utils.State;
 
 /**
  * Created by 224 on 2017-10-20.
@@ -14,28 +8,28 @@ import com.m224.ataxx.utils.IGlobalVariable;
 
 public class Tile {
 
-    private IGlobalVariable.STATE state;
+    private State state;
     private boolean selected;
     private int id;
 
-    public Tile(IGlobalVariable.STATE state, int id) {
+    public Tile(State state, int id) {
         this.state = state;
         this.id = id;
     }
 
     public boolean isStatePlayer() {
-        if (this.state == IGlobalVariable.STATE.PLAYER1 ||
-                this.state == IGlobalVariable.STATE.PLAYER2) {
+        if (this.state == State.PLAYER1 ||
+                this.state == State.PLAYER2) {
             return true;
         }
         return false;
     }
 
-    public IGlobalVariable.STATE getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(IGlobalVariable.STATE state) {
+    public void setState(State state) {
         this.state = state;
     }
 
