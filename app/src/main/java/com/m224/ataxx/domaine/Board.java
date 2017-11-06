@@ -45,26 +45,6 @@ public class Board {
     }
     /* *************** */
 
-    /* *Board Configuration* */
-    public void setConfigOne() {
-        resetBoard();
-        tiles.get(0).setState(State.PLAYER2);
-        tiles.get(8).setState(State.PLAYER1);
-        tiles.get(72).setState(State.PLAYER1);
-        tiles.get(80).setState(State.PLAYER2);
-        updateScore();
-    }
-
-    public void setConfigTwo() {
-        resetBoard();
-        tiles.get(0).setState(State.PLAYER1);
-        tiles.get(8).setState(State.PLAYER2);
-        tiles.get(72).setState(State.PLAYER2);
-        tiles.get(80).setState(State.PLAYER1);
-        updateScore();
-    }
-    /* ********************* */
-
     /* *Private Method* */
     private void updateScore() {
         scorePlayer1=0; scorePlayer2=0;
@@ -110,6 +90,60 @@ public class Board {
         return scorePlayer2;
     }
     /* ***************** */
+
+    /* *Board Configuration* */
+    public void setConfigOne() {
+        resetBoard();
+        tiles.get(0).setState(State.PLAYER2);
+        tiles.get(8).setState(State.PLAYER1);
+        tiles.get(72).setState(State.PLAYER1);
+        tiles.get(80).setState(State.PLAYER2);
+        updateScore();
+    }
+
+    public void setConfigTwo() {
+        resetBoard();
+        tiles.get(0).setState(State.PLAYER1);
+        tiles.get(8).setState(State.PLAYER2);
+        tiles.get(72).setState(State.PLAYER2);
+        tiles.get(80).setState(State.PLAYER1);
+
+        tiles.get(51).setState(State.BLOCK);
+        tiles.get(60).setState(State.BLOCK);
+        tiles.get(59).setState(State.BLOCK);
+        tiles.get(57).setState(State.BLOCK);
+        tiles.get(56).setState(State.BLOCK);
+        tiles.get(47).setState(State.BLOCK);
+        tiles.get(29).setState(State.BLOCK);
+        tiles.get(20).setState(State.BLOCK);
+        tiles.get(21).setState(State.BLOCK);
+        tiles.get(23).setState(State.BLOCK);
+        tiles.get(24).setState(State.BLOCK);
+        tiles.get(33).setState(State.BLOCK);
+
+        updateScore();
+    }
+
+    public void setConfigThree() {
+        resetBoard();
+        tiles.get(0).setState(State.PLAYER1);
+        tiles.get(8).setState(State.PLAYER2);
+        tiles.get(72).setState(State.PLAYER2);
+        tiles.get(80).setState(State.PLAYER1);
+
+        tiles.get(40).setState(State.BLOCK);
+        tiles.get(39).setState(State.BLOCK);
+        tiles.get(41).setState(State.BLOCK);
+        tiles.get(48).setState(State.BLOCK);
+        tiles.get(49).setState(State.BLOCK);
+        tiles.get(50).setState(State.BLOCK);
+        tiles.get(30).setState(State.BLOCK);
+        tiles.get(31).setState(State.BLOCK);
+        tiles.get(32).setState(State.BLOCK);
+
+        updateScore();
+    }
+    /* ********************* */
 }
 
 

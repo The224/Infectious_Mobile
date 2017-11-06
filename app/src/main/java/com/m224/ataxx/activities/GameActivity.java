@@ -1,5 +1,7 @@
 package com.m224.ataxx.activities;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -58,9 +60,25 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.navigation_dashboard:
-                gameService.setConfig(1);
-                refreshInterface();
+            case R.id.game_menu_restart:
+
+                AlertDialog.Builder alertDialogBuilder =
+                        new AlertDialog.Builder(this, R.style.DialogTheme);
+
+                alertDialogBuilder
+                        .setTitle(R.string.restart_title)
+                        .setCancelable(true)
+                        .setPositiveButton(R.string.restart_yes,
+                                new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                gameService.setConfig(1);
+                                refreshInterface();
+                            }
+                        })
+                        .setNegativeButton(R.string.restart_no,null)
+                        .create()
+                        .show();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

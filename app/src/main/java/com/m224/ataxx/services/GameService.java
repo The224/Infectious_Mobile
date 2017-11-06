@@ -23,6 +23,9 @@ public class GameService {
             case 2:
                 board.setConfigTwo();
                 break;
+            case 3:
+                board.setConfigThree();
+                break;
             default:
                 board.setConfigOne();
                 break;
@@ -51,7 +54,6 @@ public class GameService {
 
     public void move(int toId){
         if (board.getSelectTile() == null) {  // Cree la selection
-
             if (board.getStateAt(toId) == State.PLAYER1 && board.isTurnPlayerOne() ||
                     board.getStateAt(toId) == State.PLAYER2 && !board.isTurnPlayerOne()) {
                 board.setSelectTile(toId);
