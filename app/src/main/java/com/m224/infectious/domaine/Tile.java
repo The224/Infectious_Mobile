@@ -1,6 +1,6 @@
-package com.m224.ataxx.domaine;
+package com.m224.infectious.domaine;
 
-import com.m224.ataxx.utils.State;
+import com.m224.infectious.utils.State;
 
 /**
  * Created by 224 on 2017-10-20.

@@ -1,12 +1,12 @@
-package com.m224.ataxx.adapters;
+package com.m224.infectious.adapters;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.m224.ataxx.domaine.TileImageView;
-import com.m224.ataxx.utils.ConfigVariable;
+import com.m224.infectious.domaine.TileImageView;
+import com.m224.infectious.utils.ConfigVariable;
 
 import java.util.List;
 

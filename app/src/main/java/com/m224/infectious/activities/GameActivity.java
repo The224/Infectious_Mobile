@@ -1,4 +1,4 @@
-package com.m224.ataxx.activities;
+package com.m224.infectious.activities;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -13,12 +13,12 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.m224.ataxx.domaine.TileImageView;
-import com.m224.ataxx.services.GameService;
-import com.m224.ataxx.adapters.TileAdapter;
-import com.m224.ataxx.R;
-import com.m224.ataxx.utils.ConfigVariable;
-import com.m224.ataxx.utils.Util;
+import com.m224.infectious.domaine.TileImageView;
+import com.m224.infectious.services.GameService;
+import com.m224.infectious.adapters.TileAdapter;
+import com.m224.infectious.R;
+import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.Util;
 
 import java.util.ArrayList;
 import java.util.List;

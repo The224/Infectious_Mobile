@@ -1,4 +1,4 @@
-package com.m224.ataxx.adapters;
+package com.m224.infectious.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.m224.ataxx.R;
+import com.m224.infectious.R;
 
 import java.util.List;
 

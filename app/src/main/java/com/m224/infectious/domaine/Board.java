@@ -1,7 +1,7 @@
-package com.m224.ataxx.domaine;
+package com.m224.infectious.domaine;
 
-import com.m224.ataxx.utils.ConfigVariable;
-import com.m224.ataxx.utils.State;
+import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.State;
 
 import java.util.ArrayList;
 import java.util.List;

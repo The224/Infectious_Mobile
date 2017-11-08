@@ -1,11 +1,11 @@
-package com.m224.ataxx.activities;
+package com.m224.infectious.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.m224.ataxx.R;
-import com.m224.ataxx.utils.Util;
+import com.m224.infectious.R;
+import com.m224.infectious.utils.Util;
 
 public class InformationActivity extends AppCompatActivity {
 

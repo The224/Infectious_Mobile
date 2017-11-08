@@ -1,7 +1,7 @@
-package com.m224.ataxx;
+package com.m224.infectious;
 
-import com.m224.ataxx.utils.ConfigVariable;
-import com.m224.ataxx.utils.Util;
+import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.Util;
 
 import org.junit.Test;
 

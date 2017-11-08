@@ -1,4 +1,4 @@
-package com.m224.ataxx.utils;
+package com.m224.infectious.utils;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.m224.ataxx.domaine.Tile;
+import com.m224.infectious.domaine.Tile;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

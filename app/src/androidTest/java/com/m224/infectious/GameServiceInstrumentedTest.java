@@ -1,4 +1,4 @@
-package com.m224.ataxx;
+package com.m224.infectious;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

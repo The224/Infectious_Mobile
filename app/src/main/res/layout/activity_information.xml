@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    tools:context="com.m224.ataxx.activities.InformationActivity">
+    tools:context="com.m224.infectious.activities.InformationActivity">
 
     <ScrollView
         android:layout_width="match_parent"

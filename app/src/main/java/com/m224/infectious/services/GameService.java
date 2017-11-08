@@ -1,8 +1,8 @@
-package com.m224.ataxx.services;
+package com.m224.infectious.services;
 
-import com.m224.ataxx.domaine.Board;
-import com.m224.ataxx.utils.State;
-import com.m224.ataxx.utils.Util;
+import com.m224.infectious.domaine.Board;
+import com.m224.infectious.utils.State;
+import com.m224.infectious.utils.Util;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
-package com.m224.ataxx.domaine;
+package com.m224.infectious.domaine;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.widget.ImageView;
 
-import com.m224.ataxx.R;
-import com.m224.ataxx.utils.State;
+import com.m224.infectious.R;
+import com.m224.infectious.utils.State;
 
 /**
  * Created by 224 on 2017-11-01.

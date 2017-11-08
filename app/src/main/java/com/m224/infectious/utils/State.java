@@ -1,4 +1,4 @@
-package com.m224.ataxx.utils;
+package com.m224.infectious.utils;
 
 /**
  * Created by 224 on 2017-11-05.
