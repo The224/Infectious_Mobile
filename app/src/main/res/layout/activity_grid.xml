@@ -40,7 +40,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0"
             android:textAlignment="center"
             android:textColor="@color/player1"
             android:textSize="40sp" />
@@ -51,7 +50,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0"
             android:textColor="@color/player2"
             android:textSize="40sp" />
     </LinearLayout>

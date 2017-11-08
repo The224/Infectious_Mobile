@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private GamePreviewAdapter adapter;
     private RecyclerView recyclerView;
 
-    private List<String> title;
-    private List<Integer> image;
+    private List<String> titles;
+    private List<Integer> images;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_human:
-                    mTextMessage.setText(R.string.nav_human);
+                    prepareListConfigHuman();
                     return true;
                 case R.id.navigation_computer:
-                    mTextMessage.setText(R.string.nav_computer);
+                    prepareListConfigComputer();
                     return true;
                 case R.id.navigation_online:
-                    mTextMessage.setText(R.string.nav_online);
+                    prepareListConfigOnline();
                     return true;
             }
             return false;
@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initRecyclerView() {
-        title = new ArrayList<>();
-        image = new ArrayList<>();
+        titles = new ArrayList<>();
+        images = new ArrayList<>();
 
-        adapter = new GamePreviewAdapter(this, title, image);
+        adapter = new GamePreviewAdapter(this, titles, images);
 
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -81,19 +81,33 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        prepareListConfig();
+        prepareListConfigHuman();
     }
 
-    private void prepareListConfig() {
-        title.add("Config 1");
-        image.add(R.drawable.config_1);
-        title.add("Config 2");
-        image.add(R.drawable.config_2);
-        title.add("Config 3");
-        image.add(R.drawable.config_3);
-        title.add("Config 4");
-        image.add(R.drawable.config_4);
+    private void prepareListConfigHuman() {
+        titles.clear();images.clear();
+        titles.add("Config 1");
+        images.add(R.drawable.config_1);
+        titles.add("Config 2");
+        images.add(R.drawable.config_2);
+        titles.add("Config 3");
+        images.add(R.drawable.config_3);
+        titles.add("Config 4");
+        images.add(R.drawable.config_4);
+        adapter.notifyDataSetChanged();
+    }
 
+    private void prepareListConfigComputer() {
+        titles.clear();images.clear();
+        titles.add("Config 3 Computer");
+        images.add(R.drawable.config_3);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void prepareListConfigOnline() {
+        titles.clear();images.clear();
+        titles.add("Connect to rival !");
+        images.add(R.drawable.config_1);
         adapter.notifyDataSetChanged();
     }
 
