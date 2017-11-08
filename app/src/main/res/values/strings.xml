@@ -8,10 +8,10 @@
     <string name="btn_rule">Open Rule</string>
 
     <string name="actionbar_game">Let\'s Play</string>
-    <string name="actionbar_main">Ataxx</string>
+    <string name="actionbar_main">@string/app_name</string>
     <string name="actionbar_information">Information</string>
 
-    <string name="rules">Ataxx Game Rules</string>
+    <string name="rules">Infectious Game Rules</string>
     <string name="rule_one">Select a ball and click on the destination. The destination must be empty.</string>
     <string name="rule_two">If the distance is 1, the ball is duplicated.</string>
     <string name="rule_three">If it is 2, the ball make a jump.</string>
