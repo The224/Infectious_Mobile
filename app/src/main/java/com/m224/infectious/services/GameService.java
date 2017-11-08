@@ -20,6 +20,9 @@ public class GameService {
 
     public void setConfig(int id) {
         switch (id){
+            case 1:
+                board.setConfigOne();
+                break;
             case 2:
                 board.setConfigTwo();
                 break;
@@ -27,7 +30,7 @@ public class GameService {
                 board.setConfigThree();
                 break;
             default:
-                board.setConfigOne();
+                board.setConfigZero();
                 break;
         }
     }
@@ -95,7 +98,7 @@ public class GameService {
                 board.getSelectTile().setState(State.EMPTY);
             }
             board.setSelectTile(-1);
-            board.swithTurn();
+            board.switchTurn();
         }
     }
 

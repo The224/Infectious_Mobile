@@ -20,6 +20,8 @@ public class Board {
     private int scorePlayer1;
     private int scorePlayer2;
 
+    private int configId;
+
     public Board() {
         this.tiles = new ArrayList<>();
         selectTile = null;
@@ -39,7 +41,7 @@ public class Board {
         return tiles.get(i).getState();
     }
 
-    public void swithTurn() {
+    public void switchTurn() {
         turnPlayerOne = !turnPlayerOne;
         updateScore(); ////////////// Effet de board ???
     }
@@ -92,13 +94,30 @@ public class Board {
     /* ***************** */
 
     /* *Board Configuration* */
-    public void setConfigOne() {
+    public void setConfigZero() {
         resetBoard();
         tiles.get(0).setState(State.PLAYER2);
         tiles.get(8).setState(State.PLAYER1);
         tiles.get(72).setState(State.PLAYER1);
         tiles.get(80).setState(State.PLAYER2);
         updateScore();
+        configId = 0;
+    }
+
+    public void setConfigOne() {
+        resetBoard();
+        tiles.get(0).setState(State.PLAYER1);
+        tiles.get(8).setState(State.PLAYER2);
+        tiles.get(72).setState(State.PLAYER2);
+        tiles.get(80).setState(State.PLAYER1);
+        tiles.get(51).setState(State.BLOCK);tiles.get(60).setState(State.BLOCK);
+        tiles.get(59).setState(State.BLOCK);tiles.get(57).setState(State.BLOCK);
+        tiles.get(56).setState(State.BLOCK);tiles.get(47).setState(State.BLOCK);
+        tiles.get(29).setState(State.BLOCK);tiles.get(20).setState(State.BLOCK);
+        tiles.get(21).setState(State.BLOCK);tiles.get(23).setState(State.BLOCK);
+        tiles.get(24).setState(State.BLOCK);tiles.get(33).setState(State.BLOCK);
+        updateScore();
+        configId = 1;
     }
 
     public void setConfigTwo() {
@@ -107,21 +126,13 @@ public class Board {
         tiles.get(8).setState(State.PLAYER2);
         tiles.get(72).setState(State.PLAYER2);
         tiles.get(80).setState(State.PLAYER1);
-
-        tiles.get(51).setState(State.BLOCK);
-        tiles.get(60).setState(State.BLOCK);
-        tiles.get(59).setState(State.BLOCK);
-        tiles.get(57).setState(State.BLOCK);
-        tiles.get(56).setState(State.BLOCK);
-        tiles.get(47).setState(State.BLOCK);
-        tiles.get(29).setState(State.BLOCK);
-        tiles.get(20).setState(State.BLOCK);
-        tiles.get(21).setState(State.BLOCK);
-        tiles.get(23).setState(State.BLOCK);
-        tiles.get(24).setState(State.BLOCK);
-        tiles.get(33).setState(State.BLOCK);
-
+        tiles.get(40).setState(State.BLOCK);tiles.get(39).setState(State.BLOCK);
+        tiles.get(41).setState(State.BLOCK);tiles.get(48).setState(State.BLOCK);
+        tiles.get(49).setState(State.BLOCK);tiles.get(50).setState(State.BLOCK);
+        tiles.get(30).setState(State.BLOCK);tiles.get(31).setState(State.BLOCK);
+        tiles.get(32).setState(State.BLOCK);
         updateScore();
+        configId = 2;
     }
 
     public void setConfigThree() {
@@ -130,18 +141,15 @@ public class Board {
         tiles.get(8).setState(State.PLAYER2);
         tiles.get(72).setState(State.PLAYER2);
         tiles.get(80).setState(State.PLAYER1);
-
-        tiles.get(40).setState(State.BLOCK);
-        tiles.get(39).setState(State.BLOCK);
-        tiles.get(41).setState(State.BLOCK);
-        tiles.get(48).setState(State.BLOCK);
-        tiles.get(49).setState(State.BLOCK);
-        tiles.get(50).setState(State.BLOCK);
-        tiles.get(30).setState(State.BLOCK);
-        tiles.get(31).setState(State.BLOCK);
-        tiles.get(32).setState(State.BLOCK);
-
+        tiles.get(13).setState(State.BLOCK);tiles.get(22).setState(State.BLOCK);
+        tiles.get(31).setState(State.BLOCK);tiles.get(40).setState(State.BLOCK);
+        tiles.get(39).setState(State.BLOCK);tiles.get(38).setState(State.BLOCK);
+        tiles.get(37).setState(State.BLOCK);tiles.get(41).setState(State.BLOCK);
+        tiles.get(42).setState(State.BLOCK);tiles.get(43).setState(State.BLOCK);
+        tiles.get(49).setState(State.BLOCK);tiles.get(58).setState(State.BLOCK);
+        tiles.get(67).setState(State.BLOCK);
         updateScore();
+        configId = 3;
     }
     /* ********************* */
 }
