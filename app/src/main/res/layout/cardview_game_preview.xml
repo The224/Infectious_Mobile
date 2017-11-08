@@ -22,17 +22,20 @@
                 android:id="@+id/preview"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:scaleType="fitXY"
+                android:background="@color/primaryDark"
+                android:padding="5dp"
+                android:scaleType="centerInside"
                 android:src="@drawable/placeholder" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@id/preview"
-                android:padding="3dp"
+                android:background="@color/primaryDark"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
 
         </RelativeLayout>

@@ -42,12 +42,6 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
-    public void startActivityGrid(View view) {
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.right_start, R.anim.right_end);
-    }
-
     public void startActivityInformation(View v) {
         Intent intent = new Intent(this, InformationActivity.class);
         startActivity(intent);
@@ -92,13 +86,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void prepareListConfig() {
         title.add("Config 1");
-        image.add(R.drawable.background);
+        image.add(R.drawable.config_1);
         title.add("Config 2");
-        image.add(R.drawable.background);
+        image.add(R.drawable.config_2);
         title.add("Config 3");
-        image.add(R.drawable.background);
+        image.add(R.drawable.config_3);
         title.add("Config 4");
-        image.add(R.drawable.background);
+        image.add(R.drawable.config_4);
 
         adapter.notifyDataSetChanged();
     }
