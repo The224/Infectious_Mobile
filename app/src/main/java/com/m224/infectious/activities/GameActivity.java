@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.m224.infectious.domaine.TileImageView;
 import com.m224.infectious.services.GameService;
-import com.m224.infectious.adapters.TileAdapter;
+import com.m224.infectious.adapters.TileImageAdapter;
 import com.m224.infectious.R;
 import com.m224.infectious.utils.ConfigVariable;
 import com.m224.infectious.utils.Util;
@@ -46,8 +46,6 @@ public class GameActivity extends AppCompatActivity {
         } else {
             gameService.setConfig(extras.getInt("configId"));
         }
-
-
 
         for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
             gridImages.add(new TileImageView(this, gameService.getStateAt(i), i));
@@ -99,7 +97,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void handleGrid() {
         GridView gridview = findViewById(R.id.grid_view);
-        gridview.setAdapter(new TileAdapter(this, gridImages));
+        gridview.setAdapter(new TileImageAdapter(this, gridImages));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {

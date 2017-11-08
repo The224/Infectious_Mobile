@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.m224.infectious.R;
-import com.m224.infectious.adapters.ConfigListAdapter;
+import com.m224.infectious.adapters.GamePreviewAdapter;
 import com.m224.infectious.utils.Util;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private ConfigListAdapter adapter;
+    private GamePreviewAdapter adapter;
     private RecyclerView recyclerView;
 
     private List<String> title;
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         title = new ArrayList<>();
         image = new ArrayList<>();
 
-        adapter = new ConfigListAdapter(this, title, image);
+        adapter = new GamePreviewAdapter(this, title, image);
 
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -87,33 +87,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        prepareAlbums();
+        prepareListConfig();
     }
 
-    private void prepareAlbums() {
-        title.add("Test 111");
+    private void prepareListConfig() {
+        title.add("Config 1");
         image.add(R.drawable.background);
-        title.add("Test 222");
+        title.add("Config 2");
         image.add(R.drawable.background);
-        title.add("Test 333");
-        image.add(R.drawable.ic_arrow_left);
-        title.add("Test 444");
+        title.add("Config 3");
         image.add(R.drawable.background);
-        title.add("Test 555");
-        image.add(R.drawable.background);
-        title.add("Test 666");
-        image.add(R.drawable.background);
-        title.add("Test 777");
-        image.add(R.drawable.ic_arrow_right);
-        title.add("Test 888");
-        image.add(R.drawable.background);
-        title.add("Test 999");
-        image.add(R.drawable.background);
-        title.add("Test 123");
-        image.add(R.drawable.background);
-        title.add("Test 456");
-        image.add(R.drawable.background);
-        title.add("Test 789");
+        title.add("Config 4");
         image.add(R.drawable.background);
 
         adapter.notifyDataSetChanged();

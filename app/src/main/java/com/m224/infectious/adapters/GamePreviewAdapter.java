@@ -10,13 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.m224.infectious.R;
+import com.m224.infectious.activities.MainActivity;
 
 import java.util.List;
 
 /**
  * Created by Ravi Tamada on 18/05/16.
  */
-public class ConfigListAdapter extends RecyclerView.Adapter<ConfigListAdapter.Card> {
+public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.Card> {
 
     private List<String> titleList;
     private List<Integer> imageResList;
@@ -33,7 +34,7 @@ public class ConfigListAdapter extends RecyclerView.Adapter<ConfigListAdapter.Ca
         }
     }
 
-    public ConfigListAdapter(Context context, List<String> titleList, List<Integer> imageResList) {;
+    public GamePreviewAdapter(Context context, List<String> titleList, List<Integer> imageResList) {;
         this.titleList = titleList;
         this.imageResList = imageResList;
         this.context = context;
@@ -42,20 +43,28 @@ public class ConfigListAdapter extends RecyclerView.Adapter<ConfigListAdapter.Ca
     @Override
     public Card onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_config_info, parent, false);
-
+                .inflate(R.layout.cardview_game_preview, parent, false);
         return new Card(itemView);
     }
 
     @Override
     public void onBindViewHolder(final Card holder, final int position) {
+        final MainActivity mainActivity = (MainActivity)context;
+
         holder.title.setText(titleList.get(position));
         holder.preview.setImageResource(imageResList.get(position));
+
+        holder.preview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.startGameWithConfig(position);
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "At : "+position, Toast.LENGTH_SHORT).show();
+                mainActivity.startGameWithConfig(position);
             }
         });
     }
