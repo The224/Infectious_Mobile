@@ -18,9 +18,5 @@ public class AIServiceTest {
         AIService aiServiceTest = new AIService(AIDifficulty.EASY);
 
 
-        assertEquals(72, aiServiceTest.requestMovement());
-
-
-
     }
 }

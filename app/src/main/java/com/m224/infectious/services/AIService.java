@@ -2,53 +2,95 @@ package com.m224.infectious.services;
 
 import android.support.v4.util.Pair;
 
+import com.m224.infectious.domaine.Board;
+import com.m224.infectious.domaine.Tile;
 import com.m224.infectious.utils.AIDifficulty;
+import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.State;
 
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by 224 on 2017-11-08.
  */
 
 public class AIService {
-    //                   tileId  points
-    private List<Pair<Integer,Integer>> bestMove;
-    public AIDifficulty difficulty;
+    //                tileId  points
+    private List<Movement> movements;
+    private AIDifficulty difficulty;
+
+    private class Movement {
+        protected int origin;
+        protected int destination;
+        protected int points;
+
+        public Movement(int origin, int destination, int points) {
+            this.origin = origin;
+            this.destination = destination;
+            this.points = points;
+        }
+    }
 
     public AIService(AIDifficulty difficulty) {
         this.difficulty = difficulty;
-        this.bestMove = new ArrayList<>();
+        this.movements = new ArrayList<>();
     }
 
-    public int requestMovement() {
-        bestMove.add(Pair.create(12,0));
-        bestMove.add(Pair.create(54,2));
-        bestMove.add(Pair.create(23,3));
-        bestMove.add(Pair.create(6,4));
-        bestMove.add(Pair.create(72,8));
-        bestMove.add(Pair.create(49,3));
-        bestMove.add(Pair.create(28,7));
-        bestMove.add(Pair.create(68,1));
-        bestMove.add(Pair.create(65,0));
-        bestMove.add(Pair.create(24,5));
+
+
+    public int requestMovement(List<Tile> tiles) {
 
 
 
-        return bestMove.get(1).first;
+        fillMovements(tiles);
+        sortMovements();
+        return -1;
     }
 
-    public void sortBestMovement() {
-        Collections.sort(bestMove, new Comparator<Pair<Integer, Integer>>() {
+    public void fillMovements(List<Tile> tiles) {
+
+        List<Tile> copyTiles =  tiles;
+
+        for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
+            for (int j = 0; j < ConfigVariable.MAX_TILE; j++) {
+                computeMove(copyTiles, i, j);
+                copyTiles = tiles;
+            }
+        }
+    }
+
+    public void computeMove(List<Tile> tiles, int origin, int destination) {
+        int points = 0;
+
+
+        for (Tile tile : tiles) {
+            if (tile.getState() == State.PLAYERAI)
+                points++;
+        }
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+    public void sortMovements() {
+        Collections.sort(movements, new Comparator<Movement>() {
             @Override
-            public int compare(Pair<Integer, Integer> p1, Pair<Integer, Integer> p2) {
-                if (p1.second > p2.second)
+            public int compare(Movement m1, Movement m2) {
+                if (m1.points > m2.points)
                     return -1;
-                else if (p1.second < p2.second)
+                else if (m1.points < m2.points)
                     return 1;
                 return 0;
             }
@@ -99,3 +141,5 @@ public class AIService {
 
 
 }
+
+/*Implement MinMax one day !*/

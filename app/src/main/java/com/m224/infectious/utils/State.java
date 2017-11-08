@@ -9,4 +9,5 @@ public enum State {
     BLOCK,
     PLAYER1,
     PLAYER2,
+    PLAYERAI,
 }
