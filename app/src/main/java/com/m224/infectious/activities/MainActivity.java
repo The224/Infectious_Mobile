@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.m224.infectious.R;
 import com.m224.infectious.adapters.GamePreviewAdapter;
+import com.m224.infectious.domaine.CardConfig;
+import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.Util;
 
 import java.util.ArrayList;
@@ -22,12 +24,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
     private GamePreviewAdapter adapter;
     private RecyclerView recyclerView;
 
-    private List<String> titles;
-    private List<Integer> images;
+    private List<CardConfig> cardConfigs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Util.customActionbar(this, R.layout.actionbar_main);
 
-        mTextMessage = findViewById(R.id.tv_msg);
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -69,10 +68,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initRecyclerView() {
-        titles = new ArrayList<>();
-        images = new ArrayList<>();
+        cardConfigs = new ArrayList<>();
 
-        adapter = new GamePreviewAdapter(this, titles, images);
+        adapter = new GamePreviewAdapter(this, cardConfigs);
 
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -85,36 +83,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void prepareListConfigHuman() {
-        titles.clear();images.clear();
-        titles.add("Config 1");
-        images.add(R.drawable.config_1);
-        titles.add("Config 2");
-        images.add(R.drawable.config_2);
-        titles.add("Config 3");
-        images.add(R.drawable.config_3);
-        titles.add("Config 4");
-        images.add(R.drawable.config_4);
+        cardConfigs.clear();
+        cardConfigs.add(new CardConfig("Config 1", GameType.LOCAL, 0));
+        cardConfigs.add(new CardConfig("Config 2", GameType.LOCAL, 1));
+        cardConfigs.add(new CardConfig("Config 3", GameType.LOCAL, 2));
+        cardConfigs.add(new CardConfig("Config 4", GameType.LOCAL, 3));
         adapter.notifyDataSetChanged();
     }
 
     private void prepareListConfigComputer() {
-        titles.clear();images.clear();
-        titles.add("Config 3 Computer");
-        images.add(R.drawable.config_3);
+        cardConfigs.clear();
+        cardConfigs.add(new CardConfig("Config 3 computer", GameType.COMPUTER, 2));
         adapter.notifyDataSetChanged();
     }
 
     private void prepareListConfigOnline() {
-        titles.clear();images.clear();
-        titles.add("Connect to rival !");
-        images.add(R.drawable.config_1);
+        cardConfigs.clear();
+        cardConfigs.add(new CardConfig("Connect to rival !", GameType.ONLINE, 1));
         adapter.notifyDataSetChanged();
     }
 
 
-    public void startGameWithConfig(int configId) {
+    public void startGameWithConfig(int configId, GameType gameType) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("configId", configId);
+        intent.putExtra("gameType", gameType);
+
         startActivity(intent);
         overridePendingTransition(R.anim.right_start, R.anim.right_end);
     }

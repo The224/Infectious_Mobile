@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.m224.infectious.R;
 import com.m224.infectious.activities.MainActivity;
+import com.m224.infectious.domaine.CardConfig;
+import com.m224.infectious.utils.GameType;
 
 import java.util.List;
 
@@ -18,24 +20,22 @@ import java.util.List;
  */
 public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.Card> {
 
-    private List<String> titleList;
-    private List<Integer> imageResList;
+    private List<CardConfig> cardConfigs;
     private Context context;
 
     public class Card extends RecyclerView.ViewHolder {
         public TextView title;
-        public ImageView preview;
+        public GameType gameType;
+        public int configId;
 
         public Card(View view) {
             super(view);
             title = view.findViewById(R.id.title);
-            preview = view.findViewById(R.id.preview);
         }
     }
 
-    public GamePreviewAdapter(Context context, List<String> titleList, List<Integer> imageResList) {;
-        this.titleList = titleList;
-        this.imageResList = imageResList;
+    public GamePreviewAdapter(Context context, List<CardConfig> cardConfigs) {
+        this.cardConfigs = cardConfigs;
         this.context = context;
     }
 
@@ -50,19 +50,20 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
     public void onBindViewHolder(final Card holder, final int position) {
         final MainActivity mainActivity = (MainActivity)context;
 
-        holder.title.setText(titleList.get(position));
-        holder.preview.setImageResource(imageResList.get(position));
+        holder.title.setText(cardConfigs.get(position).getTitle());
+        holder.gameType = cardConfigs.get(position).getGameType();
+        holder.configId = cardConfigs.get(position).getConfigId();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.startGameWithConfig(position);
+                mainActivity.startGameWithConfig(holder.configId, holder.gameType);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return titleList.size();
+        return cardConfigs.size();
     }
 }

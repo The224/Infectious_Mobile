@@ -18,20 +18,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/preview"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:background="@color/primaryDark"
-                android:padding="5dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/placeholder" />
-
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/preview"
                 android:background="@color/primaryDark"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
