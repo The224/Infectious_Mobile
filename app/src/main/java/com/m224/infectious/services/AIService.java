@@ -17,7 +17,7 @@ import java.util.List;
  * Created by 224 on 2017-11-08.
  */
 
-public class AIService {
+public class AIService extends GameService {
     //                tileId  points
     private List<Movement> movements;
     private AIDifficulty difficulty;
@@ -70,10 +70,6 @@ public class AIService {
             if (tile.getState() == State.PLAYERAI)
                 points++;
         }
-
-
-
-
 
     }
 

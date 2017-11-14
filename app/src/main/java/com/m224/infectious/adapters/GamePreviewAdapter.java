@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.m224.infectious.R;
 import com.m224.infectious.activities.MainActivity;
@@ -43,7 +42,7 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
     @Override
     public Card onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.cardview_game_preview, parent, false);
+                .inflate(R.layout.cardview_config_preview, parent, false);
         return new Card(itemView);
     }
 

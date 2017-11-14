@@ -91,6 +91,11 @@ public class Board {
     public int getScorePlayer2() {
         return scorePlayer2;
     }
+
+    public int getConfigId() {
+        return configId;
+    }
+
     /* ***************** */
 
     /* *Board Configuration* */
