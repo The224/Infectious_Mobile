@@ -89,9 +89,6 @@ public class GameActivity extends AppCompatActivity {
             case R.id.game_menu_save:
 
 
-
-
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -152,6 +149,7 @@ public class GameActivity extends AppCompatActivity {
     public void quickSave() {
         gameService.getBoard().getConfig().setTitle(getResources().getString(R.string.quick_save));
         String jsonBoard = Util.boardToJSONString(gameService.getBoard());
+
         SaveBoardTable saveBoardTable = new SaveBoardTable(this);
         saveBoardTable.open();
         saveBoardTable.insertQuickSave(jsonBoard);

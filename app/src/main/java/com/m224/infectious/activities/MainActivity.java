@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private List<Board> saveGames;
     private List<Config> configs;
 
+    private List<Pair<Config, Board>> games;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
