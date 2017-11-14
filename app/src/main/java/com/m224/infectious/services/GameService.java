@@ -13,6 +13,26 @@ import java.util.List;
 
 public class GameService {
 
+    /**
+     * Donc, je suis obliger d'avoir board pour sauver les donnees en SQL,
+     * Justement, y reste le sql a implementer
+     * Et computer a gerer
+     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private Board board;
 
     public GameService(Config config, Board board) {
