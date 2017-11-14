@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.m224.infectious.domaine.TileImageView;
+import com.m224.infectious.domaine.GridImageView;
 import com.m224.infectious.utils.ConfigVariable;
 
 import java.util.List;
@@ -16,9 +16,9 @@ import java.util.List;
 
 public class TileImageAdapter extends BaseAdapter {
     private Context context;
-    private List<TileImageView> gridImage;
+    private List<GridImageView> gridImage;
 
-    public TileImageAdapter(Context context, List<TileImageView> gridImage) {
+    public TileImageAdapter(Context context, List<GridImageView> gridImage) {
         this.context = context;
         this.gridImage = gridImage;
     }

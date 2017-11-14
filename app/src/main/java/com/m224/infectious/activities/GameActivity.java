@@ -13,7 +13,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.m224.infectious.domaine.TileImageView;
+import com.m224.infectious.domaine.GridImageView;
 import com.m224.infectious.services.GameService;
 import com.m224.infectious.adapters.TileImageAdapter;
 import com.m224.infectious.R;
@@ -27,7 +27,7 @@ public class GameActivity extends AppCompatActivity {
 
     private GameService gameService = new GameService();
     private TextView tv_player_1, tv_player_2, tv_turn;
-    private List<TileImageView> gridImages = new ArrayList<>();
+    private List<GridImageView> gridImages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
-            gridImages.add(new TileImageView(this, gameService.getStateAt(i), i));
+            gridImages.add(new GridImageView(this, gameService.getStateAt(i), i));
         }
 
         handleGrid();

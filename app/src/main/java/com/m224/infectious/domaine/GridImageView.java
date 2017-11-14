@@ -12,13 +12,13 @@ import com.m224.infectious.utils.State;
  * Created by 224 on 2017-11-01.
  */
 
-public class TileImageView extends ImageView {
+public class GridImageView extends ImageView {
 
     private State state;
     private boolean selected;
     private int id;
 
-    public TileImageView(Context context, State state, int id) {
+    public GridImageView(Context context, State state, int id) {
         super(context);
         this.state = state;
         this.id = id;
