@@ -20,19 +20,6 @@ public class GameService {
      */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     private Board board;
 
     public GameService(Config config, Board board) {

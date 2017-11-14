@@ -18,6 +18,7 @@ import com.m224.infectious.domaine.GridImageView;
 import com.m224.infectious.services.GameService;
 import com.m224.infectious.adapters.TileImageAdapter;
 import com.m224.infectious.R;
+import com.m224.infectious.sql.SaveBoardTable;
 import com.m224.infectious.utils.ConfigVariable;
 import com.m224.infectious.utils.Util;
 
@@ -142,7 +143,40 @@ public class GameActivity extends AppCompatActivity {
     }
     /* *********** */
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        quickSave();
+    }
 
+    public void quickSave() {
+        String jsonBoard = Util.boardToJSONString(gameService.getBoard());
+
+        SaveBoardTable saveBoardTable = new SaveBoardTable(this);
+        saveBoardTable.open();
+
+        saveBoardTable.insertQuickSave(jsonBoard);
+
+        saveBoardTable.close();
+    }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

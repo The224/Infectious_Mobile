@@ -15,6 +15,8 @@ import android.view.View;
 import com.m224.infectious.R;
 import com.m224.infectious.adapters.GamePreviewAdapter;
 import com.m224.infectious.domaine.Config;
+import com.m224.infectious.domaine.Save;
+import com.m224.infectious.sql.SaveBoardTable;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.Util;
 
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private GamePreviewAdapter adapter;
     private RecyclerView recyclerView;
-
+    private List<Save> saves;
     private List<Config> configs;
 
     @Override
@@ -38,6 +40,14 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         initRecyclerView();
+    }
+
+
+    public void initSaves() {
+        SaveBoardTable saveBoardTable = new SaveBoardTable(this);
+        saveBoardTable.open();
+        saves = saveBoardTable.getAllSave();
+        saveBoardTable.close();
     }
 
     public void startActivityInformation(View v) {
@@ -82,10 +92,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void prepareListConfigHuman() {
         configs.clear();
-        configs.add(new Config("Config 1", GameType.LOCAL, 0));
-        configs.add(new Config("Config 2", GameType.LOCAL, 1));
-        configs.add(new Config("Config 3", GameType.LOCAL, 2));
-        configs.add(new Config("Config 4", GameType.LOCAL, 3));
+        configs.add(new Config("New Field Game", GameType.LOCAL, 0));
+        configs.add(new Config("New Square Game", GameType.LOCAL, 1));
+        configs.add(new Config("New Block Game", GameType.LOCAL, 2));
+        configs.add(new Config("New Cross Game", GameType.LOCAL, 3));
         adapter.notifyDataSetChanged();
     }
 
