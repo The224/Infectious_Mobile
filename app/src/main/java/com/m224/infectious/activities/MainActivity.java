@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -17,9 +16,7 @@ import com.m224.infectious.AllSaveTask;
 import com.m224.infectious.R;
 import com.m224.infectious.adapters.GamePreviewAdapter;
 import com.m224.infectious.domaine.Board;
-import com.m224.infectious.domaine.Config;
-import com.m224.infectious.domaine.Save;
-import com.m224.infectious.sql.SaveBoardTable;
+import com.m224.infectious.utils.ConfigVariable;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.Util;
 
@@ -31,10 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private GamePreviewAdapter adapter;
     private RecyclerView recyclerView;
     private List<Board> saveGames;
-    private List<Config> configs;
 
-    private List<Pair<Config, Board>> games;
-
+    private List<Board> games;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void initRecyclerView() {
-        configs = new ArrayList<>();
+        games = new ArrayList<>();
 
-        adapter = new GamePreviewAdapter(this, configs);
+        adapter = new GamePreviewAdapter(this, games);
 
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -100,47 +95,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void prepareListConfigHuman() {
-        configs.clear();
+        games.clear();
 
         for (int i = 0; i < saveGames.size(); i++) {
-            if (saveGames.get(i).getConfig().getGameType() == GameType.LOCAL)
-                configs.add(saveGames.get(i).getConfig());
+            if (saveGames.get(i).getGameType() == GameType.LOCAL)
+                games.add(saveGames.get(i));
         }
 
-        configs.add(new Config("New Field Game", GameType.LOCAL, 0));
-        configs.add(new Config("New Square Game", GameType.LOCAL, 1));
-        configs.add(new Config("New Block Game", GameType.LOCAL, 2));
-        configs.add(new Config("New Cross Game", GameType.LOCAL, 3));
+        games.add(new Board("New Field Game", ConfigVariable.configField, GameType.LOCAL));
+        games.add(new Board("New Square Game", ConfigVariable.configSquare, GameType.LOCAL));
+        games.add(new Board("New Block Game", ConfigVariable.configBlock, GameType.LOCAL));
+        games.add(new Board("New Cross Game", ConfigVariable.configCross, GameType.LOCAL));
         adapter.notifyDataSetChanged();
     }
 
     private void prepareListConfigComputer() {
-        configs.clear();
+        games.clear();
 
         for (int i = 0; i < saveGames.size(); i++) {
-            if (saveGames.get(i).getConfig().getGameType() == GameType.COMPUTER)
-                configs.add(saveGames.get(i).getConfig());
+            if (saveGames.get(i).getGameType() == GameType.COMPUTER)
+                games.add(saveGames.get(i));
         }
 
-        configs.add(new Config("Config 3 computer", GameType.COMPUTER, 2));
+        games.add(new Board("New Field Game VS computer", ConfigVariable.configField, GameType.COMPUTER));
         adapter.notifyDataSetChanged();
     }
 
     private void prepareListConfigOnline() {
-        configs.clear();
+        games.clear();
 
         for (int i = 0; i < saveGames.size(); i++) {
-            if (saveGames.get(i).getConfig().getGameType() == GameType.ONLINE)
-                configs.add(saveGames.get(i).getConfig());
+            if (saveGames.get(i).getGameType() == GameType.ONLINE)
+                games.add(saveGames.get(i));
         }
 
-        configs.add(new Config("Connect to rival !", GameType.ONLINE, 1));
+        games.add(new Board("Connect to rival !", ConfigVariable.configCross, GameType.LOCAL));
         adapter.notifyDataSetChanged();
     }
 
-    public void startGameWithConfig(Config config) {
+    public void startGameWithConfig(Board board) {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("config", config);
+        intent.putExtra("board", board);
 
         startActivity(intent);
         overridePendingTransition(R.anim.right_start, R.anim.right_end);

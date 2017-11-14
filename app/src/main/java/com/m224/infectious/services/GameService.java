@@ -1,7 +1,8 @@
 package com.m224.infectious.services;
 
 import com.m224.infectious.domaine.Board;
-import com.m224.infectious.domaine.Config;
+import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.State;
 import com.m224.infectious.utils.Util;
 
@@ -22,17 +23,17 @@ public class GameService {
 
     private Board board;
 
-    public GameService(Config config, Board board) {
+    public GameService(Board board) {
         if (board != null) {
             this.board = board;
         }
         else {
-            this.board = new Board(config);
+            this.board = new Board("NULL", ConfigVariable.configField, GameType.LOCAL);
         }
     }
 
     public void restart() {
-        board.restart();
+        board.reset();
     }
 
     public int getScorePlayer1() {

@@ -4,6 +4,7 @@ import com.m224.infectious.utils.ConfigVariable;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.State;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by 224 on 2017-11-03.
  */
 
-public class Board {
+public class Board implements Serializable {
 
     private int id;
     private String title;
@@ -25,9 +26,11 @@ public class Board {
     private int scorePlayer1;
     private int scorePlayer2;
 
-    public Board(int[] blockTile) {
+    public Board(String title, int[] blockTile, GameType gameType) {
         this.tiles = new ArrayList<>();
         this.blockTile = blockTile;
+        this.gameType = gameType;
+        this.title = title;
         selectTile = null;
         turnPlayerOne = true;
         scorePlayer1 = 0;
@@ -45,7 +48,7 @@ public class Board {
         countScore();
     }
 
-    private void reset() {
+    public void reset() {
         for (Tile tile : tiles)
             tile.setState(State.EMPTY);
 
@@ -123,8 +126,8 @@ public class Board {
         return selectTile;
     }
 
-    public void setSelectTile(Tile selectTile) {
-        this.selectTile = selectTile;
+    public void setSelectTile(int id) {
+        this.selectTile = tiles.get(id);
     }
 
     public boolean isTurnPlayerOne() {
