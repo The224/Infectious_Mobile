@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-
     private void initRecyclerView() {
         configs = new ArrayList<>();
 
@@ -102,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-
     public void startGameWithConfig(int configId, GameType gameType) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("configId", configId);
@@ -111,15 +109,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.right_start, R.anim.right_end);
     }
-
-
-
-
-
-
-
-
-
 
 
 

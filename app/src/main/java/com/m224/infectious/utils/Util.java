@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.Tile;
 
 import java.lang.reflect.Type;
@@ -29,13 +30,12 @@ public class Util {
         actionBar.setCustomView(v);
     }
 
-    public static String gridToJSONString(List<Tile> tiles) {
-        return new Gson().toJson(tiles);
+    public static String boardToJSONString(Board board) {
+        return new Gson().toJson(board);
     }
 
-    public static List<Tile> JSONStringToGrid(String string) {
-        Type listType = new TypeToken<ArrayList<Tile>>(){}.getType();
-        return new Gson().fromJson(string,listType);
+    public static Board JSONToBoard(String string) {
+        return new Gson().fromJson(string,Board.class);
     }
 
     public static List<Integer> getTileAround(int tileId) {

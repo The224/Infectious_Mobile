@@ -20,10 +20,11 @@ public class Board {
     private int scorePlayer1;
     private int scorePlayer2;
 
-    private int configId;
+    private Config config;
 
-    public Board() {
+    public Board(Config config) {
         this.tiles = new ArrayList<>();
+        this.config = config;
         selectTile = null;
         turnPlayerOne = true;
         scorePlayer1 = 0;
@@ -92,8 +93,8 @@ public class Board {
         return scorePlayer2;
     }
 
-    public int getConfigId() {
-        return configId;
+    public Config getConfig() {
+        return config;
     }
 
     /* ***************** */
@@ -106,7 +107,6 @@ public class Board {
         tiles.get(72).setState(State.PLAYER1);
         tiles.get(80).setState(State.PLAYER2);
         updateScore();
-        configId = 0;
     }
 
     public void setConfigOne() {
@@ -122,7 +122,6 @@ public class Board {
         tiles.get(21).setState(State.BLOCK);tiles.get(23).setState(State.BLOCK);
         tiles.get(24).setState(State.BLOCK);tiles.get(33).setState(State.BLOCK);
         updateScore();
-        configId = 1;
     }
 
     public void setConfigTwo() {
@@ -137,7 +136,6 @@ public class Board {
         tiles.get(30).setState(State.BLOCK);tiles.get(31).setState(State.BLOCK);
         tiles.get(32).setState(State.BLOCK);
         updateScore();
-        configId = 2;
     }
 
     public void setConfigThree() {
@@ -154,7 +152,6 @@ public class Board {
         tiles.get(49).setState(State.BLOCK);tiles.get(58).setState(State.BLOCK);
         tiles.get(67).setState(State.BLOCK);
         updateScore();
-        configId = 3;
     }
     /* ********************* */
 }
