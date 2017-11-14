@@ -11,11 +11,10 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.m224.infectious.R;
 import com.m224.infectious.adapters.GamePreviewAdapter;
-import com.m224.infectious.domaine.CardConfig;
+import com.m224.infectious.domaine.Config;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.Util;
 
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private GamePreviewAdapter adapter;
     private RecyclerView recyclerView;
 
-    private List<CardConfig> cardConfigs;
+    private List<Config> configs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initRecyclerView() {
-        cardConfigs = new ArrayList<>();
+        configs = new ArrayList<>();
 
-        adapter = new GamePreviewAdapter(this, cardConfigs);
+        adapter = new GamePreviewAdapter(this, configs);
 
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -83,23 +82,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void prepareListConfigHuman() {
-        cardConfigs.clear();
-        cardConfigs.add(new CardConfig("Config 1", GameType.LOCAL, 0));
-        cardConfigs.add(new CardConfig("Config 2", GameType.LOCAL, 1));
-        cardConfigs.add(new CardConfig("Config 3", GameType.LOCAL, 2));
-        cardConfigs.add(new CardConfig("Config 4", GameType.LOCAL, 3));
+        configs.clear();
+        configs.add(new Config("Config 1", GameType.LOCAL, 0));
+        configs.add(new Config("Config 2", GameType.LOCAL, 1));
+        configs.add(new Config("Config 3", GameType.LOCAL, 2));
+        configs.add(new Config("Config 4", GameType.LOCAL, 3));
         adapter.notifyDataSetChanged();
     }
 
     private void prepareListConfigComputer() {
-        cardConfigs.clear();
-        cardConfigs.add(new CardConfig("Config 3 computer", GameType.COMPUTER, 2));
+        configs.clear();
+        configs.add(new Config("Config 3 computer", GameType.COMPUTER, 2));
         adapter.notifyDataSetChanged();
     }
 
     private void prepareListConfigOnline() {
-        cardConfigs.clear();
-        cardConfigs.add(new CardConfig("Connect to rival !", GameType.ONLINE, 1));
+        configs.clear();
+        configs.add(new Config("Connect to rival !", GameType.ONLINE, 1));
         adapter.notifyDataSetChanged();
     }
 

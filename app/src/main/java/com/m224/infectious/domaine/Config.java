@@ -11,12 +11,12 @@ import com.m224.infectious.utils.GameType;
  * Created by 224 on 2017-11-13.
  */
 
-public class CardConfig {
+public class Config {
     private String title;
     private GameType gameType;
     private int configId;
 
-    public CardConfig(String title, GameType gameType, int configId) {
+    public Config(String title, GameType gameType, int configId) {
         this.title = title;
         this.gameType = gameType;
         this.configId = configId;

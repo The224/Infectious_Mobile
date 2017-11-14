@@ -5,12 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.m224.infectious.R;
 import com.m224.infectious.activities.MainActivity;
-import com.m224.infectious.domaine.CardConfig;
+import com.m224.infectious.domaine.Config;
 import com.m224.infectious.utils.GameType;
 
 import java.util.List;
@@ -20,7 +19,7 @@ import java.util.List;
  */
 public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.Card> {
 
-    private List<CardConfig> cardConfigs;
+    private List<Config> configs;
     private Context context;
 
     public class Card extends RecyclerView.ViewHolder {
@@ -34,8 +33,8 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
         }
     }
 
-    public GamePreviewAdapter(Context context, List<CardConfig> cardConfigs) {
-        this.cardConfigs = cardConfigs;
+    public GamePreviewAdapter(Context context, List<Config> configs) {
+        this.configs = configs;
         this.context = context;
     }
 
@@ -50,9 +49,9 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
     public void onBindViewHolder(final Card holder, final int position) {
         final MainActivity mainActivity = (MainActivity)context;
 
-        holder.title.setText(cardConfigs.get(position).getTitle());
-        holder.gameType = cardConfigs.get(position).getGameType();
-        holder.configId = cardConfigs.get(position).getConfigId();
+        holder.title.setText(configs.get(position).getTitle());
+        holder.gameType = configs.get(position).getGameType();
+        holder.configId = configs.get(position).getConfigId();
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +63,6 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
 
     @Override
     public int getItemCount() {
-        return cardConfigs.size();
+        return configs.size();
     }
 }
