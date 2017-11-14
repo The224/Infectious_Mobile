@@ -25,6 +25,7 @@
     <string name="server_on">Server up</string>
 
     <string name="restart">Restart</string>
+    <string name="save">Save</string>
 
     <string-array name="avoooir">
         <item>15</item>

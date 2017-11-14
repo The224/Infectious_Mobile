@@ -16,11 +16,12 @@ public class Board {
     private Tile selectTile;
 
     private boolean turnPlayerOne;
-
     private int scorePlayer1;
     private int scorePlayer2;
 
     private Config config;
+
+    private int id;
 
     public Board(Config config) {
         this.tiles = new ArrayList<>();
@@ -31,6 +32,19 @@ public class Board {
         scorePlayer2 = 0;
         for (int i = 0; i < ConfigVariable.MAX_TILE; i++)
             tiles.add(new Tile(State.EMPTY,i));
+
+        restart();
+    }
+
+    public void restart() {
+        if (config.getConfigId() == 1)
+            setConfigOne();
+        else if (config.getConfigId() == 2)
+            setConfigTwo();
+        else if (config.getConfigId() == 3)
+            setConfigThree();
+        else
+            setConfigZero();
     }
 
     /* *Public Method* */
@@ -95,6 +109,14 @@ public class Board {
 
     public Config getConfig() {
         return config;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     /* ***************** */

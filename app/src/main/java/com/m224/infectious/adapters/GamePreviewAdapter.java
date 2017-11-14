@@ -24,8 +24,7 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
 
     public class Card extends RecyclerView.ViewHolder {
         public TextView title;
-        public GameType gameType;
-        public int configId;
+        public Config config;
 
         public Card(View view) {
             super(view);
@@ -50,13 +49,12 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
         final MainActivity mainActivity = (MainActivity)context;
 
         holder.title.setText(configs.get(position).getTitle());
-        holder.gameType = configs.get(position).getGameType();
-        holder.configId = configs.get(position).getConfigId();
+        holder.config = configs.get(position);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.startGameWithConfig(holder.configId, holder.gameType);
+                mainActivity.startGameWithConfig(holder.config);
             }
         });
     }

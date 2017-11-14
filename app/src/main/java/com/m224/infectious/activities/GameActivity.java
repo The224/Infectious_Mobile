@@ -13,6 +13,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.m224.infectious.domaine.Config;
 import com.m224.infectious.domaine.GridImageView;
 import com.m224.infectious.services.GameService;
 import com.m224.infectious.adapters.TileImageAdapter;
@@ -25,7 +26,7 @@ import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
-    private GameService gameService = new GameService();
+    private GameService gameService;
     private TextView tv_player_1, tv_player_2, tv_turn;
     private List<GridImageView> gridImages = new ArrayList<>();
 
@@ -41,11 +42,9 @@ public class GameActivity extends AppCompatActivity {
         tv_turn = findViewById(R.id.tv_turn);
 
         Bundle extras = getIntent().getExtras();
-        if(extras == null) {
-            gameService.setConfig(0);
-        } else {
-            gameService.setConfig(extras.getInt("configId"));
-        }
+
+        gameService = new GameService((Config) extras.getSerializable("config"), null);
+
 
         for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
             gridImages.add(new GridImageView(this, gameService.getStateAt(i), i));
@@ -76,13 +75,17 @@ public class GameActivity extends AppCompatActivity {
                         .setPositiveButton(R.string.restart_yes,
                                 new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
-                                gameService.setConfig(1);
+                                gameService.restart();
                                 refreshInterface();
                             }
                         })
                         .setNegativeButton(R.string.restart_no,null)
                         .create()
                         .show();
+
+                return true;
+
+            case R.id.game_menu_save:
 
                 return true;
             default:

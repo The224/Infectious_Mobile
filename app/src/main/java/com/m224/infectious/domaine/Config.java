@@ -7,11 +7,13 @@ import android.widget.TextView;
 import com.m224.infectious.R;
 import com.m224.infectious.utils.GameType;
 
+import java.io.Serializable;
+
 /**
  * Created by 224 on 2017-11-13.
  */
 
-public class Config {
+public class Config implements Serializable {
     private String title;
     private GameType gameType;
     private int configId;

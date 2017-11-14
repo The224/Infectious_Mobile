@@ -101,10 +101,9 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    public void startGameWithConfig(int configId, GameType gameType) {
+    public void startGameWithConfig(Config config) {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("configId", configId);
-        intent.putExtra("gameType", gameType);
+        intent.putExtra("config", config);
 
         startActivity(intent);
         overridePendingTransition(R.anim.right_start, R.anim.right_end);

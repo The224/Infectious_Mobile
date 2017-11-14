@@ -33,7 +33,7 @@ public class SaveBoardTable {
         db.close();
     }
 
-    public SQLiteDatabase getBDD(){
+    public SQLiteDatabase getDB(){
         return db;
     }
 

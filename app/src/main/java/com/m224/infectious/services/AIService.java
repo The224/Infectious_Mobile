@@ -17,7 +17,7 @@ import java.util.List;
  * Created by 224 on 2017-11-08.
  */
 
-public class AIService extends GameService {
+public class AIService  {
     //                tileId  points
     private List<Movement> movements;
     private AIDifficulty difficulty;
