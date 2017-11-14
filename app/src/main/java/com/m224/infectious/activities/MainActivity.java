@@ -9,11 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.m224.infectious.AllSaveTask;
 import com.m224.infectious.R;
 import com.m224.infectious.adapters.GamePreviewAdapter;
+import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.Config;
 import com.m224.infectious.domaine.Save;
 import com.m224.infectious.sql.SaveBoardTable;
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private GamePreviewAdapter adapter;
     private RecyclerView recyclerView;
-    private List<Save> saves;
+    private List<Board> saveGames;
     private List<Config> configs;
 
     @Override
@@ -39,15 +42,18 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        initSaves();
         initRecyclerView();
     }
 
-
     public void initSaves() {
-        SaveBoardTable saveBoardTable = new SaveBoardTable(this);
-        saveBoardTable.open();
-        saves = saveBoardTable.getAllSave();
-        saveBoardTable.close();
+        saveGames = new ArrayList<>();
+        new AllSaveTask(this).execute();
+    }
+
+    public void updateSaveGames(List<Board> saveGames) {
+        this.saveGames = saveGames;
+        prepareListConfigHuman();
     }
 
     public void startActivityInformation(View v) {
@@ -92,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void prepareListConfigHuman() {
         configs.clear();
+
+        for (int i = 0; i < saveGames.size(); i++) {
+            if (saveGames.get(i).getConfig().getGameType() == GameType.LOCAL)
+                configs.add(saveGames.get(i).getConfig());
+        }
+
         configs.add(new Config("New Field Game", GameType.LOCAL, 0));
         configs.add(new Config("New Square Game", GameType.LOCAL, 1));
         configs.add(new Config("New Block Game", GameType.LOCAL, 2));
@@ -101,12 +113,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void prepareListConfigComputer() {
         configs.clear();
+
+        for (int i = 0; i < saveGames.size(); i++) {
+            if (saveGames.get(i).getConfig().getGameType() == GameType.COMPUTER)
+                configs.add(saveGames.get(i).getConfig());
+        }
+
         configs.add(new Config("Config 3 computer", GameType.COMPUTER, 2));
         adapter.notifyDataSetChanged();
     }
 
     private void prepareListConfigOnline() {
         configs.clear();
+
+        for (int i = 0; i < saveGames.size(); i++) {
+            if (saveGames.get(i).getConfig().getGameType() == GameType.ONLINE)
+                configs.add(saveGames.get(i).getConfig());
+        }
+
         configs.add(new Config("Connect to rival !", GameType.ONLINE, 1));
         adapter.notifyDataSetChanged();
     }
