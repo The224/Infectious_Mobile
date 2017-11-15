@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:background="@color/primary"
         android:elevation="0dp"
-        android:onClick="startActivityInformation"
+        android:onClick="startInformationActivity"
         android:padding="10dp"
         android:src="@drawable/ic_information" />
 

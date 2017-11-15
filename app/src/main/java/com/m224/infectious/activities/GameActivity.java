@@ -13,10 +13,10 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.m224.infectious.domaine.Config;
+import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.GridImageView;
 import com.m224.infectious.services.GameService;
-import com.m224.infectious.adapters.TileImageAdapter;
+import com.m224.infectious.adapters.GridItemImageAdapter;
 import com.m224.infectious.R;
 import com.m224.infectious.sql.SaveBoardTable;
 import com.m224.infectious.utils.ConfigVariable;
@@ -44,7 +44,7 @@ public class GameActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        gameService = new GameService((Config) extras.getSerializable("config"), null);
+        gameService = new GameService((Board) extras.getSerializable("board"));
 
 
         for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
@@ -102,7 +102,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void handleGrid() {
         GridView gridview = findViewById(R.id.grid_view);
-        gridview.setAdapter(new TileImageAdapter(this, gridImages));
+        gridview.setAdapter(new GridItemImageAdapter(this, gridImages));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -147,7 +147,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void quickSave() {
-        gameService.getBoard().getConfig().setTitle(getResources().getString(R.string.quick_save));
+        gameService.getBoard().setTitle(getResources().getString(R.string.quick_save));
         String jsonBoard = Util.boardToJSONString(gameService.getBoard());
 
         SaveBoardTable saveBoardTable = new SaveBoardTable(this);

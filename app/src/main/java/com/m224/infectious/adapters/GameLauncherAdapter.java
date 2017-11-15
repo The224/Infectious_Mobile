@@ -9,22 +9,20 @@ import android.widget.TextView;
 
 import com.m224.infectious.R;
 import com.m224.infectious.activities.MainActivity;
-import com.m224.infectious.domaine.Config;
-import com.m224.infectious.utils.GameType;
+import com.m224.infectious.domaine.Board;
 
 import java.util.List;
 
 /**
  * Created by Ravi Tamada on 18/05/16.
  */
-public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.Card> {
+public class GameLauncherAdapter extends RecyclerView.Adapter<GameLauncherAdapter.Card> {
 
-    private List<Config> configs;
+    private final List<Board> boards;
     private Context context;
 
     public class Card extends RecyclerView.ViewHolder {
         public TextView title;
-        public Config config;
 
         public Card(View view) {
             super(view);
@@ -32,8 +30,8 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
         }
     }
 
-    public GamePreviewAdapter(Context context, List<Config> configs) {
-        this.configs = configs;
+    public GameLauncherAdapter(Context context, List<Board> boards) {
+        this.boards = boards;
         this.context = context;
     }
 
@@ -48,19 +46,18 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
     public void onBindViewHolder(final Card holder, final int position) {
         final MainActivity mainActivity = (MainActivity)context;
 
-        holder.title.setText(configs.get(position).getTitle());
-        holder.config = configs.get(position);
+        holder.title.setText(boards.get(position).getTitle());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.startGameWithConfig(holder.config);
+                mainActivity.startGameActivity(boards.get(position));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return configs.size();
+        return boards.size();
     }
 }

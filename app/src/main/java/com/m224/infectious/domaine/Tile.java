@@ -2,11 +2,13 @@ package com.m224.infectious.domaine;
 
 import com.m224.infectious.utils.State;
 
+import java.io.Serializable;
+
 /**
  * Created by 224 on 2017-10-20.
  */
 
-public class Tile {
+public class Tile implements Serializable{
 
     private State state;
     private boolean selected;

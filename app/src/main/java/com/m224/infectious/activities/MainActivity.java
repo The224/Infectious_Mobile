@@ -9,17 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.m224.infectious.AllSaveTask;
 import com.m224.infectious.R;
-import com.m224.infectious.adapters.GamePreviewAdapter;
+import com.m224.infectious.adapters.GameLauncherAdapter;
 import com.m224.infectious.domaine.Board;
-import com.m224.infectious.domaine.Config;
-import com.m224.infectious.domaine.Save;
-import com.m224.infectious.sql.SaveBoardTable;
+import com.m224.infectious.utils.ConfigVariable;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.Util;
 
@@ -28,124 +25,125 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private GamePreviewAdapter adapter;
-    private RecyclerView recyclerView;
+    private GameLauncherAdapter adapter;
     private List<Board> saveGames;
-    private List<Config> configs;
-
-    private List<Pair<Config, Board>> games;
-
+    private List<Board> recyclerGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        saveGames = new ArrayList<>();
+
         Util.customActionbar(this, R.layout.actionbar_main);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        initSaves();
+        findSaveGame();
         initRecyclerView();
     }
 
-    public void initSaves() {
-        saveGames = new ArrayList<>();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        findSaveGame();
+    }
+
+    public void findSaveGame() {
         new AllSaveTask(this).execute();
     }
 
     public void updateSaveGames(List<Board> saveGames) {
         this.saveGames = saveGames;
-        prepareListConfigHuman();
+        putSaveInRecycler(GameType.LOCAL);
     }
-
-    public void startActivityInformation(View v) {
-        Intent intent = new Intent(this, InformationActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.left_start, R.anim.left_end);
-    }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_human:
-                    prepareListConfigHuman();
-                    return true;
-                case R.id.navigation_computer:
-                    prepareListConfigComputer();
-                    return true;
-                case R.id.navigation_online:
-                    prepareListConfigOnline();
-                    return true;
-            }
-            return false;
-        }
-    };
 
     private void initRecyclerView() {
-        configs = new ArrayList<>();
+        recyclerGame = new ArrayList<>();
 
-        adapter = new GamePreviewAdapter(this, configs);
-
-        recyclerView = findViewById(R.id.recycler_view);
+        adapter = new GameLauncherAdapter(this, recyclerGame);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        prepareListConfigHuman();
+        prepareRecyclerHuman();
     }
 
-    private void prepareListConfigHuman() {
-        configs.clear();
+    private void prepareRecyclerHuman() {
+        recyclerGame.clear();
 
-        for (int i = 0; i < saveGames.size(); i++) {
-            if (saveGames.get(i).getConfig().getGameType() == GameType.LOCAL)
-                configs.add(saveGames.get(i).getConfig());
-        }
+        putSaveInRecycler(GameType.LOCAL);
 
-        configs.add(new Config("New Field Game", GameType.LOCAL, 0));
-        configs.add(new Config("New Square Game", GameType.LOCAL, 1));
-        configs.add(new Config("New Block Game", GameType.LOCAL, 2));
-        configs.add(new Config("New Cross Game", GameType.LOCAL, 3));
+        recyclerGame.add(new Board("New Field Game", ConfigVariable.configField, GameType.LOCAL));
+        recyclerGame.add(new Board("New Square Game", ConfigVariable.configSquare, GameType.LOCAL));
+        recyclerGame.add(new Board("New Block Game", ConfigVariable.configBlock, GameType.LOCAL));
+        recyclerGame.add(new Board("New Cross Game", ConfigVariable.configCross, GameType.LOCAL));
         adapter.notifyDataSetChanged();
     }
 
-    private void prepareListConfigComputer() {
-        configs.clear();
+    private void prepareRecyclerComputer() {
+        recyclerGame.clear();
 
-        for (int i = 0; i < saveGames.size(); i++) {
-            if (saveGames.get(i).getConfig().getGameType() == GameType.COMPUTER)
-                configs.add(saveGames.get(i).getConfig());
-        }
+        putSaveInRecycler(GameType.COMPUTER);
 
-        configs.add(new Config("Config 3 computer", GameType.COMPUTER, 2));
+        recyclerGame.add(new Board("New Field Game VS computer", ConfigVariable.configField, GameType.COMPUTER));
         adapter.notifyDataSetChanged();
     }
 
-    private void prepareListConfigOnline() {
-        configs.clear();
+    private void prepareRecyclerOnline() {
+        recyclerGame.clear();
 
-        for (int i = 0; i < saveGames.size(); i++) {
-            if (saveGames.get(i).getConfig().getGameType() == GameType.ONLINE)
-                configs.add(saveGames.get(i).getConfig());
-        }
+        putSaveInRecycler(GameType.ONLINE);
 
-        configs.add(new Config("Connect to rival !", GameType.ONLINE, 1));
+        recyclerGame.add(new Board("Connect to rival !", ConfigVariable.configCross, GameType.LOCAL));
         adapter.notifyDataSetChanged();
     }
 
-    public void startGameWithConfig(Config config) {
+    public void putSaveInRecycler(GameType gameType) {
+        for (int i = 0; i < saveGames.size(); i++) {
+            if (saveGames.get(i).getGameType() == gameType)
+                recyclerGame.add(saveGames.get(i));
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    public void startGameActivity(Board board) {
         Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("config", config);
+        intent.putExtra("board", board);
 
         startActivity(intent);
         overridePendingTransition(R.anim.right_start, R.anim.right_end);
     }
 
+    /**
+     * Listener for 3 game type bottom button
+     */
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_human:
+                    prepareRecyclerHuman();
+                    return true;
+                case R.id.navigation_computer:
+                    prepareRecyclerComputer();
+                    return true;
+                case R.id.navigation_online:
+                    prepareRecyclerOnline();
+                    return true;
+            }
+            return false;
+        }
+    };
 
-
+    public void startInformationActivity(View v) {
+        Intent intent = new Intent(this, InformationActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.left_start, R.anim.left_end);
+    }
 }
