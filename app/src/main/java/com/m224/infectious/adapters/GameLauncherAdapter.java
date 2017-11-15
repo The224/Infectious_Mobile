@@ -13,9 +13,6 @@ import com.m224.infectious.domaine.Board;
 
 import java.util.List;
 
-/**
- * Created by Ravi Tamada on 18/05/16.
- */
 public class GameLauncherAdapter extends RecyclerView.Adapter<GameLauncherAdapter.Card> {
 
     private final List<Board> boards;
