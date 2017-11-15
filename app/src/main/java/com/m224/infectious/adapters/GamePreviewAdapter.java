@@ -51,7 +51,7 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.startGameWithConfig(boards.get(position));
+                mainActivity.startGameActivity(boards.get(position));
             }
         });
     }
