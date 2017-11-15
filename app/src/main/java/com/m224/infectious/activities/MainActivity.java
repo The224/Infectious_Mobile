@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateSaveGames(List<Board> saveGames) {
         this.saveGames = saveGames;
-        putSaveInRecycler(GameType.LOCAL);
+        prepareRecyclerHuman();
     }
 
     private void initRecyclerView() {
@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
             if (saveGames.get(i).getGameType() == gameType)
                 recyclerGame.add(saveGames.get(i));
         }
-        adapter.notifyDataSetChanged();
     }
 
     public void startGameActivity(Board board) {
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Listener for 3 game type bottom button
+     * Listener for game type bottom buttons
      */
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

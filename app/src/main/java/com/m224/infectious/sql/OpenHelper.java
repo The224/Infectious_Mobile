@@ -12,12 +12,10 @@ public class OpenHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_BOARD = "SAVE";
     private static final String COL_ID = "ID";
-    private static final String COL_NAME = "NAME";
     private static final String COL_JSONBOARD = "JSONBOARD";
 
     private static final String CREATE_DB = "CREATE TABLE " + TABLE_BOARD + " ("
-            + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_NAME + " TEXT NOT NULL, "
-            + COL_JSONBOARD + " TEXT NOT NULL);";
+            + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_JSONBOARD + " TEXT NOT NULL);";
 
     public OpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

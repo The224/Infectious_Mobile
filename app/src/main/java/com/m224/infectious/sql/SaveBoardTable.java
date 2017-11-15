@@ -22,7 +22,6 @@ public class SaveBoardTable {
 
     private static final String TABLE_SAVE = "SAVE";
     private static final String COL_ID = "ID";
-    private static final String COL_NAME = "NAME";
     private static final String COL_JSONBOARD = "JSONBOARD";
 
     private SQLiteDatabase db;
@@ -42,37 +41,24 @@ public class SaveBoardTable {
         db.close();
     }
 
-    public SQLiteDatabase getDB(){
-        return db;
-    }
 
-    public long insertSave(String name, String jsonBoard){
+    public long insertSave(String jsonBoard){
         ContentValues values = new ContentValues();
-        values.put(COL_NAME, name);
         values.put(COL_JSONBOARD, jsonBoard);
         return db.insert(TABLE_SAVE, null, values);
     }
 
-    public int updateSave(int id, String name, String jsonBoard){
+    public long insertQuickSave(String jsonBoard){
+        removeSaveWithID(-1);
+
         ContentValues values = new ContentValues();
-        values.put(COL_NAME, name);
+        values.put(COL_ID, -1);
         values.put(COL_JSONBOARD, jsonBoard);
-        return db.update(TABLE_SAVE, values, COL_ID + " = " +id, null);
+        return db.insert(TABLE_SAVE, null, values);
     }
 
     public int removeSaveWithID(int id){
         return db.delete(TABLE_SAVE, COL_ID + " = " +id, null);
-    }
-
-    public long insertQuickSave(String jsonBoard){
-        ContentValues values = new ContentValues();
-        values.put(COL_NAME, context.getResources().getString(R.string.quick_save));
-        values.put(COL_JSONBOARD, jsonBoard);
-        values.put(COL_ID, -1);
-
-        removeSaveWithID(-1);
-
-        return db.insert(TABLE_SAVE, null, values);
     }
 
     public List<Save> getAllSave(){
@@ -82,15 +68,21 @@ public class SaveBoardTable {
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
                 int id = cursor.getInt(cursor.getColumnIndex(COL_ID));
-                String name = cursor.getString(cursor.getColumnIndex(COL_NAME));
                 String jsonBoard = cursor.getString(cursor.getColumnIndex(COL_JSONBOARD));
 
-                saves.add(new Save(id,name,jsonBoard));
+                saves.add(new Save(id,jsonBoard));
 
                 cursor.moveToNext();
             }
         }
         return saves;
+    }
+
+    /**
+     * DEBUG
+     */
+    public void drop() {
+        db.execSQL("DROP TABLE " + TABLE_SAVE + ";");
     }
 
 }

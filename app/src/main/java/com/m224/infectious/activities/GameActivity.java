@@ -1,5 +1,6 @@
 package com.m224.infectious.activities;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,11 +69,10 @@ public class GameActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.game_menu_restart:
-
-                AlertDialog.Builder alertDialogBuilder =
+                AlertDialog.Builder alertRestartDialogBuilder =
                         new AlertDialog.Builder(this, R.style.DialogTheme);
 
-                alertDialogBuilder
+                alertRestartDialogBuilder
                         .setTitle(R.string.restart_title)
                         .setCancelable(true)
                         .setPositiveButton(R.string.restart_yes,
@@ -83,17 +85,55 @@ public class GameActivity extends AppCompatActivity {
                         .setNegativeButton(R.string.restart_no,null)
                         .create()
                         .show();
-
                 return true;
-
             case R.id.game_menu_save:
+                showSaveDialog();
+                return true;
+            case R.id.game_menu_delete:
 
+                AlertDialog.Builder alertDeleteDialogBuilder =
+                        new AlertDialog.Builder(this, R.style.DialogTheme);
 
+                alertDeleteDialogBuilder
+                        .setTitle(R.string.delete_title)
+                        .setCancelable(true)
+                        .setPositiveButton(R.string.delete_yes,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+
+                                        // A voir
+                                        onBackClick(null);
+                                    }
+                                })
+                        .setNegativeButton(R.string.delete_no,null)
+                        .create()
+                        .show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    public void showSaveDialog() {
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_save_game);
+
+
+        final EditText editText = dialog.findViewById(R.id.et_save_name);
+
+        Button dialogButton = dialog.findViewById(R.id.btn_save);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (editText.getText().toString().equals(""))
+                    saveGame(editText.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
 
     public void onBackClick(View v) {
         finish();
@@ -143,20 +183,31 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        quickSave();
+
+        quickSaveGame();
     }
 
-    public void quickSave() {
+    public void quickSaveGame() {
         gameService.getBoard().setTitle(getResources().getString(R.string.quick_save));
         String jsonBoard = Util.boardToJSONString(gameService.getBoard());
 
         SaveBoardTable saveBoardTable = new SaveBoardTable(this);
+
         saveBoardTable.open();
         saveBoardTable.insertQuickSave(jsonBoard);
-
         saveBoardTable.close();
     }
 
+    public void saveGame(String name) {
+        gameService.getBoard().setTitle(name);
+        String jsonBoard = Util.boardToJSONString(gameService.getBoard());
+
+        SaveBoardTable saveBoardTable = new SaveBoardTable(this);
+
+        saveBoardTable.open();
+        saveBoardTable.insertSave(jsonBoard);
+        saveBoardTable.close();
+    }
 
 }
 

@@ -26,6 +26,10 @@
 
     <string name="restart">Restart</string>
     <string name="save">Save</string>
+    <string name="delete">Delete</string>
+
+    <string name="save_name">Save name :</string>
+    <string name="save_btn">ok</string>
 
     <string name="new_game">Start New Game</string>
     <string name="quick_save">Quick Save</string>
@@ -37,6 +41,10 @@
     <string name="restart_title">Are you sure you want to restart the game… ?</string>
     <string name="restart_yes">Yes</string>
     <string name="restart_no">No</string>
+
+    <string name="delete_title">Are you sure you want to delete the game… ?</string>
+    <string name="delete_yes">Yes</string>
+    <string name="delete_no">No</string>
 
 
 </resources>

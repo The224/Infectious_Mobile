@@ -7,12 +7,10 @@ package com.m224.infectious.domaine;
 public class Save {
 
     private int id;
-    private String name;
     private String jsonBoard;
 
-    public Save(int id, String name, String jsonBoard) {
+    public Save(int id, String jsonBoard) {
         this.id = id;
-        this.name = name;
         this.jsonBoard = jsonBoard;
     }
 
@@ -22,14 +20,6 @@ public class Save {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getJsonBoard() {
