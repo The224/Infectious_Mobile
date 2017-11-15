@@ -14,11 +14,11 @@ import java.util.List;
  * Created by 224 on 2017-10-20.
  */
 
-public class TileImageAdapter extends BaseAdapter {
+public class GridItemImageAdapter extends BaseAdapter {
     private Context context;
     private List<GridImageView> gridImage;
 
-    public TileImageAdapter(Context context, List<GridImageView> gridImage) {
+    public GridItemImageAdapter(Context context, List<GridImageView> gridImage) {
         this.context = context;
         this.gridImage = gridImage;
     }

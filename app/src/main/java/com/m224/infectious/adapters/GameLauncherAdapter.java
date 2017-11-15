@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Ravi Tamada on 18/05/16.
  */
-public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.Card> {
+public class GameLauncherAdapter extends RecyclerView.Adapter<GameLauncherAdapter.Card> {
 
     private final List<Board> boards;
     private Context context;
@@ -30,8 +30,8 @@ public class GamePreviewAdapter extends RecyclerView.Adapter<GamePreviewAdapter.
         }
     }
 
-    public GamePreviewAdapter(Context context, List<Board> configs) {
-        this.boards = configs;
+    public GameLauncherAdapter(Context context, List<Board> boards) {
+        this.boards = boards;
         this.context = context;
     }
 

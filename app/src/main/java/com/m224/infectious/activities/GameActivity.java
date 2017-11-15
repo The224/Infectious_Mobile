@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.GridImageView;
 import com.m224.infectious.services.GameService;
-import com.m224.infectious.adapters.TileImageAdapter;
+import com.m224.infectious.adapters.GridItemImageAdapter;
 import com.m224.infectious.R;
 import com.m224.infectious.sql.SaveBoardTable;
 import com.m224.infectious.utils.ConfigVariable;
@@ -102,7 +102,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void handleGrid() {
         GridView gridview = findViewById(R.id.grid_view);
-        gridview.setAdapter(new TileImageAdapter(this, gridImages));
+        gridview.setAdapter(new GridItemImageAdapter(this, gridImages));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {

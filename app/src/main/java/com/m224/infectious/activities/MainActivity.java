@@ -14,7 +14,7 @@ import android.view.View;
 
 import com.m224.infectious.AllSaveTask;
 import com.m224.infectious.R;
-import com.m224.infectious.adapters.GamePreviewAdapter;
+import com.m224.infectious.adapters.GameLauncherAdapter;
 import com.m224.infectious.domaine.Board;
 import com.m224.infectious.utils.ConfigVariable;
 import com.m224.infectious.utils.GameType;
@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private GamePreviewAdapter adapter;
+    private GameLauncherAdapter adapter;
     private List<Board> saveGames;
     private List<Board> recyclerGame;
 
@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        saveGames = new ArrayList<>();
+
         Util.customActionbar(this, R.layout.actionbar_main);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -42,20 +44,25 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        findSaveGame();
+    }
+
     public void findSaveGame() {
-        saveGames = new ArrayList<>();
         new AllSaveTask(this).execute();
     }
 
     public void updateSaveGames(List<Board> saveGames) {
         this.saveGames = saveGames;
-        prepareRecyclerHuman();
+        putSaveInRecycler(GameType.LOCAL);
     }
 
     private void initRecyclerView() {
         recyclerGame = new ArrayList<>();
 
-        adapter = new GamePreviewAdapter(this, recyclerGame);
+        adapter = new GameLauncherAdapter(this, recyclerGame);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
@@ -101,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             if (saveGames.get(i).getGameType() == gameType)
                 recyclerGame.add(saveGames.get(i));
         }
+        adapter.notifyDataSetChanged();
     }
 
     public void startGameActivity(Board board) {

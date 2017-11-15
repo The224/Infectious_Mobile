@@ -127,7 +127,10 @@ public class Board implements Serializable {
     }
 
     public void setSelectTile(int id) {
-        this.selectTile = tiles.get(id);
+        if (id < 0)
+            this.selectTile = null;
+        else
+            this.selectTile = tiles.get(id);
     }
 
     public boolean isTurnPlayerOne() {
