@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.GridImageView;
 import com.m224.infectious.services.GameService;
-import com.m224.infectious.adapters.GridItemImageAdapter;
+import com.m224.infectious.adapters.GridImageAdapter;
 import com.m224.infectious.R;
 import com.m224.infectious.sql.SaveBoardTable;
 import com.m224.infectious.utils.ConfigVariable;
@@ -84,14 +84,14 @@ public class GameActivity extends AppCompatActivity {
         finish();
         this.overridePendingTransition(R.anim.left_start, R.anim.left_end);
     }
-    
+
     private void initGridView() {
         for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
             gridImages.add(new GridImageView(this, gameService.getStateAt(i), i));
         }
 
         GridView gridview = findViewById(R.id.grid_view);
-        gridview.setAdapter(new GridItemImageAdapter(this, gridImages));
+        gridview.setAdapter(new GridImageAdapter(this, gridImages));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
