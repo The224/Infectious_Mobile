@@ -20,7 +20,7 @@ import com.m224.infectious.domaine.GridImageView;
 import com.m224.infectious.services.GameService;
 import com.m224.infectious.adapters.GridImageAdapter;
 import com.m224.infectious.R;
-import com.m224.infectious.sql.SaveBoardTable;
+import com.m224.infectious.sql.SaveTable;
 import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.Util;
 
@@ -165,21 +165,21 @@ public class GameActivity extends AppCompatActivity {
         gameService.getBoard().setTitle(getResources().getString(R.string.quick_save));
         String jsonBoard = Util.boardToJSONString(gameService.getBoard());
 
-        SaveBoardTable saveBoardTable = new SaveBoardTable(this);
+        SaveTable saveTable = new SaveTable(this);
 
-        saveBoardTable.open();
-        saveBoardTable.insertQuickSave(jsonBoard);
-        saveBoardTable.close();
+        saveTable.open();
+        saveTable.insertQuickSave(jsonBoard);
+        saveTable.close();
     }
     private void saveGame(String name) {
         gameService.getBoard().setTitle(name);
         String jsonBoard = Util.boardToJSONString(gameService.getBoard());
 
-        SaveBoardTable saveBoardTable = new SaveBoardTable(this);
+        SaveTable saveTable = new SaveTable(this);
 
-        saveBoardTable.open();
-        saveBoardTable.insertSave(jsonBoard);
-        saveBoardTable.close();
+        saveTable.open();
+        saveTable.insertSave(jsonBoard);
+        saveTable.close();
     }
     /* ************* */
 

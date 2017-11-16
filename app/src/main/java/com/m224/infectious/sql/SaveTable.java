@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.m224.infectious.R;
 import com.m224.infectious.domaine.Save;
 
 import java.util.ArrayList;
@@ -15,32 +14,31 @@ import java.util.List;
  * Created by 224 on 2017-11-13.
  */
 
-public class SaveBoardTable {
-
-    private static final int VERSION_DB = 1;
+public class SaveTable {
+    private static final int VERSION_DB = 0;
     private static final String NAME_DB = "infectious.db";
 
     private static final String TABLE_SAVE = "SAVE";
     private static final String COL_ID = "ID";
     private static final String COL_JSONBOARD = "JSONBOARD";
 
+    /// TODO : S'informer sur le retour de SQLiteDatabase Query
     private SQLiteDatabase db;
-    private OpenHelper sqlDataBase;
+    private DataBase dataBase;
     private Context context;
 
-    public SaveBoardTable(Context context){
-        sqlDataBase = new OpenHelper(context, NAME_DB, null, VERSION_DB);
+    public SaveTable(Context context){
+        dataBase = new DataBase(context, NAME_DB, null, VERSION_DB);
         this.context = context;
     }
 
     public void open(){
-        db = sqlDataBase.getWritableDatabase();
+        db = dataBase.getWritableDatabase();
     }
 
     public void close(){
         db.close();
     }
-
 
     public long insertSave(String jsonBoard){
         ContentValues values = new ContentValues();
@@ -63,26 +61,19 @@ public class SaveBoardTable {
 
     public List<Save> getAllSave(){
         List<Save> saves = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from "+TABLE_SAVE,null);
+        Cursor cursor = db.rawQuery("SELECT "+COL_JSONBOARD+" FROM "+TABLE_SAVE,null);
 
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
                 int id = cursor.getInt(cursor.getColumnIndex(COL_ID));
                 String jsonBoard = cursor.getString(cursor.getColumnIndex(COL_JSONBOARD));
-
                 saves.add(new Save(id,jsonBoard));
-
                 cursor.moveToNext();
             }
         }
+
+        cursor.close();
+
         return saves;
     }
-
-    /**
-     * DEBUG
-     */
-    public void drop() {
-        db.execSQL("DROP TABLE " + TABLE_SAVE + ";");
-    }
-
 }

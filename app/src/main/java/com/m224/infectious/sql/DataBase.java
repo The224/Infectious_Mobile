@@ -8,16 +8,16 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by 224 on 2017-11-13.
  */
 
-public class OpenHelper extends SQLiteOpenHelper {
+public class DataBase extends SQLiteOpenHelper {
 
-    private static final String TABLE_BOARD = "SAVE";
+    private static final String TABLE_SAVE = "SAVE";
     private static final String COL_ID = "ID";
     private static final String COL_JSONBOARD = "JSONBOARD";
 
-    private static final String CREATE_DB = "CREATE TABLE " + TABLE_BOARD + " ("
+    private static final String CREATE_DB = "CREATE TABLE " + TABLE_SAVE + " ("
             + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_JSONBOARD + " TEXT NOT NULL);";
 
-    public OpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public DataBase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
@@ -28,7 +28,7 @@ public class OpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE " + TABLE_BOARD + ";");
+        db.execSQL("DROP TABLE " + TABLE_SAVE + ";");
         onCreate(db);
     }
 

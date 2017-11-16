@@ -1,13 +1,11 @@
 package com.m224.infectious;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import com.m224.infectious.activities.MainActivity;
 import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.Save;
-import com.m224.infectious.sql.SaveBoardTable;
+import com.m224.infectious.sql.SaveTable;
 import com.m224.infectious.utils.Util;
 
 import java.util.ArrayList;
@@ -28,10 +26,10 @@ public class FetchSaveTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        SaveBoardTable saveBoardTable = new SaveBoardTable(mainActivity);
-        saveBoardTable.open();
-        List<Save> saves = saveBoardTable.getAllSave();
-        saveBoardTable.close();
+        SaveTable saveTable = new SaveTable(mainActivity);
+        saveTable.open();
+        List<Save> saves = saveTable.getAllSave();
+        saveTable.close();
 
         for (Save save : saves) {
             Board board = Util.JSONToBoard(save.getJsonBoard());
