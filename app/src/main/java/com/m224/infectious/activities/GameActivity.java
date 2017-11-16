@@ -21,7 +21,7 @@ import com.m224.infectious.services.GameService;
 import com.m224.infectious.adapters.GridImageAdapter;
 import com.m224.infectious.R;
 import com.m224.infectious.sql.SaveBoardTable;
-import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.Util;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initGridView() {
-        for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
+        for (int i = 0; i < GridConfig.MAX_TILE; i++) {
             gridImages.add(new GridImageView(this, gameService.getStateAt(i), i));
         }
 
@@ -190,7 +190,7 @@ public class GameActivity extends AppCompatActivity {
         refreshTurn();
     }
     private void refreshGrid() {
-        for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
+        for (int i = 0; i < GridConfig.MAX_TILE; i++) {
             gridImages.get(i).setState(gameService.getStateAt(i));
             gridImages.get(i).setSelected(gameService.isSelectAt(i));
         }

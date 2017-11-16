@@ -1,6 +1,6 @@
 package com.m224.infectious.domaine;
 
-import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.State;
 
@@ -36,7 +36,7 @@ public class Board implements Serializable {
         scorePlayer1 = 0;
         scorePlayer2 = 0;
 
-        for (int i = 0; i < ConfigVariable.MAX_TILE; i++)
+        for (int i = 0; i < GridConfig.MAX_TILE; i++)
             tiles.add(new Tile(State.EMPTY,i));
 
 

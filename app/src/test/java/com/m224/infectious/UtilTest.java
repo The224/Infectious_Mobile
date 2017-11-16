@@ -1,6 +1,6 @@
 package com.m224.infectious;
 
-import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.Util;
 
 import org.junit.Test;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 public class UtilTest {
     @Test
     public void tileAround10Test() throws Exception {
-        assertEquals(81, ConfigVariable.MAX_TILE);
+        assertEquals(81, GridConfig.MAX_TILE);
 
         List<Integer> returnList = Util.getTileAround(10);
 
@@ -29,7 +29,7 @@ public class UtilTest {
 
     @Test
     public void tileAround80Test() throws Exception {
-        assertEquals(81, ConfigVariable.MAX_TILE);
+        assertEquals(81, GridConfig.MAX_TILE);
 
         List<Integer> returnList = Util.getTileAround(80);
 
@@ -41,7 +41,7 @@ public class UtilTest {
 
     @Test
     public void tileAround72Test() throws Exception {
-        assertEquals(81, ConfigVariable.MAX_TILE);
+        assertEquals(81, GridConfig.MAX_TILE);
 
         List<Integer> returnList = Util.getTileAround(72);
 

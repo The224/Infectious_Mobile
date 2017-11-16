@@ -1,11 +1,8 @@
 package com.m224.infectious.services;
 
-import android.support.v4.util.Pair;
-
-import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.Tile;
 import com.m224.infectious.utils.AIDifficulty;
-import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.State;
 
 import java.util.ArrayList;
@@ -54,8 +51,8 @@ public class AIService  {
 
         List<Tile> copyTiles =  tiles;
 
-        for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
-            for (int j = 0; j < ConfigVariable.MAX_TILE; j++) {
+        for (int i = 0; i < GridConfig.MAX_TILE; i++) {
+            for (int j = 0; j < GridConfig.MAX_TILE; j++) {
                 computeMove(copyTiles, i, j);
                 copyTiles = tiles;
             }

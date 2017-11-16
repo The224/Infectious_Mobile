@@ -1,7 +1,7 @@
 package com.m224.infectious.services;
 
 import com.m224.infectious.domaine.Board;
-import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.State;
 import com.m224.infectious.utils.Util;
@@ -13,14 +13,6 @@ import java.util.List;
  */
 
 public class GameService {
-
-    /**
-     * Donc, je suis obliger d'avoir board pour sauver les donnees en SQL,
-     * Justement, y reste le sql a implementer
-     * Et computer a gerer
-     */
-
-
     private Board board;
 
     public GameService(Board board) {
@@ -28,7 +20,7 @@ public class GameService {
             this.board = board;
         }
         else {
-            this.board = new Board("NULL", ConfigVariable.configField, GameType.LOCAL);
+            this.board = new Board("NULL", GridConfig.FIELD, GameType.LOCAL);
         }
     }
 

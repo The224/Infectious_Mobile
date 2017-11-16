@@ -6,11 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.m224.infectious.domaine.Board;
-import com.m224.infectious.domaine.Tile;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +37,7 @@ public class Util {
     }
 
     public static List<Integer> getTileAround(int tileId) {
-        int rowLength = (int)Math.sqrt(ConfigVariable.MAX_TILE);
+        int rowLength = (int)Math.sqrt(GridConfig.MAX_TILE);
         List<Integer> around = new ArrayList<>();
         boolean upLeft = true, upRight = true, downLeft = true, downRight = true;
 
@@ -51,7 +48,7 @@ public class Util {
             upRight = false;
         }
 
-        if (tileId < (ConfigVariable.MAX_TILE - rowLength) ) { // Ne se situe pas au sol
+        if (tileId < (GridConfig.MAX_TILE - rowLength) ) { // Ne se situe pas au sol
             around.add(tileId+rowLength);
         } else {
             downLeft = false;

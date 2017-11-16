@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.m224.infectious.domaine.GridImageView;
-import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.GridConfig;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class GridImageAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return ConfigVariable.MAX_TILE;
+        return GridConfig.MAX_TILE;
     }
 
     @Override

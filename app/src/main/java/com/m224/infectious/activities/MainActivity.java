@@ -16,7 +16,7 @@ import com.m224.infectious.FetchSaveTask;
 import com.m224.infectious.R;
 import com.m224.infectious.adapters.GameLauncherAdapter;
 import com.m224.infectious.domaine.Board;
-import com.m224.infectious.utils.ConfigVariable;
+import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.Util;
 
@@ -85,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
         putSaveInRecycler();
 
         if (userGameTypeChoice == GameType.COMPUTER) {
-            recyclerBoards.add(new Board("New Field Game VS computer", ConfigVariable.configField, GameType.COMPUTER));
+            recyclerBoards.add(new Board("New Field Game VS computer", GridConfig.FIELD, GameType.COMPUTER));
         } else {
-            recyclerBoards.add(new Board("New Field Game", ConfigVariable.configField, GameType.LOCAL));
-            recyclerBoards.add(new Board("New Square Game", ConfigVariable.configSquare, GameType.LOCAL));
-            recyclerBoards.add(new Board("New Block Game", ConfigVariable.configBlock, GameType.LOCAL));
-            recyclerBoards.add(new Board("New Cross Game", ConfigVariable.configCross, GameType.LOCAL));
+            recyclerBoards.add(new Board("New Field Game", GridConfig.FIELD, GameType.LOCAL));
+            recyclerBoards.add(new Board("New Square Game", GridConfig.SQUARE, GameType.LOCAL));
+            recyclerBoards.add(new Board("New Block Game", GridConfig.BLOCK, GameType.LOCAL));
+            recyclerBoards.add(new Board("New Cross Game", GridConfig.CROSS, GameType.LOCAL));
         }
 
         adapter.notifyDataSetChanged();
