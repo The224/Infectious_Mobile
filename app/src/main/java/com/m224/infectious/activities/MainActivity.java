@@ -12,7 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.m224.infectious.AllSaveTask;
+import com.m224.infectious.FetchSaveTask;
 import com.m224.infectious.R;
 import com.m224.infectious.adapters.GameLauncherAdapter;
 import com.m224.infectious.domaine.Board;
@@ -24,21 +24,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    // Ptn to the RecyclerAdapter for update
     private GameLauncherAdapter adapter;
-    private List<Board> saveGames;
-    private List<Board> recyclerGame;
+    // List of fetch game
+    private List<Board> saveBoards;
+    // List of user board choice
+    private List<Board> recyclerBoards;
+    // BottomNav user choice
+    private GameType userGameTypeChoice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        saveGames = new ArrayList<>();
-
         Util.customActionbar(this, R.layout.actionbar_main);
 
+        saveBoards = new ArrayList<>();
+        recyclerBoards = new ArrayList<>();
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setOnNavigationItemSelectedListener(navGameTypeListener);
 
         findSaveGame();
         initRecyclerView();
@@ -50,56 +55,76 @@ public class MainActivity extends AppCompatActivity {
         findSaveGame();
     }
 
+    // Start FetchSaveTask
     public void findSaveGame() {
-        new AllSaveTask(this).execute();
+        new FetchSaveTask(this).execute();
     }
 
+    // Response of FetchSaveTask
     public void updateSaveGames(List<Board> saveGames) {
-        this.saveGames = saveGames;
-        prepareRecyclerHuman();
+        this.saveBoards = saveGames;
+        updateRecyclerBoards();
     }
 
     private void initRecyclerView() {
-        recyclerGame = new ArrayList<>();
+        adapter = new GameLauncherAdapter(this, recyclerBoards);
 
-        adapter = new GameLauncherAdapter(this, recyclerGame);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
-
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        prepareRecyclerHuman();
+        updateRecyclerBoards();
     }
 
-    private void prepareRecyclerHuman() {
-        recyclerGame.clear();
 
-        putSaveInRecycler(GameType.LOCAL);
+    public void updateRecyclerBoards() {
+        recyclerBoards.clear();
 
-        recyclerGame.add(new Board("New Field Game", ConfigVariable.configField, GameType.LOCAL));
-        recyclerGame.add(new Board("New Square Game", ConfigVariable.configSquare, GameType.LOCAL));
-        recyclerGame.add(new Board("New Block Game", ConfigVariable.configBlock, GameType.LOCAL));
-        recyclerGame.add(new Board("New Cross Game", ConfigVariable.configCross, GameType.LOCAL));
+        putSaveInRecycler();
+
+        if (userGameTypeChoice == GameType.COMPUTER) {
+            recyclerBoards.add(new Board("New Field Game VS computer", ConfigVariable.configField, GameType.COMPUTER));
+        } else {
+            recyclerBoards.add(new Board("New Field Game", ConfigVariable.configField, GameType.LOCAL));
+            recyclerBoards.add(new Board("New Square Game", ConfigVariable.configSquare, GameType.LOCAL));
+            recyclerBoards.add(new Board("New Block Game", ConfigVariable.configBlock, GameType.LOCAL));
+            recyclerBoards.add(new Board("New Cross Game", ConfigVariable.configCross, GameType.LOCAL));
+        }
+
         adapter.notifyDataSetChanged();
     }
 
-    private void prepareRecyclerComputer() {
-        recyclerGame.clear();
-
-        putSaveInRecycler(GameType.COMPUTER);
-
-        recyclerGame.add(new Board("New Field Game VS computer", ConfigVariable.configField, GameType.COMPUTER));
-        adapter.notifyDataSetChanged();
-    }
-
-    public void putSaveInRecycler(GameType gameType) {
-        for (int i = 0; i < saveGames.size(); i++) {
-            if (saveGames.get(i).getGameType() == gameType)
-                recyclerGame.add(saveGames.get(i));
+    public void putSaveInRecycler() {
+        for (int i = 0; i < saveBoards.size(); i++) {
+            if (saveBoards.get(i).getGameType() == userGameTypeChoice)
+                recyclerBoards.add(saveBoards.get(i));
         }
     }
+
+    /**
+     * Listener for game type bottom buttons
+     */
+    private BottomNavigationView.OnNavigationItemSelectedListener navGameTypeListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_human:
+                    userGameTypeChoice = GameType.LOCAL;
+                    break;
+                case R.id.navigation_computer:
+                    userGameTypeChoice = GameType.COMPUTER;
+                    break;
+                case R.id.navigation_online:
+                    // One day ! Sadly, not today !
+                    return false;
+            }
+            updateRecyclerBoards();
+            return false;
+        }
+    };
 
     public void startGameActivity(Board board) {
         Intent intent = new Intent(this, GameActivity.class);
@@ -108,28 +133,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.right_start, R.anim.right_end);
     }
-
-    /**
-     * Listener for game type bottom buttons
-     */
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_human:
-                    prepareRecyclerHuman();
-                    return true;
-                case R.id.navigation_computer:
-                    prepareRecyclerComputer();
-                    return true;
-                case R.id.navigation_online:
-                    // One day ! Sadly, not today !
-                    return false;
-            }
-            return false;
-        }
-    };
 
     public void startInformationActivity(View v) {
         Intent intent = new Intent(this, InformationActivity.class);

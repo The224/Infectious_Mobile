@@ -17,11 +17,11 @@ import java.util.List;
  * Created by 224 on 2017-11-14.
  */
 
-public class AllSaveTask extends AsyncTask<Void, Void, Void> {
+public class FetchSaveTask extends AsyncTask<Void, Void, Void> {
     public MainActivity mainActivity;
     private List<Board> saveGames;
 
-    public AllSaveTask(MainActivity mainActivity) {
+    public FetchSaveTask(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
         saveGames = new ArrayList<>();
     }
