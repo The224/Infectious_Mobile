@@ -94,15 +94,6 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private void prepareRecyclerOnline() {
-        recyclerGame.clear();
-
-        putSaveInRecycler(GameType.ONLINE);
-
-        recyclerGame.add(new Board("Connect to rival !", ConfigVariable.configCross, GameType.LOCAL));
-        adapter.notifyDataSetChanged();
-    }
-
     public void putSaveInRecycler(GameType gameType) {
         for (int i = 0; i < saveGames.size(); i++) {
             if (saveGames.get(i).getGameType() == gameType)
@@ -133,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
                     prepareRecyclerComputer();
                     return true;
                 case R.id.navigation_online:
-                    prepareRecyclerOnline();
-                    return true;
+                    // One day ! Sadly, not today !
+                    return false;
             }
             return false;
         }

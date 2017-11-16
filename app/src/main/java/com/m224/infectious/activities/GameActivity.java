@@ -49,7 +49,6 @@ public class GameActivity extends AppCompatActivity {
 
         gameService = new GameService((Board) extras.getSerializable("board"));
 
-
         for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
             gridImages.add(new GridImageView(this, gameService.getStateAt(i), i));
         }
