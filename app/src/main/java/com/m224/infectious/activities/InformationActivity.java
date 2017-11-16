@@ -16,7 +16,7 @@ public class InformationActivity extends AppCompatActivity {
         Util.customActionbar(this, R.layout.actionbar_information);
     }
 
-    public void onBackClick(View v) {
+    public void closeInformationActivity(View v) {
         finish();
         this.overridePendingTransition(R.anim.right_start, R.anim.right_end);
     }

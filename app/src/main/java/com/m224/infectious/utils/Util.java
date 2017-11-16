@@ -23,6 +23,7 @@ public class Util {
     public static void customActionbar(AppCompatActivity appCompatActivity, int resources) {
         android.support.v7.app.ActionBar actionBar = appCompatActivity.getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true);
+        appCompatActivity.setTitle("");
 
         LayoutInflater inflator = (LayoutInflater) appCompatActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(resources, null);

@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.GridImageView;
@@ -39,21 +38,15 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
         Util.customActionbar(this, R.layout.actionbar_grid);
-        setTitle("");
 
         tv_player_1 = findViewById(R.id.tv_player_1);
         tv_player_2 = findViewById(R.id.tv_player_2);
         tv_turn = findViewById(R.id.tv_turn);
 
         Bundle extras = getIntent().getExtras();
-
         gameService = new GameService((Board) extras.getSerializable("board"));
 
-        for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
-            gridImages.add(new GridImageView(this, gameService.getStateAt(i), i));
-        }
-
-        handleGrid();
+        initGridView();
         refreshInterface();
     }
 
@@ -65,59 +58,54 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        quickSaveGame();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.game_menu_restart:
-                AlertDialog.Builder alertRestartDialogBuilder =
-                        new AlertDialog.Builder(this, R.style.DialogTheme);
-
-                alertRestartDialogBuilder
-                        .setTitle(R.string.restart_title)
-                        .setCancelable(true)
-                        .setPositiveButton(R.string.restart_yes,
-                                new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                gameService.restart();
-                                refreshInterface();
-                            }
-                        })
-                        .setNegativeButton(R.string.restart_no,null)
-                        .create()
-                        .show();
+                menuRestartDialog();
                 return true;
             case R.id.game_menu_save:
-                showSaveDialog();
+                menuSaveDialog();
                 return true;
             case R.id.game_menu_delete:
-
-                AlertDialog.Builder alertDeleteDialogBuilder =
-                        new AlertDialog.Builder(this, R.style.DialogTheme);
-
-                alertDeleteDialogBuilder
-                        .setTitle(R.string.delete_title)
-                        .setCancelable(true)
-                        .setPositiveButton(R.string.delete_yes,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-
-                                        // A voir
-                                        onBackClick(null);
-                                    }
-                                })
-                        .setNegativeButton(R.string.delete_no,null)
-                        .create()
-                        .show();
+                menuDeleteDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void showSaveDialog() {
+    public void closeGameActivity(View v) {
+        finish();
+        this.overridePendingTransition(R.anim.left_start, R.anim.left_end);
+    }
+    
+    private void initGridView() {
+        for (int i = 0; i < ConfigVariable.MAX_TILE; i++) {
+            gridImages.add(new GridImageView(this, gameService.getStateAt(i), i));
+        }
+
+        GridView gridview = findViewById(R.id.grid_view);
+        gridview.setAdapter(new GridItemImageAdapter(this, gridImages));
+
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                gameService.move(position);
+                refreshInterface();
+                // Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show(); eventually
+            }
+        });
+    }
+
+    /* *Menu Dialog* */
+    private void menuSaveDialog() {
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_save_game);
-
-
         final EditText editText = dialog.findViewById(R.id.et_save_name);
 
         Button dialogButton = dialog.findViewById(R.id.btn_save);
@@ -133,26 +121,69 @@ public class GameActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void menuRestartDialog() {
+        AlertDialog.Builder alertRestartDialogBuilder =
+                new AlertDialog.Builder(this, R.style.DialogTheme);
 
-    public void onBackClick(View v) {
-        finish();
-        this.overridePendingTransition(R.anim.left_start, R.anim.left_end);
+        alertRestartDialogBuilder
+                .setTitle(R.string.restart_title)
+                .setCancelable(true)
+                .setPositiveButton(R.string.restart_yes,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                gameService.restart();
+                                refreshInterface();
+                            }
+                        })
+                .setNegativeButton(R.string.restart_no,null)
+                .create()
+                .show();
     }
 
-    private void handleGrid() {
-        GridView gridview = findViewById(R.id.grid_view);
-        gridview.setAdapter(new GridItemImageAdapter(this, gridImages));
+    private void menuDeleteDialog() {
+        AlertDialog.Builder alertDeleteDialogBuilder =
+                new AlertDialog.Builder(this, R.style.DialogTheme);
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                gameService.move(position);
-                refreshInterface();
-                Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
+        alertDeleteDialogBuilder
+                .setTitle(R.string.delete_title)
+                .setCancelable(true)
+                .setPositiveButton(R.string.delete_yes,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // A voir
+                                closeGameActivity(null);
+                            }
+                        })
+                .setNegativeButton(R.string.delete_no,null)
+                .create()
+                .show();
     }
+    /* ************* */
 
-    /* *Refresher* */
+    /* *SQL Speaker* */
+    private void quickSaveGame() { // Maybe start a thread, each x minute call quickSave
+        gameService.getBoard().setTitle(getResources().getString(R.string.quick_save));
+        String jsonBoard = Util.boardToJSONString(gameService.getBoard());
+
+        SaveBoardTable saveBoardTable = new SaveBoardTable(this);
+
+        saveBoardTable.open();
+        saveBoardTable.insertQuickSave(jsonBoard);
+        saveBoardTable.close();
+    }
+    private void saveGame(String name) {
+        gameService.getBoard().setTitle(name);
+        String jsonBoard = Util.boardToJSONString(gameService.getBoard());
+
+        SaveBoardTable saveBoardTable = new SaveBoardTable(this);
+
+        saveBoardTable.open();
+        saveBoardTable.insertSave(jsonBoard);
+        saveBoardTable.close();
+    }
+    /* ************* */
+
+    /* *UI Refresher* */
     private void refreshInterface() {
         refreshGrid();
         refreshScore();
@@ -177,37 +208,7 @@ public class GameActivity extends AppCompatActivity {
             tv_turn.setTextColor(getResources().getColor(R.color.player2));
         }
     }
-    /* *********** */
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        quickSaveGame();
-    }
-
-    public void quickSaveGame() {
-        gameService.getBoard().setTitle(getResources().getString(R.string.quick_save));
-        String jsonBoard = Util.boardToJSONString(gameService.getBoard());
-
-        SaveBoardTable saveBoardTable = new SaveBoardTable(this);
-
-        saveBoardTable.open();
-        saveBoardTable.insertQuickSave(jsonBoard);
-        saveBoardTable.close();
-    }
-
-    public void saveGame(String name) {
-        gameService.getBoard().setTitle(name);
-        String jsonBoard = Util.boardToJSONString(gameService.getBoard());
-
-        SaveBoardTable saveBoardTable = new SaveBoardTable(this);
-
-        saveBoardTable.open();
-        saveBoardTable.insertSave(jsonBoard);
-        saveBoardTable.close();
-    }
-
+    /* ************** */
 }
 
 

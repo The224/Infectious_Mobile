@@ -27,7 +27,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:background="@color/primary"
-        android:onClick="onBackClick"
+        android:onClick="closeInformationActivity"
         android:padding="10dp"
         android:src="@drawable/ic_arrow_right" />
 

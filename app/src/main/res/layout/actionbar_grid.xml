@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/primary"
         android:elevation="0dp"
-        android:onClick="onBackClick"
+        android:onClick="closeGameActivity"
         android:padding="10dp"
         android:src="@drawable/ic_arrow_left"
         android:layout_alignParentTop="true"
