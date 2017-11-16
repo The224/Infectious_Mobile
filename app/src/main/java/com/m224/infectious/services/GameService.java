@@ -28,26 +28,30 @@ public class GameService {
         board.reset();
     }
 
+    /* *Getters for the UI* */
     public int getScorePlayer1() {
         return board.getScorePlayer1();
     }
-
     public int getScorePlayer2() {
         return board.getScorePlayer2();
     }
-
     public State getStateAt(int id) {
         return board.getStateAt(id);
     }
-
     public boolean isSelectAt(int id) {
         return board.getTileAt(id).isSelected();
     }
-
     public boolean isTurnPlayerOne() {
         return board.isTurnPlayerOne();
     }
+    public Board getBoard() {
+        return board;
+    }
+    /* ******************** */
 
+    /* *Game Logic* */
+    /**
+     * Call when user touch the grid */
     public void move(int toId){
         if (board.getSelectTile() == null) {  // Cree la selection
             if (board.getStateAt(toId) == State.PLAYER1 && board.isTurnPlayerOne() ||
@@ -70,7 +74,7 @@ public class GameService {
     }
 
     /**
-     * Infect the 8 tiles around param int*/
+     * Infect the 8 tiles around aroundId */
     private void infectAround(int aroundId) {
         List<Integer> integerList = Util.getTileAround(aroundId);
         for (int id : integerList ) {
@@ -79,6 +83,8 @@ public class GameService {
         }
     }
 
+    /**
+     * Change tile State */
     private void makeMovement(int toId) {
         int moveType = Util.confirmValidMove(board.getSelectTile().getId(),toId);
 
@@ -94,10 +100,7 @@ public class GameService {
             board.switchTurn();
         }
     }
-
-    public Board getBoard() {
-        return board;
-    }
+    /* ************ */
 }
 
 
