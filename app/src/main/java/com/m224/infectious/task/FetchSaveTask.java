@@ -1,4 +1,4 @@
-package com.m224.infectious;
+package com.m224.infectious.task;
 
 import android.os.AsyncTask;
 
@@ -35,7 +35,6 @@ public class FetchSaveTask extends AsyncTask<Void, Void, Void> {
             Board board = Util.JSONToBoard(save.getJsonBoard());
             saveGames.add(board);
         }
-
         return null;
     }
 

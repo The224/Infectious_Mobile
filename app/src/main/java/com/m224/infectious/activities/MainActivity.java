@@ -12,7 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.m224.infectious.FetchSaveTask;
+import com.m224.infectious.task.FetchSaveTask;
 import com.m224.infectious.R;
 import com.m224.infectious.adapters.GameLauncherAdapter;
 import com.m224.infectious.domaine.Board;
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     return false;
             }
             updateRecyclerBoards();
-            return false;
+            return true;
         }
     };
 

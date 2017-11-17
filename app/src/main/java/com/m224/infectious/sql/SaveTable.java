@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class SaveTable {
-    private static final int VERSION_DB = 0;
+    private static final int VERSION_DB = 1;
     private static final String NAME_DB = "infectious.db";
 
     private static final String TABLE_SAVE = "SAVE";
