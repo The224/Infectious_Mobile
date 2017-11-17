@@ -6,6 +6,7 @@ import com.m224.infectious.utils.State;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -158,6 +159,21 @@ public class Board implements Serializable {
     }
 
 /* ***************** */
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", gameType=" + gameType +
+                ", blockTile=" + Arrays.toString(blockTile) +
+                ", tiles=" + tiles +
+                ", selectTile=" + selectTile +
+                ", turnPlayerOne=" + turnPlayerOne +
+                ", scorePlayer1=" + scorePlayer1 +
+                ", scorePlayer2=" + scorePlayer2 +
+                '}';
+    }
 }
 
 

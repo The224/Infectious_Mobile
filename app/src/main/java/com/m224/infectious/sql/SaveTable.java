@@ -61,7 +61,7 @@ public class SaveTable {
 
     public List<Save> getAllSave(){
         List<Save> saves = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT "+COL_JSONBOARD+" FROM "+TABLE_SAVE,null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_SAVE,null);
 
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {

@@ -9,9 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.m224.infectious.domaine.Save;
 import com.m224.infectious.task.FetchSaveTask;
 import com.m224.infectious.R;
 import com.m224.infectious.adapters.GameLauncherAdapter;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         saveBoards = new ArrayList<>();
         recyclerBoards = new ArrayList<>();
+        userGameTypeChoice = GameType.LOCAL;
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(navGameTypeListener);
@@ -64,6 +67,12 @@ public class MainActivity extends AppCompatActivity {
     public void updateSaveGames(List<Board> saveGames) {
         this.saveBoards = saveGames;
         updateRecyclerBoards();
+
+        Log.d("updateSaveGames", "Taille : "+saveGames.size());
+
+        for (Board board : saveGames)
+            Log.d("updateSaveGames", board.toString());
+
     }
 
     private void initRecyclerView() {
