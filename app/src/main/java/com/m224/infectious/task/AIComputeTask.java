@@ -9,9 +9,10 @@ import com.m224.infectious.activities.GameActivity;
  */
 
 public class AIComputeTask extends AsyncTask<Void, Void, Void> {
-    public GameActivity gameActivity;
+    private GameActivity gameActivity;
 
-    public AIComputeTask(GameActivity gameActivity) {
+    public AIComputeTask(GameActivity gameActivity1) {
+        this.gameActivity = gameActivity1;
     }
 
     @Override
@@ -30,3 +31,31 @@ public class AIComputeTask extends AsyncTask<Void, Void, Void> {
 
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

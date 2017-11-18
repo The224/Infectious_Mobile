@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
                     userGameTypeChoice = GameType.COMPUTER;
                     break;
                 case R.id.navigation_online:
-                    // One day ! Sadly, not today !
+                    // One day ! Sadly, not today ! #Firebase
                     return false;
             }
             updateRecyclerBoards();
