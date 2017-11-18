@@ -1,5 +1,6 @@
 package com.m224.infectious.services;
 
+import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.Tile;
 import com.m224.infectious.utils.AIDifficulty;
 import com.m224.infectious.utils.GridConfig;
@@ -15,9 +16,9 @@ import java.util.List;
  */
 
 public class AIService  {
-    //                tileId  points
     private List<Movement> movements;
     private AIDifficulty difficulty;
+    private Board originBoard;
 
     private class Movement {
         protected int origin;
@@ -31,7 +32,7 @@ public class AIService  {
         }
     }
 
-    public AIService(AIDifficulty difficulty) {
+    public AIService(AIDifficulty difficulty, Board board) {
         this.difficulty = difficulty;
         this.movements = new ArrayList<>();
     }
@@ -101,32 +102,6 @@ public class AIService  {
      *      Difficile - 4-1
      *      Extreme   - 1-1
      */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
