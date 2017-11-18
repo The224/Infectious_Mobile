@@ -4,10 +4,7 @@
     <string name="turn_player_one">Player 1 Turn</string>
     <string name="turn_player_two">Player 2 Turn</string>
 
-    <string name="btn_grid">Open Grid</string>
-    <string name="btn_rule">Open Rule</string>
-
-    <string name="actionbar_game">Let\'s Play</string>
+    <string name="actionbar_game">@string/app_name</string>
     <string name="actionbar_main">@string/app_name</string>
     <string name="actionbar_information">Information</string>
 

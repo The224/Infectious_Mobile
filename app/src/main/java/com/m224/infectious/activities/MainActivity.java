@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         updateRecyclerBoards();
     }
 
-
     public void updateRecyclerBoards() {
         recyclerBoards.clear();
 

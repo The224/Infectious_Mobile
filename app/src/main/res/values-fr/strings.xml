@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Infectious</string>
+
+    <string name="turn_player_one">Joueur 1</string>
+    <string name="turn_player_two">Joueur 2</string>
+
+    <string name="actionbar_game">@string/app_name</string>
+    <string name="actionbar_main">@string/app_name</string>
+    <string name="actionbar_information">Information</string>
+
+    <string name="rules">Regle du jeu</string>
+    <string name="rule_one">Select a ball and click on the destination. The destination must be empty.</string>
+    <string name="rule_two">If the distance is 1, the ball is duplicated.</string>
+    <string name="rule_three">If it is 2, the ball make a jump.</string>
+    <string name="rule_four">Each time your moving, the ball will infect every opposite ball around.</string>
+    <string name="rule_five">Game end when one of the players can\'t move.</string>
+    <string name="rule_six">The player with more balls… Win !</string>
+
+    <string name="with_love">Fait avec 💚</string>
+
+    <string name="server_off">Deconnecter</string>
+    <string name="server_on">Connecter</string>
+
+    <string name="restart">Recommencer</string>
+    <string name="save">Sauvegarder</string>
+    <string name="delete">Supprimer</string>
+
+    <string name="save_name">Nom de la sauvegarde :</string>
+    <string name="save_btn">ok</string>
+
+    <string name="new_game">Commencer une nouvelle partie :</string>
+    <string name="quick_save">Sauvegarde Rapide</string>
+
+    <string name="nav_human">Humain</string>
+    <string name="nav_computer">Ordinateur</string>
+    <string name="nav_online">En ligne</string>
+
+    <string name="restart_title">Etez-vous sur de vouloir recommencer la partie… ?</string>
+    <string name="restart_yes">Oui</string>
+    <string name="restart_no">Non</string>
+
+    <string name="delete_title">Etez-vous sur de vouloir supprimer la partie… ?</string>
+    <string name="delete_yes">Oui</string>
+    <string name="delete_no">Non</string>
+
+
+</resources>

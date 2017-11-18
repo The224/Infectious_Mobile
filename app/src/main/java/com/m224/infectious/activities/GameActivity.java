@@ -161,7 +161,7 @@ public class GameActivity extends AppCompatActivity {
     /* ************* */
 
     /* *SQL Speaker* */
-    private void quickSaveGame() { // Maybe start a thread, each x minute call quickSave
+    private void quickSaveGame() { // TODO : Maybe start a thread, each x minute call quickSave
         gameService.getBoard().setTitle(getResources().getString(R.string.quick_save));
         String jsonBoard = Util.boardToJSONString(gameService.getBoard());
 

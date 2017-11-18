@@ -65,7 +65,7 @@ public class AIService extends GameService {
                 for (int i : dispoMove) {
                     /// Infect around sur le meme board !!!!! reset board a chaque fois sinon !!!!
                     /// Need to simulate infect
-                    int points = infectAround(i);
+                    int points = getBoard().infectAround(i);
 
                     movements.add(new Movement(tile.getId(),i,points));
                 }
