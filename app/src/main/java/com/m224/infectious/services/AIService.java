@@ -3,8 +3,10 @@ package com.m224.infectious.services;
 import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.Tile;
 import com.m224.infectious.utils.AIDifficulty;
+import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.State;
+import com.m224.infectious.utils.Util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +17,7 @@ import java.util.List;
  * Created by 224 on 2017-11-08.
  */
 
-public class AIService  {
+public class AIService extends GameService {
     private List<Movement> movements;
     private AIDifficulty difficulty;
     private Board originBoard;
@@ -33,66 +35,49 @@ public class AIService  {
     }
 
     public AIService(AIDifficulty difficulty, Board board) {
+        super(board);
         this.difficulty = difficulty;
         this.movements = new ArrayList<>();
     }
 
+    public void template() {
+        /*
+        pour tout les case
+            getAllmovementDispo
+            pour allmovementDispo
+                    get infect number
+                    create movement obj
 
+        sort list of movement
 
-    public int requestMovement(List<Tile> tiles) {
-
-
-
-        fillMovements(tiles);
-        sortMovements();
-        return -1;
+        mathrandom on array depend of difficulty*/
     }
 
-    public void fillMovements(List<Tile> tiles) {
 
-        List<Tile> copyTiles =  tiles;
 
-        for (int i = 0; i < GridConfig.MAX_TILE; i++) {
-            for (int j = 0; j < GridConfig.MAX_TILE; j++) {
-                computeMove(copyTiles, i, j);
-                copyTiles = tiles;
+    public void computeMove() {
+        List<Movement> movements = new ArrayList<>();
+
+        for (Tile tile: getBoard().getTiles()) {
+            if (tile.getState() == State.PLAYER2) {
+                int[] dispoMove = getAllDispoMove();
+
+                for (int i : dispoMove) {
+                    /// Infect around sur le meme board !!!!! reset board a chaque fois sinon !!!!
+                    /// Need to simulate infect
+                    int points = infectAround(i);
+
+                    movements.add(new Movement(tile.getId(),i,points));
+                }
             }
         }
     }
 
-    public void computeMove(List<Tile> tiles, int origin, int destination) {
-        int points = 0;
-
-
-        for (Tile tile : tiles) {
-            if (tile.getState() == State.PLAYERAI)
-                points++;
-        }
-
+    // Besoin de recuperser les vrai movement disponible !
+    public int[] getAllDispoMove() {
+        int[] test = {2,3,5};
+        return test;
     }
-
-
-
-
-
-
-
-
-    public void sortMovements() {
-        Collections.sort(movements, new Comparator<Movement>() {
-            @Override
-            public int compare(Movement m1, Movement m2) {
-                if (m1.points > m2.points)
-                    return -1;
-                else if (m1.points < m2.points)
-                    return 1;
-                return 0;
-            }
-        });
-    }
-
-
-
 
     /**
      * Faire une list des dix meilleurs coups
@@ -103,11 +88,23 @@ public class AIService  {
      *      Extreme   - 1-1
      */
 
-
-
-
-
-
 }
 
 /*Implement MinMax one day !*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

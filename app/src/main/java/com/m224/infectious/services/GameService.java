@@ -74,13 +74,20 @@ public class GameService {
     }
 
     /**
-     * Infect the 8 tiles around aroundId */
-    private void infectAround(int aroundId) {
+     * Infect the 8 tiles around aroundId
+     * @param aroundId tile id to infect around
+     * @return number of infected tiles
+     */
+    protected int infectAround(int aroundId) {
+        int nbInfect = 0;
         List<Integer> integerList = Util.getTileAround(aroundId);
         for (int id : integerList ) {
-            if (board.getTileAt(id).isStatePlayer())
+            if (board.getTileAt(id).isStatePlayer()) {
                 board.getTileAt(id).setState(board.getStateAt(aroundId));
+                nbInfect++;
+            }
         }
+        return nbInfect;
     }
 
     /**
