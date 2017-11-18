@@ -3,6 +3,7 @@ package com.m224.infectious.domaine;
 import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.State;
+import com.m224.infectious.utils.Util;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -72,6 +73,23 @@ public class Board implements Serializable {
             if (tile.getState() == State.PLAYER2)
                 scorePlayer2++;
         }
+    }
+
+    /**
+     * Infect the 8 tiles around aroundId
+     * @param tileId tile id to infect around
+     * @return number of infected tiles
+     */
+    public int infectAround(int tileId) {
+        int nbInfect = 0;
+        List<Integer> integerList = Util.getTileAround(tileId);
+        for (int id : integerList ) {
+            if (getTileAt(id).isStatePlayer()) {
+                getTileAt(id).setState(getStateAt(tileId));
+                nbInfect++;
+            }
+        }
+        return nbInfect;
     }
 
     /* *Getter & Setter* */
