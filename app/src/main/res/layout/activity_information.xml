@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,6 +29,11 @@
                 android:elevation="2dp"
                 android:orientation="vertical">
 
+                <fragment
+                    android:id="@+id/frag_setting"
+                    android:name="com.m224.infectious.fragment.SettingFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

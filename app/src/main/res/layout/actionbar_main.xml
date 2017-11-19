@@ -16,29 +16,20 @@
         android:elevation="0dp"
         android:onClick="startInformationActivity"
         android:padding="10dp"
-        android:src="@drawable/ic_information" />
+        android:src="@drawable/ic_settings" />
 
     <TextView
         android:id="@+id/tv_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:fontFamily="monospace"
+        android:gravity="center"
         android:paddingTop="4dp"
         android:text="@string/app_name"
         android:textColor="@android:color/white"
         android:textSize="24sp" />
-
-    <ImageButton
-        android:id="@+id/ib_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/primary"
-        android:elevation="0dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_settings" />
 
 </RelativeLayout>
