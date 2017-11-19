@@ -12,7 +12,6 @@
         android:layout_height="match_parent">
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +19,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_marginTop="12dp"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,105 +29,21 @@
                 android:orientation="vertical">
 
                 <fragment
+                    android:id="@+id/frag_rules"
+                    android:name="com.m224.infectious.fragment.RulesFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="20dp" />
+
+                <fragment
                     android:id="@+id/frag_setting"
                     android:name="com.m224.infectious.fragment.SettingFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/border_accent"
                     android:layout_marginLeft="3dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/rules"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:padding="10dp"
-                        android:text='@string/rules'
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/rule_one"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text='@string/rule_one'
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/rule_two"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text='@string/rule_two'
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/rule_three"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text='@string/rule_three'
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/rule_four"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text='@string/rule_four'
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/rule_five"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text='@string/rule_five'
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/rule_six"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text='@string/rule_six'
-                        android:textAlignment="center"
-                        android:textColor="@android:color/white" />
-
-                </LinearLayout>
+                    android:layout_marginRight="3dp" />
 
                 <TextView
                     android:id="@+id/tv_love"
@@ -139,9 +54,17 @@
                     android:padding="30dp"
                     android:text="@string/with_love"
                     android:textColor="@color/colorAccent" />
+
             </LinearLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                tools:layout_editor_absoluteX="87dp"
+                tools:layout_editor_absoluteY="199dp" />
+
         </LinearLayout>
+
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

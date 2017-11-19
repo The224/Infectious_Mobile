@@ -8,7 +8,13 @@
     <string name="actionbar_main">@string/app_name</string>
     <string name="actionbar_information">Information</string>
 
-    <string name="rules">Infectious Game Rules</string>
+
+    <string name="setting">Settings</string>
+    <string name="username">Username</string>
+    <string name="ai_difficulty">AI Difficulty</string>
+    <string name="confirm">Update</string>
+
+    <string name="rules">Game Rules</string>
     <string name="rule_one">Select a ball and click on the destination. The destination must be empty.</string>
     <string name="rule_two">If the distance is 1, the ball is duplicated.</string>
     <string name="rule_three">If it is 2, the ball make a jump.</string>
@@ -26,7 +32,7 @@
     <string name="delete">Delete</string>
 
     <string name="save_name">Save name :</string>
-    <string name="save_btn">ok</string>
+    <string name="save_btn">OK</string>
 
     <string name="new_game">Start New Game</string>
     <string name="quick_save">Quick Save</string>
@@ -45,6 +51,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
 
 
 </resources>
