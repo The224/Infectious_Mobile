@@ -21,6 +21,8 @@ public class GameLauncherAdapter extends RecyclerView.Adapter<GameLauncherAdapte
     public class Card extends RecyclerView.ViewHolder {
         public TextView title;
 
+        // TODO : Mettre des icons et meilleur card
+
         public Card(View view) {
             super(view);
             title = view.findViewById(R.id.title);

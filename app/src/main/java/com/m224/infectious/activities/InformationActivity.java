@@ -15,7 +15,7 @@ public class InformationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_information);
         Util.customActionbar(this, R.layout.actionbar_information);
 
-
+        // TODO : faire que les setting font quelque chose !
 
     }
 

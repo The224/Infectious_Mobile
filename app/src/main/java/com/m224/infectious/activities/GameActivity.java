@@ -175,6 +175,9 @@ public class GameActivity extends AppCompatActivity {
         gameService.getBoard().setTitle(name);
         String jsonBoard = Util.boardToJSONString(gameService.getBoard());
 
+
+
+
         SaveTable saveTable = new SaveTable(this);
 
         saveTable.open();
