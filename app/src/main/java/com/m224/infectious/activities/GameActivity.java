@@ -1,10 +1,13 @@
 package com.m224.infectious.activities;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,10 +20,13 @@ import android.widget.TextView;
 
 import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.GridImageView;
+import com.m224.infectious.services.AIService;
 import com.m224.infectious.services.GameService;
 import com.m224.infectious.adapters.GridImageAdapter;
 import com.m224.infectious.R;
 import com.m224.infectious.sql.SaveTable;
+import com.m224.infectious.task.AIComputeTask;
+import com.m224.infectious.utils.AIDifficulty;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.State;
@@ -32,6 +38,7 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity {
 
     private GameService gameService;
+    private AIComputeTask aiComputeTask;
     private TextView tv_player_1, tv_player_2, tv_turn;
     private List<GridImageView> gridImages = new ArrayList<>();
 
@@ -50,6 +57,8 @@ public class GameActivity extends AppCompatActivity {
 
         if (gameService.getBoard().getGameType() == GameType.COMPUTER)
             tv_player_2.setTextColor(getResources().getColor(R.color.playerComputer));
+
+        new AIComputeTask(this, getDifficultyUser()).execute();
 
         initGridView();
         refreshInterface();
@@ -109,6 +118,25 @@ public class GameActivity extends AppCompatActivity {
                 // Toast.makeText(GameActivity.this, "" + position, Toast.LENGTH_SHORT).show(); eventually
             }
         });
+    }
+
+    public void aiMove(Pair<Integer,Integer> result) {
+        gameService.aiMove(result);
+        refreshInterface();
+    }
+
+    public AIDifficulty getDifficultyUser() {
+        SharedPreferences settings = getSharedPreferences("preferences", Context.MODE_PRIVATE);
+        int difficulty = settings.getInt("difficulty", 2);
+
+        if (difficulty == 1)
+            return AIDifficulty.EASY;
+        else if (difficulty == 2)
+            return AIDifficulty.MEDIUM;
+        else if (difficulty == 3)
+            return AIDifficulty.HARD;
+        else
+            return AIDifficulty.HARDCORE;
     }
 
     /* *Menu Dialog* */
@@ -197,9 +225,14 @@ public class GameActivity extends AppCompatActivity {
 
     /* *UI Refresher* */
     private void refreshInterface() {
-        refreshGrid();
-        refreshScore();
-        refreshTurn();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                refreshGrid();
+                refreshScore();
+                refreshTurn();
+            }
+        });
     }
     private void refreshGrid() {
         for (int i = 0; i < GridConfig.MAX_TILE; i++) {
@@ -227,6 +260,10 @@ public class GameActivity extends AppCompatActivity {
         }
     }
     /* ************** */
+
+    public GameService getGameService() {
+        return gameService;
+    }
 }
 
 

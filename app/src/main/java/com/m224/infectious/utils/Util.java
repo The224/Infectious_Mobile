@@ -9,7 +9,9 @@ import com.google.gson.Gson;
 import com.m224.infectious.domaine.Board;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by 224 on 2017-10-23.
@@ -91,13 +93,11 @@ public class Util {
      */
     public static int confirmValidMove(int start, int end) {
         List<Integer> duplicates = getTileAround(start);
-
         for (int duplicate : duplicates) {
             if (duplicate == end) {
                 return 1;
             }
         }
-
         for (int duplicate : duplicates) {
             List<Integer> jumps = getTileAround(duplicate);
             for (int jump : jumps) {
@@ -106,8 +106,25 @@ public class Util {
                 }
             }
         }
-
         return 0;
+    }
+
+    public static List<Integer> getValidMove(int start) {
+        List<Integer> validMove = new ArrayList<>();
+
+        List<Integer> duplicates = getTileAround(start);
+        for (int duplicate : duplicates) {
+            validMove.addAll(getTileAround(duplicate));
+        }
+        validMove.addAll(duplicates);
+
+        // Remove Duplicated
+        Set<Integer> hs = new HashSet<>();
+        hs.addAll(validMove);
+        validMove.clear();
+        validMove.addAll(hs);
+
+        return validMove;
     }
 
 

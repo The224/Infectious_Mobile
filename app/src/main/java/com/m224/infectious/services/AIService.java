@@ -1,5 +1,8 @@
 package com.m224.infectious.services;
 
+import android.support.annotation.NonNull;
+import android.util.Pair;
+
 import com.m224.infectious.domaine.Board;
 import com.m224.infectious.domaine.Tile;
 import com.m224.infectious.utils.AIDifficulty;
@@ -14,83 +17,95 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Created by 224 on 2017-11-08.
+ * Semili Singleton
  */
 
-public class AIService extends GameService {
+public class AIService {
     private List<Movement> movements;
-    private AIDifficulty difficulty;
-    private Board originBoard;
 
-    private class Movement {
-        protected int origin;
-        protected int destination;
-        protected int points;
+    private class Movement implements Comparable<Movement> {
+        private int origin;
+        private int destination;
+        private int score;
 
-        public Movement(int origin, int destination, int points) {
+        private Movement(int origin, int destination, int score) {
             this.origin = origin;
             this.destination = destination;
-            this.points = points;
+            this.score = score;
+        }
+
+        @Override
+        public int compareTo(@NonNull Movement movement) {
+            return 0;
         }
     }
 
-    public AIService(AIDifficulty difficulty, Board board) {
-        super(board);
-        this.difficulty = difficulty;
+    public Pair<Integer,Integer> compute(AIDifficulty difficulty, Board board) {
         this.movements = new ArrayList<>();
+
+        fillMovement(board);
+        sortResult();
+        Movement movement = getRandomMove(difficulty);
+        movements.clear();
+        return new Pair<>(movement.origin,movement.destination);
     }
 
-    public void template() {
-        /*
-        pour tout les case
-            getAllmovementDispo
-            pour allmovementDispo
-                    get infect number
-                    create movement obj
-
-        sort list of movement
-
-        mathrandom on array depend of difficulty*/
-    }
-
-
-
-    public void computeMove() {
-        List<Movement> movements = new ArrayList<>();
-
-        for (Tile tile: getBoard().getTiles()) {
-            if (tile.getState() == State.PLAYER2) {
-                int[] dispoMove = getAllDispoMove();
-
-                for (int i : dispoMove) {
-                    /// Infect around sur le meme board !!!!! reset board a chaque fois sinon !!!!
-                    /// Need to simulate infect
-                    int points = getBoard().infectAround(i);
-
-                    movements.add(new Movement(tile.getId(),i,points));
+    private void fillMovement(Board board) {
+        // MUCH WOW !
+        for (int i = 0; i < GridConfig.MAX_TILE; i++) { // For
+            if (board.getStateAt(i) == State.PLAYER2) { // only the tile of the computer
+                List<Integer> validMove = Util.getValidMove(i);
+                for (int j : validMove) {
+                    if (board.getStateAt(j) == State.EMPTY && i != j) {
+                        int k = getTileScore(board, j);
+                        movements.add(new Movement(i,j,k));
+                    }
                 }
             }
         }
     }
 
-    // Besoin de recuperser les vrai movement disponible !
-    public int[] getAllDispoMove() {
-        int[] test = {2,3,5};
-        return test;
+    private void sortResult() {
+        movements.sort(new Comparator<Movement>() {
+            @Override
+            public int compare(Movement m1, Movement m2) {
+                if (m1.score < m2.score)
+                    return 1;
+                if (m1.score > m2.score)
+                    return -1;
+                return 0;
+            }
+        });
     }
 
-    /**
-     * Faire une list des dix meilleurs coups
-     * Math.random
-     *      Facile    - 10-1
-     *      Moyen     - 7-1
-     *      Difficile - 4-1
-     *      Extreme   - 1-1
-     */
+    private Movement getRandomMove(AIDifficulty difficulty) { // TODO : add magic number to GridConfig ???
+        int max;
+        if (difficulty == AIDifficulty.EASY)
+            max = 50;
+        else if (difficulty == AIDifficulty.MEDIUM)
+            max = 20;
+        else if (difficulty == AIDifficulty.HARD)
+            max = 5;
+        else
+            max = 1;
 
+        int aiChoice = (int)(Math.random()* max);
+
+        return movements.get(aiChoice);
+    }
+
+
+    private int getTileScore(Board board, int tileId) {
+        int nbInfect = 0;
+        List<Integer> integerList = Util.getTileAround(tileId);
+        for (int id : integerList ) {
+            if (board.getTileAt(id).getState() == State.PLAYER1) {
+                nbInfect++;
+            }
+        }
+        return nbInfect;
+    }
 }
-
-/*Implement MinMax one day !*/
 
 
 

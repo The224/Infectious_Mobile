@@ -1,6 +1,13 @@
 package com.m224.infectious.services;
 
+import android.content.Context;
+import android.util.Pair;
+import android.widget.SeekBar;
+
+import com.m224.infectious.R;
 import com.m224.infectious.domaine.Board;
+import com.m224.infectious.task.AIComputeTask;
+import com.m224.infectious.utils.AIDifficulty;
 import com.m224.infectious.utils.GridConfig;
 import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.State;
@@ -53,7 +60,9 @@ public class GameService {
     /**
      * Call when user touch the grid */
     public void move(int toId){
-        if (board.getSelectTile() == null) {  // Cree la selection
+        if (!isTurnPlayerOne() && board.getGameType() == GameType.COMPUTER) {
+            // Computer is thinking
+        } else if (board.getSelectTile() == null) {  // Cree la selection
             if (board.getStateAt(toId) == State.PLAYER1 && board.isTurnPlayerOne() ||
                     board.getStateAt(toId) == State.PLAYER2 && !board.isTurnPlayerOne()) {
                 board.setSelectTile(toId);
@@ -90,6 +99,24 @@ public class GameService {
             board.switchTurn();
         }
     }
+
+    public void aiMove(Pair<Integer, Integer> aiChoice) {
+        int moveType = Util.confirmValidMove(aiChoice.first,aiChoice.second);
+
+        if (moveType > 0) {
+            board.getTileAt(aiChoice.first);
+
+            board.getTileAt(aiChoice.second).setState(board.getTileAt(aiChoice.first).getState());
+            board.infectAround(aiChoice.second);
+
+            if (moveType == 2) {
+                board.getTileAt(aiChoice.first).setState(State.EMPTY);
+            }
+            board.setSelectTile(-1);
+            board.switchTurn();
+        }
+    }
+
     /* ************ */
 }
 

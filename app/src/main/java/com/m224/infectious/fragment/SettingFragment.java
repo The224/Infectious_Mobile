@@ -73,7 +73,7 @@ public class SettingFragment extends Fragment {
         editor.putInt("difficulty", sb_difficulty.getProgress());
 
         editor.apply();
-        
+
         Toast.makeText(getContext(),R.string.toast_confirm, Toast.LENGTH_SHORT).show();
     }
 
