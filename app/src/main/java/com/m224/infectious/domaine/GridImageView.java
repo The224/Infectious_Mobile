@@ -44,6 +44,8 @@ public class GridImageView extends ImageView {
             drawables[0] = getResources().getDrawable(R.drawable.tile_player1);
         } else if (state == State.PLAYER2) {
             drawables[0] = getResources().getDrawable(R.drawable.tile_player2);
+        } else if (state == State.PLAYERAI) {
+            drawables[0] = getResources().getDrawable(R.drawable.tile_computer);
         } else {
             drawables[0] = getResources().getDrawable(R.drawable.tile_block);
         }

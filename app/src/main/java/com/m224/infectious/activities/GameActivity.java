@@ -21,7 +21,9 @@ import com.m224.infectious.services.GameService;
 import com.m224.infectious.adapters.GridImageAdapter;
 import com.m224.infectious.R;
 import com.m224.infectious.sql.SaveTable;
+import com.m224.infectious.utils.GameType;
 import com.m224.infectious.utils.GridConfig;
+import com.m224.infectious.utils.State;
 import com.m224.infectious.utils.Util;
 
 import java.util.ArrayList;
@@ -45,6 +47,9 @@ public class GameActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         gameService = new GameService((Board) extras.getSerializable("board"));
+
+        if (gameService.getBoard().getGameType() == GameType.COMPUTER)
+            tv_player_2.setTextColor(getResources().getColor(R.color.playerComputer));
 
         initGridView();
         refreshInterface();
@@ -87,7 +92,11 @@ public class GameActivity extends AppCompatActivity {
 
     private void initGridView() {
         for (int i = 0; i < GridConfig.MAX_TILE; i++) {
-            gridImages.add(new GridImageView(this, gameService.getStateAt(i), i));
+            if (gameService.getBoard().getGameType() == GameType.COMPUTER &&
+                    gameService.getStateAt(i) == State.PLAYER2) // Other Player is a AI !
+                gridImages.add(new GridImageView(this, State.PLAYERAI, i));
+            else
+                gridImages.add(new GridImageView(this, gameService.getStateAt(i), i));
         }
 
         GridView gridview = findViewById(R.id.grid_view);
@@ -207,8 +216,14 @@ public class GameActivity extends AppCompatActivity {
             tv_turn.setText(getResources().getString(R.string.turn_player_one));
             tv_turn.setTextColor(getResources().getColor(R.color.player1));
         } else {
-            tv_turn.setText(getResources().getString(R.string.turn_player_two));
-            tv_turn.setTextColor(getResources().getColor(R.color.player2));
+            if (gameService.getBoard().getGameType() == GameType.COMPUTER) {
+                tv_turn.setTextColor(getResources().getColor(R.color.playerComputer));
+                tv_turn.setText(getResources().getString(R.string.turn_player_computer));
+            }
+            else {
+                tv_turn.setTextColor(getResources().getColor(R.color.player2));
+                tv_turn.setText(getResources().getString(R.string.turn_player_two));
+            }
         }
     }
     /* ************** */

@@ -5,10 +5,10 @@
     <color name="colorAccent">#A0E418</color>
     <color name="colorAccentDark">#51730c</color>
 
-    <color name="player1">#F6C90E</color>
-    <color name="player1Dark">#7b6304</color>
-    <color name="player2">#F64E8B</color>
-    <color name="player2Dark">#790630</color>
+    <color name="player1">#F64E8B</color>
+    <color name="player1Dark">#790630</color>
+    <color name="player2">#F6C90E</color>
+    <color name="player2Dark">#7b6304</color>
     <color name="playerComputer">@color/colorAccent</color>
     <color name="playerComputerDark">@color/colorAccentDark</color>
 
