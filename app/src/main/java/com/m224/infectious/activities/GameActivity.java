@@ -38,7 +38,6 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity {
 
     private GameService gameService;
-    private AIComputeTask aiComputeTask;
     private TextView tv_player_1, tv_player_2, tv_turn;
     private List<GridImageView> gridImages = new ArrayList<>();
 
@@ -236,7 +235,14 @@ public class GameActivity extends AppCompatActivity {
     }
     private void refreshGrid() {
         for (int i = 0; i < GridConfig.MAX_TILE; i++) {
-            gridImages.get(i).setState(gameService.getStateAt(i));
+
+            if (gameService.getBoard().getGameType() == GameType.COMPUTER &&
+                    gameService.getStateAt(i) == State.PLAYER2) {
+                gridImages.get(i).setState(State.PLAYERAI);
+            }
+            else
+                gridImages.get(i).setState(gameService.getStateAt(i));
+
             gridImages.get(i).setSelected(gameService.isSelectAt(i));
         }
     }
