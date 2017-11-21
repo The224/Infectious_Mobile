@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Infectious</string>
 
     <string name="turn_player_one">Joueur 1</string>
     <string name="turn_player_two">Joueur 2</string>
+    <string name="turn_player_computer">L\'ordinateur réfléchit</string>
 
     <string name="actionbar_game">@string/app_name</string>
     <string name="actionbar_main">@string/app_name</string>
     <string name="actionbar_information">Information</string>
+
+    <string name="setting">Configuration</string>
+    <string name="username">Nom du joueur</string>
+    <string name="ai_difficulty">Force de l\'ordinateur</string>
+    <string name="confirm">Confirmer</string>
+    <string name="toast_confirm">Préférences mise à jour</string>
 
     <string name="rules">Regle du jeu</string>
     <string name="rule_one">Select a ball and click on the destination. The destination must be empty.</string>
@@ -44,6 +49,5 @@
     <string name="delete_title">Etez-vous sur de vouloir supprimer la partie… ?</string>
     <string name="delete_yes">Oui</string>
     <string name="delete_no">Non</string>
-
-
+    
 </resources>

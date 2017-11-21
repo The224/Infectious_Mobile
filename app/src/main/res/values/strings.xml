@@ -9,13 +9,11 @@
     <string name="actionbar_main">@string/app_name</string>
     <string name="actionbar_information">Information</string>
 
-
     <string name="setting">Settings</string>
     <string name="username">Username</string>
     <string name="ai_difficulty">AI Difficulty</string>
     <string name="confirm">Update</string>
     <string name="toast_confirm">Preferences Updated</string>
-
 
     <string name="rules">Game Rules</string>
     <string name="rule_one">Select a ball and click on the destination. The destination must be empty.</string>
