@@ -54,11 +54,11 @@ public class GameActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         gameService = new GameService((Board) extras.getSerializable("board"));
 
-        if (gameService.getBoard().getGameType() == GameType.COMPUTER)
+        if (gameService.getBoard().getGameType() == GameType.COMPUTER) {
             tv_player_2.setTextColor(getResources().getColor(R.color.playerComputer));
-
-        new AIComputeTask(this, getDifficultyUser()).execute();
-
+            new AIComputeTask(this, getDifficultyUser()).execute();
+        }
+        
         initGridView();
         refreshInterface();
     }
