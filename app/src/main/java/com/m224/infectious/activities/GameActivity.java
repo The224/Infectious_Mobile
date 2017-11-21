@@ -128,11 +128,11 @@ public class GameActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences("preferences", Context.MODE_PRIVATE);
         int difficulty = settings.getInt("difficulty", 2);
 
-        if (difficulty == 1)
+        if (difficulty == 0)
             return AIDifficulty.EASY;
-        else if (difficulty == 2)
+        else if (difficulty == 1)
             return AIDifficulty.MEDIUM;
-        else if (difficulty == 3)
+        else if (difficulty == 2)
             return AIDifficulty.HARD;
         else
             return AIDifficulty.HARDCORE;

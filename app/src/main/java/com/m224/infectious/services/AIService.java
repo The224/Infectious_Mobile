@@ -80,16 +80,22 @@ public class AIService {
 
     private Movement getRandomMove(AIDifficulty difficulty) { // TODO : add magic number to GridConfig ???
         int max;
+
+
         if (difficulty == AIDifficulty.EASY)
-            max = 50;
+            max = (int) Math.ceil(movements.size()*75/100);
         else if (difficulty == AIDifficulty.MEDIUM)
-            max = 20;
+            max = (int) Math.ceil(movements.size()*50/100);
         else if (difficulty == AIDifficulty.HARD)
-            max = 5;
+            max = (int) Math.ceil(movements.size()*25/100);
         else
-            max = 1;
+            max = (int) Math.ceil(movements.size()/100);
 
         int aiChoice = (int)(Math.random()* max);
+
+        /**
+         * if aiChoice == 0 you win !
+         */
 
         return movements.get(aiChoice);
     }
