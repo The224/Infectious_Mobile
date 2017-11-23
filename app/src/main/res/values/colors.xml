@@ -14,8 +14,8 @@
 
     <color name="white">#FFF</color>
 
-    <!--
-    <color name="colorPrimary">#393E46</color>
-    <color name="colorPrimaryDark">#222831</color>
-    -->
+    <color name="tile_empty">#333</color>
+    <color name="tile_block">#111</color>
+    <color name="tile_selected">#F96D00</color>
+    <color name="tile_not_selected">#000</color>
 </resources>
