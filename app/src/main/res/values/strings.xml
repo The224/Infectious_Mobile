@@ -17,8 +17,8 @@
 
     <string name="rules">Game Rules</string>
     <string name="rule_one">Select a ball and click on the destination. The destination must be empty.</string>
-    <string name="rule_two">If the distance is 1, the ball is duplicated.</string>
-    <string name="rule_three">If it is 2, the ball make a jump.</string>
+    <string name="rule_two">If the distance is 1 (Orange), the ball is duplicated.</string>
+    <string name="rule_three">If it is 2 (Yellow), the ball make a jump.</string>
     <string name="rule_four">Each time your moving, the ball will infect every opposite ball around.</string>
     <string name="rule_five">Game end when one of the players can\'t move.</string>
     <string name="rule_six">The player with more balls… Win !</string>

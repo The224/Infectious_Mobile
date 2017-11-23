@@ -17,9 +17,9 @@
 
 	<string name="rules">Regle du jeu</string>
     <string name="rule_one">Choisissez une balle, puis une case vide.</string>
-    <string name="rule_two">Si la distance à franchir est de 1, la balle est copiée.</string>
-    <string name="rule_three">Si la distance est 2, la balle est deplacée.</string>
-    <string name="rule_four">Lorsqu\'une balle est deplacée, toutes les balles qui l'entourent prennent sa couleur.</string>
+    <string name="rule_two">Si la distance à franchir est de 1 (Jaune), la balle est copiée.</string>
+    <string name="rule_three">Si la distance est 2 (Orange), la balle est déplacée.</string>
+    <string name="rule_four">Lorsqu\'une balle est déplacée, toutes les balles qui l\'entourent prennent sa couleur.</string>
     <string name="rule_five">La partie se termine lorsqu\'un joueur ne peut plus jouer.</string>
     <string name="rule_six">Le joueur qui a le plus de balles… gagne !</string>
 

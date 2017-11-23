@@ -5,12 +5,12 @@
     <color name="colorAccent">#A0E418</color>
     <color name="colorAccentDark">#51730c</color>
 
-    <color name="player1">#F64E8B</color>
-    <color name="player1Dark">#790630</color>
-    <color name="player2">#F6C90E</color>
-    <color name="player2Dark">#7b6304</color>
-    <color name="playerComputer">@color/colorAccent</color>
-    <color name="playerComputerDark">@color/colorAccentDark</color>
+    <color name="player1">#186be7</color>
+    <color name="player1Dark">#124ba1</color>
+    <color name="player2">#ff0000</color>
+    <color name="player2Dark">#b30000</color>
+    <color name="playerComputer">#00ff00</color>
+    <color name="playerComputerDark">#00b300</color>
 
     <color name="white">#FFF</color>
 
