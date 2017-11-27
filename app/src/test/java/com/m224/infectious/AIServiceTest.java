@@ -13,9 +13,12 @@ import static org.junit.Assert.assertTrue;
  */
 
 public class AIServiceTest {
+
+
+
+
     @Test
-    public void requestMovementTest() {
-        AIService aiServiceTest = new AIService(AIDifficulty.EASY);
+    public void computeTest() {
 
 
     }

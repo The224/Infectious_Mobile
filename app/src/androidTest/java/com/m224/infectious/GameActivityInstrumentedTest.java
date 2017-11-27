@@ -14,12 +14,15 @@ import static org.junit.Assert.assertEquals;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class GameServiceInstrumentedTest {
+public class GameActivityInstrumentedTest {
     @Test
-    public void useAppContext() throws Exception {
+    public void confirmWorkingGame() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.m224.ataxx", appContext.getPackageName());
     }
+
+
+
 }
